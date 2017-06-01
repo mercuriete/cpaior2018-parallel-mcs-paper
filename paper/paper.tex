@@ -30,12 +30,21 @@
 
 \newcommand*\samethanks[1][\value{footnote}]{\footnotemark[#1]}
 
-\title{Observations from Parallelising Three Maximum Common Subgraph Algorithms}
+\title{Observations from Parallelising Three Maximum Common (Connected) Subgraph Algorithms}
 
-\author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences Research Council [grant numbers EP/K503058/1 and EP/M508056/1]} \and Patrick Prosser \and James Trimble\samethanks[1]}
+\author{Ruth Hoffmann \inst{1} \and Ciaran McCreesh\thanks{This work was supported by the
+Engineering and Physical Sciences Research Council [grant numbers EP/K503058/1, EP/M508056/1, and EP/M508056/1]}
+\inst{2} \and Patrick Prosser \inst{2} \and Samba Ndojh Ndiaye\thanks{This work
+was supported by the ANR project SoLStiCe (ANR-13-BS02-0002-01)} \inst{3}
+\and Craig Reilly \samethanks[1] \inst{2}
+\and Christine Solnon\samethanks[2]\inst{4} \and James Trimble\samethanks[1] \inst{2}}
 
-\institute{University of Glasgow, Glasgow, Scotland,\\
-\email{c.mccreesh.1@research.gla.ac.uk}}
+\institute{
+    University of St Andrews, St Andrews, Scotland
+    \and University of Glasgow, Glasgow, Scotland
+    \and Universit\'e Lyon 1, LIRIS, UMR5205, F-69621, France
+    \and INSA-Lyon, LIRIS, UMR5205, F-69621, France \\
+    \email{c.mccreesh.1@research.gla.ac.uk}}
 
 \begin{document}
 
@@ -46,6 +55,24 @@
 \end{abstract}
 
 \section{Introduction}
+
+\section{Sequential Algorithms}
+
+\subsection{A Basic Constraint Model}
+
+\subsection{Ensuring Connectedness}
+
+\subsection{The Splitting Algorithm}
+
+\subsection{The Clique Encoding}
+
+\subsection{The $k$-less Subgraph Isomorphism Algorithm}
+
+\section{Parallel Search}
+
+\section{Experiments}
+
+\section{Conclusion}
 
 \bibliographystyle{splncs03}
 \bibliography{dblp}
