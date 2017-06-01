@@ -1,7 +1,7 @@
 % vim: set spell spelllang=en tw=100 :
 
 \documentclass{llncs}
-\usepackage[pass]{geometry}
+\usepackage[pass,showframe]{geometry}
 
 \usepackage{complexity}
 \usepackage{microtype}
@@ -72,6 +72,162 @@
 \section{Parallel Search}
 
 \section{Experiments}
+
+\begin{figure}[p]
+    \includegraphics*[scale=0.7]{plots/33v-par-cumulative.pdf}
+    \hfill
+    \includegraphics*[scale=0.7]{plots/plain-par-cumulative.pdf}
+
+    \vspace*{1em}
+    \includegraphics*[scale=0.7]{plots/33ved-par-cumulative.pdf}
+    \hfill
+    \includegraphics*[scale=0.7]{plots/plain-connected-par-cumulative.pdf}
+
+    \vspace*{1em}
+    \includegraphics*[scale=0.7]{plots/33ve-connected-par-cumulative.pdf}
+    \hfill
+    \includegraphics*[scale=0.7]{plots/sip-par-cumulative.pdf}
+
+    \caption{The cumulative number of instances solved in under a certain time, comparing sequential
+    (solid lines) and parallel (dotted lines) algorithms, for six different families of maximum
+    common (connected) subgraph problems. All experiments use 32 threads on a 16 core,
+    hyper-threaded system.}
+    \label{figure:mcs-par-unconnected-cumulative}
+\end{figure}
+
+Cumulative performance plots comparing each parallel algorithm to its sequential version are given
+in \cref{figure:mcs-par-unconnected-cumulative}, using 32 threads on 16 core hyper-threaded Intel Xeon
+E5-2640 v2 systems. The results are consistent: in each case the parallel algorithm is clearly and
+substantially better than its sequential version, except when the sequential runtime is below 100
+milliseconds.
+
+\begin{figure}[p]
+    \centering
+    \hspace*{0.5em}\includegraphics*[scale=0.7]{plots/plain-par-heatmap-clique.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/plain-par-heatmap-kdown.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/plain-par-heatmap-james.pdf}\hspace*{0.5em}
+
+    \vspace*{2em}
+    \centering
+    \hspace*{0.5em}\includegraphics*[scale=0.7]{plots/33ved-par-heatmap-clique.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/33ved-par-heatmap-james.pdf}\hspace*{0.5em}
+
+    \vspace*{2em}
+    \centering
+    \hspace*{0.5em}\includegraphics*[scale=0.7]{plots/sip-par-heatmap-kdown.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/sip-par-heatmap-james.pdf}\hspace*{0.5em}
+
+    \caption{The benefits of parallelism, for different sets of problem instances and for different
+    algorithms. All experiments use 32 threads on a 16 core, hyper-threaded system; points below the
+    top diagonal line indicate a speedup, and the lower diagonal line is a sixteen times speedup.}
+    \label{figure:mcs-par-speedups}
+\end{figure}
+
+\Cref{figure:mcs-par-speedups} gives instance-by-instance comparisons for a representative subset of
+these algorithm and problem combinations. For the clique algorithm on unlabelled graphs (top left),
+the results show fairly consistent speedups for harder instances: there is only a single instance
+whose sequential runtime is over two seconds where we obtain a speedup of less than ten. We also see
+a significant number of superlinear speedups. This is because there are relatively long proofs of
+optimality for most of the harder instances, but strong solutions are usually found quickly (and
+where they are not, the additional diversity helps). The results are similarly positive on
+labelled graphs (centre left), with speedups of greater than ten being the norm for harder
+instances, although there is more variety in the results.
+
+For $k{\downarrow}$ on the unlabelled maximum common subgraph instances (top centre), the typical speedup
+is between two and ten, and occasionally there are speedups of between ten and one hundred. A few
+instances show small slowdowns: remember that when running 32 threads on a 16 core, hyper-threaded
+system, each individual thread runs somewhat slower than it would if only a single thread were
+running---in other words, these slight slowdowns are due to hardware effects, not changes to the
+search tree.
+
+On the larger subgraph isomorphism instances (bottom left), we see a concentration of speedups
+of around ten. We also see strongly superlinear speedups in some cases, with eight
+instances finishing in under one second which timed out sequentially at one thousand seconds.
+Examining these instances closely shows that in each case, they are satisfiable with either $k = 0$
+or very low values of $k$, and that the superlinear speedups are due to the parallel search
+introducing early diversity, offsetting an incorrect initial value-ordering heuristic choice. We
+also see more instances with slight absolute slowdowns: these are instances where the additional
+threads contribute no helpful work to the solution, and where the slowdown due to not having 32
+times as many resources when using 32 threads is particularly pronounced (memory contention is much
+more of a problem for these larger graphs). Although not ideal, in aggregate these results are rare
+and are more than offset by the superlinear speedups for other instances.
+
+\begin{figure}[p]
+    \centering
+    \hspace*{1em}\includegraphics*[scale=0.7]{plots/plain-clique-par-repeat-heatmap.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/plain-clique-par-8to32-heatmap.pdf}\hspace*{1em}
+
+    \vspace*{1em}
+    \centering
+    \hspace*{1em}\includegraphics*[scale=0.7]{plots/plain-kdown-par-repeat-heatmap.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/plain-kdown-par-8to32-heatmap.pdf}\hspace*{1em}
+
+    \vspace*{1em}
+    \centering
+    \hspace*{1em}\includegraphics*[scale=0.7]{plots/plain-james-par-repeat-heatmap.pdf}\hfill
+    \includegraphics*[scale=0.7]{plots/plain-james-par-8to32-heatmap.pdf}\hspace*{1em}
+
+    \caption{Parallel search is reproducible and scalable, as well as risk-free and beneficial. In the
+    left-hand column, we compare each of the three parallel algorithms against a repeated run with
+    the same parameters, on the unconnected, unlabelled instances (points on the diagonal line show
+    reproducibility of runtimes). In the right-hand column, we compare going from 8 threads to 32
+    threads (points below the diagonal line are an improvement). All experiments are on a 16 core,
+    hyper-threaded system.}
+    \label{figure:mcs-par-repeats}
+\end{figure}
+
+What about the splitting algorithm? On unlabelled instances (top right), our speedups are typically
+between those obtained from the clique algorithm and those from $k{\downarrow}$, being mainly a
+little below ten times. However, in some cases we see absolute slowdowns of up to four times: in
+these cases, parallelism does little, and is not enough to offset the costs we paid when switching
+from an in-place data structure to a data structure which requires copying. Interestingly, we also
+see many more superlinear speedups for this algorithm, which suggests that its value ordering
+heuristics are particularly poor early-on in search. (This last point is not particularly
+surprising: compared to $k{\downarrow}$, the splitting algorithm does not try to reduce domains at
+all at the top of search. The clique encoding, meanwhile, is able to capture even richer information
+about variable-value relationships. The splitting algorithm is fast, but comparatively stupid.)
+
+Similar trends occur with the subgraph isomorphism instances (bottom right), and the absolute
+slowdowns go as high as a factor of ten---this is on instances with particularly large
+target graphs, where copying is most expensive, and where there is a high branching factor at the
+root of the search tree. Again, superlinear speedups are common.
+
+On labelled instances (centre right), the parallel performance is less erratic. Although we no
+longer see absolute slowdowns (excluding on very easy instances), we also see fewer superlinear
+speedups, with most speedups being between one and ten. In many of these instances, parallelism
+does very little: restricting splitting to a depth of five in these cases gives work balance
+problems, but does help us avoid the substantial overheads that come with deeper splitting. This is
+because the search trees for these instances tend to have a very low branching factor---in
+constraint programming terms, the labels make each domain contain only a few values.
+
+\Cref{figure:mcs-par-unconnected-cumulative,figure:mcs-par-speedups} show that for all three
+algorithms, parallel search is beneficial, and also (reasonably) risk-free: although in a few cases the
+constant factor slowdowns due to hardware limitations and having to make changes to data structures
+are unpleasant, we do not encounter any exponential slowdowns due to search tree changes. But what
+about reproducibility and scalability? Further experiments in \cref{figure:mcs-par-repeats}
+establish that both of these properties also hold. In the left-hand column, we plot each algorithm
+run against itself, using 32 threads in both cases. For the clique and $k{\downarrow}$ approaches,
+every instance is on the central diagonal line, showing an extremely high level of reproducibility.
+For the splitting algorithm, there is a little more variability, particularly for easier instances:
+inspecting the results suggests that this is not down to different amounts of search work being
+performed, but rather whether or not helper threads end up triggering additional copying.
+
+In the right-hand column of \cref{figure:mcs-par-repeats}, we plot the effects of moving from 8
+threads (on the same system) to 32 threads. Points below the diagonal line indicate an improvement.
+For the clique approach, increasing the number of threads is unequivocally beneficial. For the
+$k{\downarrow}$ algorithm, the benefits are slim, and sometimes performance worsens slightly due to
+memory contention (not work done) but we do not see any exponential slowdowns. Finally, for the
+splitting algorithm, the results are usually strictly better, although in a few cases the overheads
+increase further giving a slowdown; we also see an increase in the occurrence of strongly
+superlinear speedups.
+
+It is likely that the parallel results for the splitting algorithm can be improved further. In the
+labelled case, we are often not obtaining a good work balance. However, deeper splitting is
+expensive, particularly with larger graphs. One option to consider would be recomputing parts of the
+search tree to avoid the costs of potentially allowing a copy in the future. This would be extremely
+unpleasant from an implementation perspective, but may be necessary to obtain more even results.
+However, even without this change, the parallel algorithm is clearly preferable to the sequential
+one.
 
 \section{Conclusion}
 
