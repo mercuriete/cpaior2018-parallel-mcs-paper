@@ -1,0 +1,53 @@
+% vim: set spell spelllang=en tw=100 :
+
+\documentclass{llncs}
+\usepackage[pass]{geometry}
+
+\usepackage{complexity}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{tikz}
+
+\usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
+
+\definecolor{uofgsandstone}{rgb}{0.321569, 0.278431, 0.231373}
+\definecolor{uofglawn}{rgb}{0.517647, 0.741176, 0}
+\definecolor{uofgcobalt}{rgb}{0, 0.615686, 0.92549}
+\definecolor{uofgpumpkin}{rgb}{1.0, 0.72549, 0.282353}
+\definecolor{uofgthistle}{rgb}{0.584314, 0.070588, 0.447059}
+
+\newcommand{\citet}[1]{\citeauthor{#1} \shortcite{#1}}
+\newcommand{\citep}[1]{\cite{#1}}
+
+% cref style
+\crefname{figure}{Figure}{Figures}
+\Crefname{figure}{Figure}{Figures}
+
+% http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
+\newcommand{\shortoverline}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\newcommand*\samethanks[1][\value{footnote}]{\footnotemark[#1]}
+
+\title{Observations from Parallelising Three Maximum Common Subgraph Algorithms}
+
+\author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences Research Council [grant numbers EP/K503058/1 and EP/M508056/1]} \and Patrick Prosser \and James Trimble\samethanks[1]}
+
+\institute{University of Glasgow, Glasgow, Scotland,\\
+\email{c.mccreesh.1@research.gla.ac.uk}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+
+\bibliographystyle{splncs03}
+\bibliography{dblp}
+
+\end{document}
