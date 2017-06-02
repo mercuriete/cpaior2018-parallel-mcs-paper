@@ -26,6 +26,10 @@ $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/clique/%.nodes : $(RESULTS)/clique/%.out
+	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/clique-par/t16/%.nodes : $(RESULTS)/clique-par/t16/%.out
 	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
 	[[ -s $@ ]]
