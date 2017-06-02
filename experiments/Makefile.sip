@@ -4,7 +4,7 @@ MODULUS := 1
 CATTER := cat
 INSTANCES_FILE := sipinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
-TIMEOUT := 1000
+TIMEOUT := 100
 ALGORITHMS := clique cp-fc kdown james-cpp-max james-cpp-max-down
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/sip
