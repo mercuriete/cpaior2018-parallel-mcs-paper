@@ -14,5 +14,5 @@ all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/t$(
 
 $(RESULTS)/clique-par/t$(N_THREADS)/%.out :
 	mkdir -p $(RESULTS)/clique-par/t$(N_THREADS)
-	ulimit -s $(STACK_SPACE) ; ../parallel-clique-code/solve_max_common_subgraph --timeout $(TIMEOUT) --threads $(N_THREADS) --no-edge-labels $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../parallel-clique-code/solve_max_common_subgraph --timeout $(TIMEOUT) --threads $(N_THREADS) --undirected --no-edge-labels $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
