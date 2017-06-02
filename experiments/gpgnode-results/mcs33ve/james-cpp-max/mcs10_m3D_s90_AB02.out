@@ -1,0 +1,35 @@
+Incumbent size: 1
+Incumbent size: 2
+Incumbent size: 3
+Incumbent size: 4
+Incumbent size: 5
+Incumbent size: 6
+Incumbent size: 7
+Incumbent size: 8
+Incumbent size: 9
+Incumbent size: 10
+Incumbent size: 11
+Incumbent size: 12
+Incumbent size: 13
+Incumbent size: 14
+Incumbent size: 15
+Incumbent size: 16
+Incumbent size: 17
+Incumbent size: 18
+Incumbent size: 19
+Incumbent size: 20
+Incumbent size: 21
+Incumbent size: 22
+Incumbent size: 23
+Incumbent size: 24
+Incumbent size: 25
+Incumbent size: 26
+Incumbent size: 27
+Incumbent size: 28
+Incumbent size: 29
+Incumbent size: 30
+Solution size 30
+(0 -> 59) (1 -> 66) (5 -> 18) (8 -> 7) (11 -> 20) (12 -> 54) (13 -> 38) (15 -> 62) (19 -> 82) (22 -> 58) (25 -> 43) (28 -> 78) (33 -> 74) (34 -> 1) (35 -> 80) (42 -> 29) (43 -> 68) (45 -> 5) (49 -> 73) (52 -> 32) (56 -> 65) (59 -> 36) (62 -> 71) (72 -> 19) (76 -> 61) (77 -> 44) (80 -> 23) (82 -> 15) (86 -> 26) (88 -> 48) 
+Nodes:                      398448443
+CPU time (ms):              100000
+TIMEOUT
