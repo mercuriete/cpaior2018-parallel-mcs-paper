@@ -1,0 +1,17 @@
+-- worker thread times 0 0 0
+-- 1 <20
+-- worker thread times 1 1 1
+-- 2 <19
+-- worker thread times 11 11 11
+-- 12 <18
+-- worker thread times 42 41 41
+-- 43 <17
+-- worker thread times 146 145 145
+-- 147 <16
+-- worker thread times 492 492 492
+-- 493 <15
+-- worker thread times 31 31 31
+true 78634
+(0 -> -1) (1 -> 18) (2 -> 16) (3 -> 6) (4 -> 2) (5 -> 4) (6 -> 15) (7 -> -1) (8 -> -1) (9 -> -1) (10 -> 17) (11 -> 10) (12 -> 14) (13 -> 9) (14 -> 19) (15 -> -1) (16 -> 3) (17 -> 5) (18 -> 0) (19 -> -1) 
+732 1 2 12 43 147 493 32
+EXCEPT=6 FAIL0=1 FAIL1=2 FAIL2=12 FAIL3=43 FAIL4=147 FAIL5=493 SIZE=14 

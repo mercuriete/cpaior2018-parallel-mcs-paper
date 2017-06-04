@@ -1,0 +1,15 @@
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-- 1 <15
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-- 1 <14
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-- 2 <13
+-- worker thread times 0 1 1 0 0 0 0 1 0 1 0 1 0 0 0
+-- 2 <12
+-- worker thread times 3 5 4 4 5 2 3 3 3 4 2 3 4 4 2
+-- 7 <11
+-- worker thread times 2 3 3 2 2 2 2 2 3 3 2 2 3 2 2
+true 2382
+(0 -> -1) (1 -> 9) (2 -> 12) (3 -> 14) (4 -> 4) (5 -> 11) (6 -> 3) (7 -> 10) (8 -> 8) (9 -> 13) (10 -> -1) (11 -> 2) (12 -> -1) (13 -> -1) (14 -> -1) 
+19 1 1 2 2 7 4
+EXCEPT=5 FAIL0=1 FAIL1=1 FAIL2=2 FAIL3=2 FAIL4=7 SIZE=10 

@@ -1,0 +1,28 @@
+-- worker thread times 0 0 0 0 0 0 0
+-- 1 <40
+-- worker thread times 0 0 0 0 0 0 0
+-- 1 <39
+-- worker thread times 0 0 1 1 0 0 0
+-- 2 <38
+-- worker thread times 7 8 8 8 8 8 7
+-- 10 <37
+-- worker thread times 44 44 43 42 43 44 41
+-- 46 <36
+-- worker thread times 168 167 168 169 169 166 168
+-- 172 <35
+-- worker thread times 543 542 541 542 542 542 543
+-- 546 <34
+-- worker thread times 2027 2025 2025 2027 2026 2024 2027
+-- 2031 <33
+-- worker thread times 6105 6103 6103 6102 6103 6103 6103
+-- 6108 <32
+-- worker thread times 20161 20160 20160 20159 20159 20160 20159
+-- 20165 <31
+-- worker thread times 61640 61638 61635 61637 61637 61639 61638
+-- 61643 <30
+-- worker thread times 9268 9268 9268 9268 9268 9268 9268
+-- 9269 <29
+false 10481517 aborted
+
+100000 1 1 2 10 46 172 546 2031 6108 20165 61643 9269
+FAIL0=1 FAIL1=1 FAIL10=61643 FAIL11=9269 FAIL2=2 FAIL3=10 FAIL4=46 FAIL5=172 FAIL6=546 FAIL7=2031 FAIL8=6108 FAIL9=20165 

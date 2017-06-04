@@ -1,0 +1,13 @@
+-- worker thread times 0 0 0
+-- 0 <15
+-- worker thread times 0 0 0
+-- 0 <14
+-- worker thread times 0 0 1
+-- 1 <13
+-- worker thread times 9 9 9
+-- 10 <12
+-- worker thread times 0 0 0
+true 1506
+(0 -> 8) (1 -> -1) (2 -> 6) (3 -> 2) (4 -> 9) (5 -> 12) (6 -> 7) (7 -> 11) (8 -> -1) (9 -> 1) (10 -> 3) (11 -> 13) (12 -> -1) (13 -> -1) (14 -> 10) 
+15 0 0 1 10 1
+EXCEPT=4 FAIL0=0 FAIL1=0 FAIL2=1 FAIL3=10 SIZE=11 

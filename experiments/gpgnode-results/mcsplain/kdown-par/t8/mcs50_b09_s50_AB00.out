@@ -1,0 +1,28 @@
+-- worker thread times 0 0 0 0 0 0 0
+-- 1 <50
+-- worker thread times 0 0 0 0 0 0 0
+-- 1 <49
+-- worker thread times 3 2 2 2 2 2 2
+-- 4 <48
+-- worker thread times 23 24 23 24 22 22 23
+-- 26 <47
+-- worker thread times 80 77 77 79 80 80 79
+-- 83 <46
+-- worker thread times 293 294 293 293 293 293 292
+-- 296 <45
+-- worker thread times 853 852 852 852 851 850 853
+-- 856 <44
+-- worker thread times 2251 2249 2251 2250 2248 2249 2249
+-- 2254 <43
+-- worker thread times 5457 5462 5460 5460 5460 5459 5461
+-- 5465 <42
+-- worker thread times 13135 13139 13136 13137 13135 13137 13136
+-- 13142 <41
+-- worker thread times 31806 31805 31806 31808 31809 31805 31804
+-- 31812 <40
+-- worker thread times 46050 46049 46050 46051 46049 46051 46050
+-- 46052 <39
+false 7806285 aborted
+
+100000 1 1 4 26 83 296 856 2254 5465 13142 31812 46052
+FAIL0=1 FAIL1=1 FAIL10=31812 FAIL11=46052 FAIL2=4 FAIL3=26 FAIL4=83 FAIL5=296 FAIL6=856 FAIL7=2254 FAIL8=5465 FAIL9=13142 

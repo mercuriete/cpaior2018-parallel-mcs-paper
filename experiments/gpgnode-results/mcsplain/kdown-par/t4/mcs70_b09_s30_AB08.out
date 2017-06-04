@@ -1,0 +1,23 @@
+-- worker thread times 0 0 0
+-- 1 <30
+-- worker thread times 1 2 1
+-- 2 <29
+-- worker thread times 12 11 12
+-- 13 <28
+-- worker thread times 44 44 44
+-- 46 <27
+-- worker thread times 157 154 156
+-- 158 <26
+-- worker thread times 373 374 374
+-- 377 <25
+-- worker thread times 874 873 874
+-- 876 <24
+-- worker thread times 1785 1784 1786
+-- 1789 <23
+-- worker thread times 4203 4201 4203
+-- 4205 <22
+-- worker thread times 426 426 426
+true 573634
+(0 -> 12) (1 -> 0) (2 -> 1) (3 -> -1) (4 -> 2) (5 -> 24) (6 -> 6) (7 -> 3) (8 -> 28) (9 -> 16) (10 -> 14) (11 -> -1) (12 -> -1) (13 -> 5) (14 -> -1) (15 -> 10) (16 -> 29) (17 -> 17) (18 -> 27) (19 -> -1) (20 -> -1) (21 -> -1) (22 -> 11) (23 -> 21) (24 -> 23) (25 -> 7) (26 -> -1) (27 -> -1) (28 -> 22) (29 -> 9) 
+7898 1 2 13 46 158 377 876 1789 4205 426
+EXCEPT=9 FAIL0=1 FAIL1=2 FAIL2=13 FAIL3=46 FAIL4=158 FAIL5=377 FAIL6=876 FAIL7=1789 FAIL8=4205 SIZE=21 

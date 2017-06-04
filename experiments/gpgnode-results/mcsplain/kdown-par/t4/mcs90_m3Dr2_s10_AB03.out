@@ -1,0 +1,7 @@
+-- worker thread times 0 0 0
+-- 1 <10
+-- worker thread times 0 0 0
+true 17
+(0 -> 1) (1 -> 7) (2 -> 0) (3 -> 5) (4 -> 8) (5 -> 2) (6 -> -1) (7 -> 3) (8 -> 9) (9 -> 4) 
+3 1 1
+EXCEPT=1 FAIL0=1 SIZE=9 

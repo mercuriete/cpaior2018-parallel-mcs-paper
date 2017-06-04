@@ -1,0 +1,22 @@
+-- worker thread times 0 0 0
+-- 1 <40
+-- worker thread times 1 1 1
+-- 2 <39
+-- worker thread times 11 11 11
+-- 12 <38
+-- worker thread times 56 54 55
+-- 57 <37
+-- worker thread times 312 311 310
+-- 314 <36
+-- worker thread times 2018 2020 2018
+-- 2022 <35
+-- worker thread times 11287 11285 11285
+-- 11290 <34
+-- worker thread times 74606 74605 74602
+-- 74607 <33
+-- worker thread times 11689 11689 11689
+-- 11690 <32
+false 5109711 aborted
+
+100000 1 2 12 57 314 2022 11290 74607 11690
+FAIL0=1 FAIL1=2 FAIL2=12 FAIL3=57 FAIL4=314 FAIL5=2022 FAIL6=11290 FAIL7=74607 FAIL8=11690 

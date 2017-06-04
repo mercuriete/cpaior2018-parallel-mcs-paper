@@ -1,0 +1,9 @@
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-- 1 <10
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-- 1 <9
+-- worker thread times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+true 194
+(0 -> 2) (1 -> -1) (2 -> 6) (3 -> 1) (4 -> 9) (5 -> 4) (6 -> 5) (7 -> 8) (8 -> 3) (9 -> -1) 
+5 1 1 2
+EXCEPT=2 FAIL0=1 FAIL1=1 SIZE=8 

@@ -1,0 +1,28 @@
+-- worker thread times 0 0 0 0 0 0 0
+-- 1 <50
+-- worker thread times 1 0 0 1 1 1 0
+-- 3 <49
+-- worker thread times 7 6 5 6 6 6 6
+-- 8 <48
+-- worker thread times 29 28 27 28 28 28 29
+-- 31 <47
+-- worker thread times 97 96 95 96 94 95 95
+-- 98 <46
+-- worker thread times 313 312 311 311 311 313 311
+-- 316 <45
+-- worker thread times 779 777 777 775 779 776 778
+-- 781 <44
+-- worker thread times 2023 2021 2022 2022 2019 2023 2023
+-- 2026 <43
+-- worker thread times 4828 4826 4827 4827 4828 4826 4828
+-- 4832 <42
+-- worker thread times 11450 11450 11447 11448 11449 11448 11446
+-- 11453 <41
+-- worker thread times 26986 26987 26987 26987 26987 26988 26987
+-- 26993 <40
+-- worker thread times 53448 53448 53448 53448 53449 53449 53449
+-- 53451 <39
+false 7818361 aborted
+
+100000 1 3 8 31 98 316 781 2026 4832 11453 26993 53451
+FAIL0=1 FAIL1=3 FAIL10=26993 FAIL11=53451 FAIL2=8 FAIL3=31 FAIL4=98 FAIL5=316 FAIL6=781 FAIL7=2026 FAIL8=4832 FAIL9=11453 
