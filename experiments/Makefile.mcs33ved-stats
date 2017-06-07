@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max clique-par/t32
+ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32
 RESULTS := gpgnode-results/mcs33ved
 
 all : $(RESULTS)/runtimes.data $(RESULTS)/nodes.data

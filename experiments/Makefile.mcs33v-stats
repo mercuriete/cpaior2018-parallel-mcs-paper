@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max clique-par/t32
+ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32
 RESULTS := gpgnode-results/mcs33v
 
 all : $(RESULTS)/runtimes.data $(RESULTS)/nodes.data
@@ -11,6 +11,10 @@ runtimes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a
 nodes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.nodes ))
 
 $(RESULTS)/clique/%.runtime : $(RESULTS)/clique/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-par/t8/%.runtime : $(RESULTS)/clique-par/t8/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
@@ -27,6 +31,10 @@ $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	[[ -s $@ ]]
 
 $(RESULTS)/clique/%.nodes : $(RESULTS)/clique/%.out
+	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-par/t8/%.nodes : $(RESULTS)/clique-par/t8/%.out
 	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
 	[[ -s $@ ]]
 
