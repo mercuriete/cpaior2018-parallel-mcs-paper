@@ -5,21 +5,26 @@ CATTER := cat
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique-par kdown-par james-cpp-max-par
+ALGORITHMS := clique-par kdown-par james-cpp-max-par kdown-cilk
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcsplain
 N_THREADS := 32
+T_EXTRA :=
 
-all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/t$(N_THREADS)/$i.out ))
+all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/t$(N_THREADS)$(T_EXTRA)/$i.out ))
 
-$(RESULTS)/clique-par/t$(N_THREADS)/%.out :
-	mkdir -p $(RESULTS)/clique-par/t$(N_THREADS)
+$(RESULTS)/clique-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/clique-par/t$(N_THREADS)$(T_EXTRA)
 	ulimit -s $(STACK_SPACE) ; ../parallel-clique-code/solve_max_common_subgraph --undirected --unlabelled --timeout $(TIMEOUT) --threads $(N_THREADS) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
-$(RESULTS)/kdown-par/t$(N_THREADS)/%.out :
-	mkdir -p $(RESULTS)/kdown-par/t$(N_THREADS)
+$(RESULTS)/kdown-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/kdown-par/t$(N_THREADS)$(T_EXTRA)
 	ulimit -s $(STACK_SPACE) ; ../parallel-kdown-code/solve_subgraph_isomorphism parallelix --format vf --induced --timeout $(TIMEOUT) --threads $(N_THREADS) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
-$(RESULTS)/james-cpp-max-par/t$(N_THREADS)/%.out :
-	mkdir -p $(RESULTS)/james-cpp-max-par/t$(N_THREADS)
-	ulimit -s $(STACK_SPACE) ; env ../../partitioning-common-subgraph/code/james-cpp-parallel/mcsp --threads $(N_THREADS) --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+$(RESULTS)/kdown-cilk/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/kdown-cilk/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; env CILK_NWORKERS=$(N_THREADS) ../cilk-kdown-code/solve_subgraph_isomorphism cilkix --format vf --induced --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; env ../james-cpp-parallel/mcsp --threads $(N_THREADS) --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
