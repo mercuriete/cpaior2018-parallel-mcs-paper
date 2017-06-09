@@ -65,6 +65,16 @@
 
 \subsection{The Splitting Algorithm}
 
+Due to the special structure of the maximum common subgraph problem, the following property holds
+throughout the search process using the CP model: any two variables either have domains with no
+values in common (with the possible exception of \bot), or have identical domains. The algorithm
+McSplit exploits this property, while exploring essentially the same search tree as the CP model.
+Rather than storing a domain for each vertex in V(G) -- which results in redundant storage in cases
+where domains are identical -- equivalence classes of vertices in V(G) are stored, and a set of
+candidate vertices in H is stored for each equivalence class. This enables fast propagation of the
+constraints and smaller memory requirements. In addition, the data structure enables good branching
+heuristics to be calculated cheaply.
+
 \subsection{The Clique Encoding}
 
 \subsection{The $k$-less Subgraph Isomorphism Algorithm}
