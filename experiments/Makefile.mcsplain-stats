@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max kdown clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 kdown-par/t4 kdown-par/t8 kdown-par/t16 kdown-par/t32 kdown-par/t64
+ALGORITHMS := clique james-cpp-max kdown clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 kdown-par/t4 kdown-par/t8 kdown-par/t16 kdown-par/t32 kdown-par/t64 clique-cilk/t32 kdown-cilk/t32 clique-cilk/t32r kdown-cilk/t32r kdown-par/t32r james-cpp-max-par/t32r
 RESULTS := gpgnode-results/mcsplain
 
 all : $(RESULTS)/runtimes.data
@@ -30,7 +30,19 @@ $(RESULTS)/kdown-par/t32/%.runtime : $(RESULTS)/kdown-par/t32/%.out
 	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/kdown-par/t32r/%.runtime : $(RESULTS)/kdown-par/t32r/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/kdown-par/t64/%.runtime : $(RESULTS)/kdown-par/t64/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/kdown-cilk/t32/%.runtime : $(RESULTS)/kdown-cilk/t32/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/kdown-cilk/t32r/%.runtime : $(RESULTS)/kdown-cilk/t32r/%.out
 	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
@@ -58,6 +70,14 @@ $(RESULTS)/clique-par/t64/%.runtime : $(RESULTS)/clique-par/t64/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/clique-cilk/t32/%.runtime : $(RESULTS)/clique-cilk/t32/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-cilk/t32r/%.runtime : $(RESULTS)/clique-cilk/t32r/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
@@ -75,6 +95,10 @@ $(RESULTS)/james-cpp-max-par/t16/%.runtime : $(RESULTS)/james-cpp-max-par/t16/%.
 	[[ -s $@ ]]
 
 $(RESULTS)/james-cpp-max-par/t32/%.runtime : $(RESULTS)/james-cpp-max-par/t32/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/james-cpp-max-par/t32r/%.runtime : $(RESULTS)/james-cpp-max-par/t32r/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
@@ -147,7 +171,6 @@ $(RESULTS)/nodes.data : nodes
 	{ echo instance $(ALGORITHMS) ; cut -d' ' -f1 < $(INSTANCES_FILE) | while read a ; do \
 	    echo $$a $$(cat $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$$a.nodes ) ) ; \
 	done ; } | tee $@
-
 
 $(RESULTS)/runtimes.data : runtimes
 	{ echo instance $(ALGORITHMS) ; cut -d' ' -f1 < $(INSTANCES_FILE) | while read a ; do \
