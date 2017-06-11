@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique james-cpp-max james-cpp-max-down cp-branching-mac cp-branching-filtering-mac cp-filtering-mac
+ALGORITHMS := clique james-cpp-max
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcs33ve-connected
 

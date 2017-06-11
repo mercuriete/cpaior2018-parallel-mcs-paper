@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique-par
+ALGORITHMS := clique-par james-cpp-max-par
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcsplain-connected
 N_THREADS := 32
@@ -15,3 +15,7 @@ all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/t$(
 $(RESULTS)/clique-par/t$(N_THREADS)/%.out :
 	mkdir -p $(RESULTS)/clique-par/t$(N_THREADS)
 	ulimit -s $(STACK_SPACE) ; ../parallel-clique-code/solve_max_common_subgraph --undirected --unlabelled --connected --threads $(N_THREADS) --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; env ../james-cpp-parallel/mcsp --connected --threads $(N_THREADS) --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
