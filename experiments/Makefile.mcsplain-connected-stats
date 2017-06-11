@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max james-cpp-max-down cp-branching-fc cp-branching-filtering-fc cp-filtering-fc clique-par/t32
+ALGORITHMS := clique james-cpp-max
 RESULTS := gpgnode-results/mcsplain-connected
 
-all : $(RESULTS)/runtimes.data $(RESULTS)/nodes.data
+all : $(RESULTS)/runtimes.data
 
 runtimes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.runtime ))
 
