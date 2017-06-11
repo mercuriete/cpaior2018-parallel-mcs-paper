@@ -79,6 +79,10 @@ In addition, the data structure enables good branching heuristics to be calculat
 
 \subsection{The $k$-less Subgraph Isomorphism Algorithm}
 
+The algorithm as described by Hoffmann, McCreesh, and Reilly \cite{DBLP:conf/aaai/HoffmannMR17} approaches the subgraph isomorphism problem by asking the question ``if a pattern graph cannot be found in the target, how much of the pattern graph can be found?''. The $k{\downarrow}$ algorithm tries to solve the subgraph isomorphism problem first for $k=0$ (the whole pattern graph can be found in the target), should that be not satisfiable, it tries to solve the problem for $k=1$ (one vertex cannot be matched) should that also not be satisfiable, it iterates $k$ further by a small number to keep the shrinking pattern graph within a reasonable size. By unmatching some vertices  invariants are weakened but kept effective. Specifically, invariants based around paths and degrees of vertices hold.
+
+This technique bridges the subgraph isomorphism problem with the maximal common subgraph problem. The iteration of the decision problem (iterating over $k$) leads to an algorithm with rivalling runtimes.
+
 \section{Parallel Search}
 
 \section{Experiments}
