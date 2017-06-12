@@ -24,6 +24,5 @@ plot \
     "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 2:($2>=1e5?1e-10:1) smooth cumulative w l ti 'Clique' ls 2, \
     "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 3:($3>=1e5?1e-10:1) smooth cumulative w l ti 'McSplit' ls 5, \
     "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 6:($6>=1e5?1e-10:1) smooth cumulative w l notitle ls 2 dt '.', \
-    "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 11:($11>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.', \
-    "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 12:($12>=1e5?1e-10:1) smooth cumulative w l notitle ls 2 dt '-', \
+    "../experiments/gpgnode-results/mcs33ved/runtimes.data" u 11:($11>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.'
 

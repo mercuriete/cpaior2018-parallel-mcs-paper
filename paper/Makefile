@@ -11,6 +11,13 @@ GRAPHS = \
 	gen-graph-cumulative-33ve-connected.pdf \
 	gen-graph-cumulative-sip.pdf \
 	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-plain-kdown-vs-kdown-par-t32.pdf \
+	gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.pdf \
+	gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-33v-mcsplit-vs-mcsplit-par-t32.pdf \
+	gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-33ved-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-clique-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-scatter-plain-kdown-vs-kdown-cilk-t32.pdf \
@@ -39,6 +46,6 @@ graphs : $(GRAPHS)
 
 gen-graph-%.pdf : graph-%.gnuplot
 	gnuplot $<
-	sed -i -e '19s/^\(\\path.*\)/\% \1/' gen-graph-$*.tex # epic haxx
+	sed -i -e '16,20s/^\(\\path.*\)/\% \1/' gen-graph-$*.tex # epic haxx
 	latexmk -pdf gen-graph-$*
 

@@ -26,7 +26,5 @@ plot \
     "../experiments/gpgnode-results/mcsplain/runtimes.data" u 4:($4>=1e5?1e-10:1) smooth cumulative w l ti 'k${\downarrow}$' ls 8, \
     "../experiments/gpgnode-results/mcsplain/runtimes.data" u 7:($7>=1e5?1e-10:1) smooth cumulative w l notitle ls 2 dt '.', \
     "../experiments/gpgnode-results/mcsplain/runtimes.data" u 12:($12>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.', \
-    "../experiments/gpgnode-results/mcsplain/runtimes.data" u 15:($15>=1e5?1e-10:1) smooth cumulative w l notitle ls 8 dt '.', \
-    "../experiments/gpgnode-results/mcsplain/runtimes.data" u 18:($18>=1e5?1e-10:1) smooth cumulative w l notitle ls 2 dt '-', \
-    "../experiments/gpgnode-results/mcsplain/runtimes.data" u 19:($19>=1e5?1e-10:1) smooth cumulative w l notitle ls 8 dt '-'
+    "../experiments/gpgnode-results/mcsplain/runtimes.data" u 15:($15>=1e5?1e-10:1) smooth cumulative w l notitle ls 8 dt '.'
 
