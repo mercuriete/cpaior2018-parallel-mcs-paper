@@ -111,6 +111,7 @@ namespace
             vertices_adjacent_to_by_g1(g1.size)
         {
             incumbent.start_time = params.start_time;
+            incumbent.value = params.prime;
 
             // populate our order with every vertex initially
             std::iota(order.begin(), order.end(), 0);

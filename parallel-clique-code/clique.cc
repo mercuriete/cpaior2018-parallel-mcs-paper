@@ -394,6 +394,8 @@ namespace
             nodes(0),
             vertices_adjacent_to_by_g1(g1.size)
         {
+            best_anywhere.value = params.prime;
+
             // populate our order with every vertex initially
             std::iota(order.begin(), order.end(), 0);
 

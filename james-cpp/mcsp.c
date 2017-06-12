@@ -47,6 +47,7 @@ static struct argp_option options[] = {
     {"vertex-labelled-only", 'x', 0, 0, "Use vertex labels, but not edge labels"},
     {"big-first", 'b', 0, 0, "First try to find an induced subgraph isomorphism, then decrement the target size"},
     {"timeout", 't', "timeout", 0, "Specify a timeout (seconds)"},
+    {"prime", 'p', "prime", 0, "Specify initial incumbent size"},
     { 0 }
 };
 
@@ -64,6 +65,7 @@ static struct {
     char *filename1;
     char *filename2;
     int timeout;
+    int prime;
     int arg_num;
 } arguments;
 
@@ -82,6 +84,7 @@ void set_default_arguments() {
     arguments.filename1 = NULL;
     arguments.filename2 = NULL;
     arguments.timeout = 0;
+    arguments.prime = 0;
     arguments.arg_num = 0;
 }
 
@@ -129,6 +132,9 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state) {
             break;
         case 't':
             arguments.timeout = std::stoi(arg);
+            break;
+        case 'p':
+            arguments.prime = std::stoi(arg);
             break;
         case ARGP_KEY_ARG:
             if (arguments.arg_num == 0) {
@@ -456,7 +462,7 @@ vector<VtxPair> mcs(const Graph & g0, const Graph & g1) {
         domains.push_back({start_l, start_r, left_len, right_len, false});
     }
 
-    vector<VtxPair> incumbent;
+    vector<VtxPair> incumbent(arguments.prime, {-1, -1});
 
     if (arguments.big_first) {
         for (int k=0; k<g0.n; k++) {

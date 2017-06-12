@@ -18,6 +18,8 @@ struct Params
     bool connected = false;
 
     unsigned n_threads = 1;
+
+    int prime = 0;
 };
 
 #endif

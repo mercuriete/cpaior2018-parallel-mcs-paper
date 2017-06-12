@@ -16,6 +16,8 @@ struct Params
 
     /// Connected only?
     bool connected = false;
+
+    int prime = 0;
 };
 
 #endif

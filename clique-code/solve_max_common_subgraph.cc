@@ -206,6 +206,7 @@ auto main(int argc, char * argv[]) -> int
             ("no-edge-labels",                        "Get rid of edge labels, but keep vertex labels")
             ("undirected",                            "Make the graph undirected")
             ("connected",                             "Only find connected subgraphs")
+            ("prime",              po::value<int>(),  "Set initial incumbent size")
             ;
 
         po::options_description all_options{ "All options" };
@@ -247,6 +248,9 @@ auto main(int argc, char * argv[]) -> int
         Params params;
 
         params.connected = options_vars.count("connected");
+
+        if (options_vars.count("prime"))
+            params.prime = options_vars["prime"].as<int>();
 
         if (params.connected && ! options_vars.count("undirected")) {
             std::cerr << "Currently --connected requires --undirected" << std::endl;

@@ -54,6 +54,7 @@ static struct argp_option options[] = {
     {"vertex-labelled-only", 'x', 0, 0, "Use vertex labels, but not edge labels"},
     {"big-first", 'b', 0, 0, "First try to find an induced subgraph isomorphism, then decrement the target size"},
     {"timeout", 't', "timeout", 0, "Specify a timeout (seconds)"},
+    {"prime", 'p', "prime", 0, "Specify initial incumbent size"},
     {"threads", 'T', "threads", 0, "Specify how many threads to use"},
     { 0 }
 };
@@ -72,6 +73,7 @@ static struct {
     char *filename1;
     char *filename2;
     int timeout;
+    int prime;
     int threads;
     int arg_num;
 } arguments;
@@ -91,6 +93,7 @@ void set_default_arguments() {
     arguments.filename1 = NULL;
     arguments.filename2 = NULL;
     arguments.timeout = 0;
+    arguments.prime = 0;
     arguments.threads = std::thread::hardware_concurrency();
     arguments.arg_num = 0;
 }
@@ -139,6 +142,9 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state) {
             break;
         case 't':
             arguments.timeout = std::stoi(arg);
+            break;
+        case 'p':
+            arguments.prime = std::stoi(arg);
             break;
         case 'T':
             arguments.threads = std::stoi(arg);
@@ -792,6 +798,7 @@ std::pair<vector<VtxPair>, unsigned long long> mcs(const Graph & g0, const Graph
     }
 
     AtomicIncumbent global_incumbent;
+    global_incumbent.value = arguments.prime;
     vector<VtxPair> incumbent;
     unsigned long long global_nodes = 0;
 
