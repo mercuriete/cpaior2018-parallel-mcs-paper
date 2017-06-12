@@ -19,7 +19,7 @@ n=50
 width=(max-min)/n
 hist(x,width)=width*floor((0.0+x)/width)+width/2.0
 shist(seq,par,width)=((0.0+seq)/(0.0+par)>=max?hist(max,width):hist((0.0+seq)/(0.0+par),width))
-fhist(seq,par)=(seq>=1e5||seq<1e3?0:1)
+fhist(seq,par)=(seq>=1e5||seq<5e2?0:1)
 
 set xrange [min:max+1]
 
