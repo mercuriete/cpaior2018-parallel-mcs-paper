@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique james-cpp-max
+ALGORITHMS := clique james-cpp-max clique-prime james-cpp-max-prime
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcs33ved
 
@@ -18,3 +18,11 @@ $(RESULTS)/clique/%.out :
 $(RESULTS)/james-cpp-max/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max
 	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -i -a --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/clique-prime/%.out : $(RESULTS)/clique-par/t32/%.out
+	mkdir -p $(RESULTS)/clique-prime
+	ulimit -s $(STACK_SPACE) ; ../clique-code/solve_max_common_subgraph --timeout $(TIMEOUT) --prime $$(tail -n3 $(RESULTS)/clique-par/t32/$*.out | head -n1 | xargs -n1 | tail -n1 ) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/james-cpp-max-prime/%.out : $(RESULTS)/clique-par/t32/%.out
+	mkdir -p $(RESULTS)/james-cpp-max-prime
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -i -a --timeout $(TIMEOUT) --prime $$(tail -n3 $(RESULTS)/clique-par/t32/$*.out | head -n1 | xargs -n1 | tail -n1 ) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1

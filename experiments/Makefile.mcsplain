@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique kdown james-cpp-max
+ALGORITHMS := clique kdown james-cpp-max clique-prime
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcsplain
 
@@ -14,6 +14,10 @@ all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.
 $(RESULTS)/clique/%.out :
 	mkdir -p $(RESULTS)/clique
 	ulimit -s $(STACK_SPACE) ; ../clique-code/solve_max_common_subgraph --undirected --unlabelled --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/clique-prime/%.out : $(RESULTS)/clique-par/t32/%.out
+	mkdir -p $(RESULTS)/clique-prime
+	ulimit -s $(STACK_SPACE) ; ../clique-code/solve_max_common_subgraph --undirected --unlabelled --timeout $(TIMEOUT) --prime $$(tail -n3 $(RESULTS)/clique-par/t32/$*.out | head -n1 | xargs -n1 | tail -n1 ) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/kdown/%.out :
 	mkdir -p $(RESULTS)/kdown
