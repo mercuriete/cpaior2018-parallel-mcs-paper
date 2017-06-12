@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := sipinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique cp-fc kdown james-cpp-max james-cpp-max-down kdown-par/t32
+ALGORITHMS := kdown james-cpp-max-down
 RESULTS := gpgnode-results/sip
 
 all : $(RESULTS)/runtimes.data $(RESULTS)/nodes.data

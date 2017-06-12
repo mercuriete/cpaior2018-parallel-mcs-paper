@@ -9,6 +9,7 @@ GRAPHS = \
 	gen-graph-cumulative-33ved.pdf \
 	gen-graph-cumulative-plain-connected.pdf \
 	gen-graph-cumulative-33ve-connected.pdf \
+	gen-graph-cumulative-sip.pdf \
 	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-plain-clique-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf \

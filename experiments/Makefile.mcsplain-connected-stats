@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max
+ALGORITHMS := clique james-cpp-max clique-par/t32 james-cpp-max-par/t32
 RESULTS := gpgnode-results/mcsplain-connected
 
 all : $(RESULTS)/runtimes.data
@@ -39,6 +39,10 @@ $(RESULTS)/cp-filtering-fc/%.runtime : $(RESULTS)/cp-filtering-fc/%.out
 	[[ -s $@ ]]
 
 $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/james-cpp-max-par/t32/%.runtime : $(RESULTS)/james-cpp-max-par/t32/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
