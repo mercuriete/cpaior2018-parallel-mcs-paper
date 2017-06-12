@@ -1,0 +1,72 @@
+Thread work times 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 1 0 0 1 0 1 0 0 1
+Upper bound: 127
+Thread work times 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 126
+Thread work times 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 125
+Thread work times 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1
+Upper bound: 124
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 2 0 0 0 0 0 0 0 1
+Upper bound: 123
+Thread work times 0 0 0 1 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 2 0 2 0 0 0 0 0 0 2 0 0
+Upper bound: 122
+Thread work times 0 0 0 1 2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 3 2 0 0 0 0 0
+Upper bound: 121
+Thread work times 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 1 0 2 0 0 0
+Upper bound: 120
+Thread work times 4 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 2 0 0 0 2 0 0
+Upper bound: 119
+Thread work times 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 3 0 0 3 0 0 0 0 0
+Upper bound: 118
+Thread work times 0 0 0 0 0 0 0 0 0 1 5 0 0 3 0 0 0 0 0 4 0 0 0 0 0 0 0 5 0 0 0
+Upper bound: 117
+Thread work times 0 6 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 5 2 0 0 0 0 4 0 0
+Upper bound: 116
+Thread work times 0 0 6 0 0 0 0 0 5 0 0 4 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6
+Upper bound: 115
+Thread work times 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 5 0 4 0 0 0 0 0 0 6 0 0 6 0 0 0
+Upper bound: 114
+Thread work times 7 0 5 0 0 0 0 1 5 0 0 0 0 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0
+Upper bound: 113
+Thread work times 8 0 0 0 0 7 0 0 0 0 2 0 7 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 0
+Upper bound: 112
+Thread work times 8 0 1 7 0 8 0 0 6 0 0 0 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0
+Upper bound: 111
+Thread work times 0 7 9 0 7 0 0 0 0 0 0 0 0 0 0 0 0 0 9 0 0 8 0 0 0 0 0 0 0 0 0
+Upper bound: 110
+Thread work times 9 0 0 0 0 0 0 0 8 0 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 0 0 0 0
+Upper bound: 109
+Thread work times 8 9 0 0 1 0 9 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0
+Upper bound: 108
+Thread work times 10 0 0 0 0 0 0 0 0 0 10 0 9 0 0 0 0 9 0 0 0 0 0 8 0 0 0 0 0 2 0
+Upper bound: 107
+Thread work times 10 0 12 0 0 0 0 0 10 0 0 0 0 0 0 0 0 0 0 0 12 0 0 0 0 0 0 0 0 0 0
+Upper bound: 106
+Thread work times 34 0 0 0 0 0 0 0 0 0 32 0 0 0 0 0 0 0 0 0 0 34 0 0 33 0 0 0 0 0 0
+Upper bound: 105
+Thread work times 36 0 0 0 35 0 0 0 34 0 0 0 0 0 0 0 0 0 0 0 0 0 35 0 0 0 34 0 0 0 0
+Upper bound: 104
+Thread work times 45 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 44 0 0 43 0
+Upper bound: 103
+Thread work times 15 16 16 145 17 16 17 16 16 143 15 142 140 17 16 17 141 16 17 16 15 16 16 16 17 16 16 17 17 15 16
+Upper bound: 102
+Thread work times 189 18 187 18 188 19 18 18 19 17 17 18 18 19 18 19 17 19 19 19 186 18 17 19 19 19 188 18 19 20 19
+Upper bound: 101
+Thread work times 368 367 21 21 20 20 20 367 365 21 21 19 20 22 20 22 20 20 21 20 20 21 21 21 21 363 21 22 19 20 20
+Upper bound: 100
+Thread work times 700 24 23 24 24 23 24 23 23 698 23 23 23 22 696 23 23 23 24 697 23 22 23 23 23 24 23 22 698 22 23
+Upper bound: 99
+Thread work times 1237 143 1237 142 143 143 142 141 143 142 141 1231 138 142 141 1234 141 142 143 143 140 144 141 143 1235 143 142 142 144 143 142
+Upper bound: 98
+Thread work times 5996 5996 429 430 431 5997 431 431 431 429 429 430 5999 427 430 430 430 430 430 431 430 428 5994 430 430 429 428 431 427 430 431
+Upper bound: 97
+Thread work times 18393 1175 1175 1166 1173 1174 1175 1175 1175 1176 1174 1175 1161 1175 1176 1174 1175 18392 18391 1175 18391 1176 1174 1176 1175 1176 1175 18393 1175 1174 1175
+Upper bound: 96
+Thread work times 43503 2597 2585 2598 2598 2599 2598 2599 2584 2598 2599 2599 2598 43505 2598 2597 43508 43507 2596 43507 2595 2599 2599 2599 2598 2598 2598 2598 2598 2599 2599
+Upper bound: 95
+Thread work times 4577 4577 4577 4578 4577 4578 4577 4579 4579 4577 4576 29153 29163 29162 4576 4578 4576 4577 4578 4577 29164 4576 4578 4578 4578 4579 4578 4563 4579 29163 4577
+Solution size 7
+(5 -> 21) (15 -> 8) (40 -> 31) (53 -> 32) (62 -> 46) (104 -> 47) (116 -> 20) 
+Nodes:                      207629546
+CPU time (ms):              100002
+TIMEOUT

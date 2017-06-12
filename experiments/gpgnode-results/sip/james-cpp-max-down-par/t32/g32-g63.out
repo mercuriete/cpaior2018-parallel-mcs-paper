@@ -1,0 +1,184 @@
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+Upper bound: 99
+Thread work times 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 98
+Thread work times 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2
+Upper bound: 97
+Thread work times 3 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 1 0
+Upper bound: 96
+Thread work times 3 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+Upper bound: 95
+Thread work times 4 0 0 0 0 0 0 0 2 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 3
+Upper bound: 94
+Thread work times 0 0 0 2 0 2 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 4 0 0 0 0
+Upper bound: 93
+Thread work times 0 0 0 4 0 0 0 0 0 0 0 3 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 5
+Upper bound: 92
+Thread work times 0 5 0 0 0 0 4 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 0 3 0
+Upper bound: 91
+Thread work times 0 6 0 5 0 0 0 0 0 0 0 0 0 0 5 1 1 0 0 0 0 0 0 0 0 0 0 0 0 4 0
+Upper bound: 90
+Thread work times 7 0 7 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 0
+Upper bound: 89
+Thread work times 8 0 0 0 7 0 0 0 0 6 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 8
+Upper bound: 88
+Thread work times 0 0 0 0 0 0 0 7 0 6 0 0 0 0 0 0 0 0 0 0 9 0 0 0 0 0 8 0 0 0 0
+Upper bound: 87
+Thread work times 9 8 0 0 7 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 8 0 0
+Upper bound: 86
+Thread work times 10 0 0 0 0 3 0 9 10 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 85
+Thread work times 11 0 0 0 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 8 9 0 0 0
+Upper bound: 84
+Thread work times 0 12 0 0 3 0 0 0 0 11 10 0 0 0 0 0 0 0 11 0 2 0 0 0 0 0 0 9 0 0 0
+Upper bound: 83
+Thread work times 12 0 0 0 0 0 0 0 11 12 1 0 0 0 0 0 0 0 0 10 0 0 10 0 0 0 0 0 0 0 0
+Upper bound: 82
+Thread work times 13 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 11 0 0 0 13 0 0 0 0 2 0 11 0 0 0
+Upper bound: 81
+Thread work times 0 15 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 14 0 0 0 0 0 0 0 0 11 12 0 0
+Upper bound: 80
+Thread work times 14 13 0 0 0 0 12 0 13 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 79
+Thread work times 16 0 0 0 0 0 0 0 0 0 0 0 0 0 14 3 0 0 13 0 0 0 14 0 0 0 15 0 0 0 0
+Upper bound: 78
+Thread work times 0 17 14 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 15 0 16 0 0 0 0 0 16 0 0
+Upper bound: 77
+Thread work times 0 0 0 0 0 0 0 15 0 17 0 15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 17 0
+Upper bound: 76
+Thread work times 17 19 0 0 0 0 0 16 15 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18 0 0 0 0 0 0
+Upper bound: 75
+Thread work times 19 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18 0 0 0 0 16 17 0 0 0
+Upper bound: 74
+Thread work times 19 0 0 16 0 18 0 0 18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 17 0 0 0 0 0
+Upper bound: 73
+Thread work times 19 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18 0 0
+Upper bound: 72
+Thread work times 0 21 0 20 0 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18 0 0 0
+Upper bound: 71
+Thread work times 0 0 1 0 1 0 0 0 0 0 0 2 0 20 0 1 21 0 0 0 0 19 0 0 0 0 0 0 0 0 21
+Upper bound: 70
+Thread work times 0 21 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 20 0 0 21 0 19 0 0 0 0
+Upper bound: 69
+Thread work times 0 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 22 0 0 0 0 0 0 1 21 0 0 0 23
+Upper bound: 68
+Thread work times 23 0 0 0 0 0 0 0 0 0 22 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 22 0
+Upper bound: 67
+Thread work times 0 26 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 0 0 1 0 0 0 24 0 0 0 0 23 0
+Upper bound: 66
+Thread work times 28 0 0 0 0 0 0 0 0 0 0 0 0 28 0 0 0 0 0 25 0 0 0 0 0 0 0 0 0 27 26
+Upper bound: 65
+Thread work times 0 26 0 0 0 2 25 0 0 0 24 0 0 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 64
+Thread work times 27 0 0 0 0 0 0 0 0 0 0 0 25 25 0 0 0 0 0 24 0 0 26 0 0 0 0 0 0 0 0
+Upper bound: 63
+Thread work times 0 28 0 0 0 0 0 0 0 0 0 0 25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 26 0 0 27
+Upper bound: 62
+Thread work times 29 0 0 28 27 0 0 0 0 0 26 0 0 0 0 0 0 0 0 0 0 0 0 27 0 0 0 0 0 0 0
+Upper bound: 61
+Thread work times 29 0 29 0 28 0 0 0 0 0 27 0 0 27 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 60
+Thread work times 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 30 28 0 0 29 29 0 0 31 0 0 0 0
+Upper bound: 59
+Thread work times 31 0 0 29 0 0 0 30 0 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 58
+Thread work times 32 0 0 0 0 0 0 0 0 0 0 0 0 0 29 0 0 0 30 0 0 0 0 0 1 31 0 0 29 0 0
+Upper bound: 57
+Thread work times 0 0 0 0 0 0 30 0 0 0 0 0 0 0 31 0 0 0 0 0 0 0 0 0 32 0 0 0 0 0 0
+Upper bound: 56
+Thread work times 32 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 30 0 0 29 32 0 31 0 0 0
+Upper bound: 55
+Thread work times 0 34 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 35 0 0 0 0 0 0 0 0 0 33
+Upper bound: 54
+Thread work times 0 0 34 0 0 33 0 0 0 0 35 36 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 1 0 36 0
+Upper bound: 53
+Thread work times 38 0 36 36 37 0 0 0 34 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 52
+Thread work times 0 0 0 0 0 35 0 0 0 33 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 35 0 0 0
+Upper bound: 51
+Thread work times 38 0 0 37 0 0 0 0 0 0 0 36 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 37
+Upper bound: 50
+Thread work times 36 0 0 37 0 0 0 0 0 0 35 0 0 0 0 0 0 0 0 0 0 0 0 34 0 0 0 0 38 0 0
+Upper bound: 49
+Thread work times 0 0 0 36 0 0 0 0 0 0 39 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 38 0
+Upper bound: 48
+Thread work times 39 38 37 36 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 47
+Thread work times 0 0 0 0 40 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 39 42
+Upper bound: 46
+Thread work times 41 0 0 0 0 0 40 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 39 0 38 0 0 0 0
+Upper bound: 45
+Thread work times 0 42 40 0 0 0 39 0 0 0 0 0 41 0 0 0 0 0 0 0 0 0 0 41 0 0 0 0 0 0 0
+Upper bound: 44
+Thread work times 44 0 0 0 0 43 0 42 0 0 0 0 41 1 0 0 0 0 0 0 0 0 0 0 40 0 0 0 0 0 0
+Upper bound: 43
+Thread work times 0 0 0 0 0 0 0 0 0 41 0 0 40 0 0 42 0 0 0 0 0 0 42 43 0 0 0 0 0 0 0
+Upper bound: 42
+Thread work times 0 0 0 0 0 0 42 0 0 0 0 0 0 0 45 0 0 0 0 0 0 0 0 43 0 0 0 0 45 44 0
+Upper bound: 41
+Thread work times 0 44 0 0 43 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 41 42 0 0 0 42 0 0 0 0 0
+Upper bound: 40
+Thread work times 0 45 0 0 0 44 43 0 0 0 44 0 0 0 0 0 42 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 39
+Thread work times 0 46 0 0 0 0 0 0 0 44 0 0 0 0 0 0 0 0 3 0 0 0 3 0 0 0 0 0 0 0 0
+Upper bound: 38
+Thread work times 0 0 0 43 0 44 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 43 0 0 0 0 0 45
+Upper bound: 37
+Thread work times 0 0 0 0 0 0 0 0 0 0 44 45 0 0 43 0 0 0 0 0 0 0 0 0 0 0 0 0 46 46 0
+Upper bound: 36
+Thread work times 49 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 49 48 46 2 0 0 0 2 0 0 47 0
+Upper bound: 35
+Thread work times 0 50 0 0 2 0 0 0 0 0 0 48 0 0 49 0 0 0 0 0 0 0 0 47 0 0 0 0 0 0 0
+Upper bound: 34
+Thread work times 49 0 47 48 0 48 49 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 33
+Thread work times 0 51 49 0 0 48 48 0 0 0 0 0 50 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 32
+Thread work times 48 0 0 47 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 50 49
+Upper bound: 31
+Thread work times 52 0 0 50 0 0 0 0 0 0 0 1 0 0 0 0 0 50 0 51 0 0 0 0 0 0 0 0 0 0 52
+Upper bound: 30
+Thread work times 52 0 0 0 0 0 0 50 0 0 0 0 0 0 0 0 0 0 0 50 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 29
+Thread work times 51 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 51 0 0 0 0 0 0 0 0 0 0
+Upper bound: 28
+Thread work times 0 0 0 52 53 53 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 51 0 0 0 54
+Upper bound: 27
+Thread work times 81 0 0 0 0 0 0 0 0 0 0 79 0 0 0 0 0 0 0 0 0 0 0 80 77 0 0 0 0 78 0
+Upper bound: 26
+Thread work times 126 2 0 124 0 0 0 0 0 0 2 0 125 0 0 0 1 1 0 0 1 124 0 0 122 0 0 0 2 0 0
+Upper bound: 25
+Thread work times 2 1 3 169 2 2 0 170 1 0 0 0 0 0 171 0 0 0 2 0 2 0 0 0 172 172 0 0 3 1 0
+Upper bound: 24
+Thread work times 2 322 321 320 2 3 3 1 2 4 1 0 2 2 3 1 2 3 321 0 2 3 322 3 1 4 2 0 1 2 0
+Upper bound: 23
+Thread work times 4 5 431 3 4 3 1 4 432 3 3 5 3 3 1 3 3 3 4 5 2 433 5 429 5 4 4 4 6 432 3
+Upper bound: 22
+Thread work times 717 9 7 6 6 7 8 7 9 6 8 9 8 716 8 9 716 3 0 8 7 8 6 713 7 5 8 8 717 7 6
+Upper bound: 21
+Thread work times 8 973 9 8 9 8 8 9 8 974 8 10 8 6 7 9 10 10 9 974 9 6 972 8 9 10 7 11 8 9 972
+Upper bound: 20
+Thread work times 14 15 14 13 14 13 14 14 13 14 8 10 1313 14 14 13 1315 12 1316 12 13 1316 14 14 12 13 13 14 13 13 12
+Upper bound: 19
+Thread work times 17 1800 18 17 16 17 18 18 14 17 18 16 17 16 17 1797 18 1799 12 17 17 17 1798 19 17 17 15 1798 17 16 17
+Upper bound: 18
+Thread work times 20 19 2205 21 20 21 20 21 21 20 21 18 21 21 20 2203 20 20 2205 21 21 18 21 18 21 22 20 21 17 20 22
+Upper bound: 17
+Thread work times 2674 24 24 23 23 24 23 25 24 24 25 22 25 23 25 24 24 23 2671 23 24 24 24 24 24 24 25 23 25 24 26
+Upper bound: 16
+Thread work times 3195 3193 30 29 29 29 29 27 30 29 30 29 30 30 30 29 30 29 30 30 27 31 30 29 3191 30 28 23 30 29 30
+Upper bound: 15
+Thread work times 32 33 32 34 34 32 33 31 31 32 32 33 27 31 33 33 33 30 34 33 34 34 3602 34 34 34 3603 33 33 33 3603
+Upper bound: 14
+Thread work times 38 4024 35 37 32 37 34 37 37 35 37 36 37 36 37 36 36 36 35 37 37 37 36 35 36 36 34 35 36 36 36
+Upper bound: 13
+Thread work times 4446 39 39 40 40 40 40 40 41 40 39 39 41 39 4448 4443 40 40 41 41 39 39 40 41 41 39 40 41 41 4447 41
+Upper bound: 12
+Thread work times 406 414 406 406 413 413 412 429 406 406 406 406 407 407 417 30188 30189 424 30191 406 30191 414 415 30190 421 406 411 419 415 410 414
+Upper bound: 11
+Thread work times 41571 7859 8455 8049 8112 7886 8163 8313 8344 8212 8436 8468 8523 8472 7887 7977 8611 41568 8134 8281 8338 8430 8531 8535 41569 41571 41567 8324 8460 8422 7796
+Solution size 4
+(0 -> 5) (1 -> 45) (2 -> 65) (3 -> 25) 
+Nodes:                      1179712650
+CPU time (ms):              100003
+TIMEOUT
