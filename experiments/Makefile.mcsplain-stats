@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max kdown clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 kdown-par/t4 kdown-par/t8 kdown-par/t16 kdown-par/t32 kdown-par/t64 clique-cilk/t32 kdown-cilk/t32 clique-cilk/t32r kdown-cilk/t32r kdown-par/t32r james-cpp-max-par/t32r
+ALGORITHMS := clique james-cpp-max kdown clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 kdown-par/t4 kdown-par/t8 kdown-par/t16 kdown-par/t32 kdown-par/t64 clique-cilk/t32 kdown-cilk/t32 clique-cilk/t32r kdown-cilk/t32r kdown-par/t32r james-cpp-max-par/t32r james-cpp-max-par/t2 james-cpp-max-par/t4
 RESULTS := gpgnode-results/mcsplain
 
 all : $(RESULTS)/runtimes.data
@@ -82,6 +82,10 @@ $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/james-cpp-max-par/t2/%.runtime : $(RESULTS)/james-cpp-max-par/t2/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/james-cpp-max-par/t4/%.runtime : $(RESULTS)/james-cpp-max-par/t4/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
@@ -105,72 +109,6 @@ $(RESULTS)/james-cpp-max-par/t32r/%.runtime : $(RESULTS)/james-cpp-max-par/t32r/
 $(RESULTS)/james-cpp-max-par/t64/%.runtime : $(RESULTS)/james-cpp-max-par/t64/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
-
-$(RESULTS)/clique/%.nodes : $(RESULTS)/clique/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t8/%.nodes : $(RESULTS)/clique-par/t8/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t16/%.nodes : $(RESULTS)/clique-par/t16/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t32/%.nodes : $(RESULTS)/clique-par/t32/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t32r/%.nodes : $(RESULTS)/clique-par/t32r/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t64/%.nodes : $(RESULTS)/clique-par/t64/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t32/%.nodes : $(RESULTS)/clique-par/t32/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/clique-par/t32/%.nodes : $(RESULTS)/clique-par/t32/%.out
-	if grep -q aborted $^ ; then echo NaN ; else tail -n3 < $^ | head -n1 | cut -d' ' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max/%.nodes : $(RESULTS)/james-cpp-max/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max-par/t4/%.nodes : $(RESULTS)/james-cpp-max-par/t4/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max-par/t8/%.nodes : $(RESULTS)/james-cpp-max-par/t8/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max-par/t16/%.nodes : $(RESULTS)/james-cpp-max-par/t16/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max-par/t32/%.nodes : $(RESULTS)/james-cpp-max-par/t32/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/james-cpp-max-par/t64/%.nodes : $(RESULTS)/james-cpp-max-par/t64/%.out
-	if grep -q TIMEOUT $^ ; then echo NaN ; else grep '^Nodes:' < $^ | cut -d':' -f2 ; fi > $@
-	[[ -s $@ ]]
-
-$(RESULTS)/runtimes.data : runtimes
-	{ echo instance $(ALGORITHMS) ; cut -d' ' -f1 < $(INSTANCES_FILE) | while read a ; do \
-	    echo $$a $$(cat $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$$a.runtime ) ) ; \
-	done ; } | tee $@
-
-$(RESULTS)/nodes.data : nodes
-	{ echo instance $(ALGORITHMS) ; cut -d' ' -f1 < $(INSTANCES_FILE) | while read a ; do \
-	    echo $$a $$(cat $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$$a.nodes ) ) ; \
-	done ; } | tee $@
 
 $(RESULTS)/runtimes.data : runtimes
 	{ echo instance $(ALGORITHMS) ; cut -d' ' -f1 < $(INSTANCES_FILE) | while read a ; do \

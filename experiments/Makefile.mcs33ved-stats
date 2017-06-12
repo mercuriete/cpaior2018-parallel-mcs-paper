@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 clique-cilk/t32 clique-cilk/t32r james-cpp-max-par/t32r
+ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 clique-cilk/t32 clique-cilk/t32r james-cpp-max-par/t32r clique-par/t4 clique-par/t2
 RESULTS := gpgnode-results/mcs33ved
 
 all : $(RESULTS)/runtimes.data
@@ -11,6 +11,14 @@ runtimes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a
 nodes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.nodes ))
 
 $(RESULTS)/clique/%.runtime : $(RESULTS)/clique/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-par/t2/%.runtime : $(RESULTS)/clique-par/t2/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-par/t4/%.runtime : $(RESULTS)/clique-par/t4/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
