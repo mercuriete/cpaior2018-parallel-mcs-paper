@@ -22,5 +22,7 @@ set ytics add ('5725' 5725)
 
 plot \
     "../experiments/gpgnode-results/sip/runtimes.data" u 2:($2>=1e5?1e-10:1) smooth cumulative w l ti 'McSplit${\downarrow}$' ls 5, \
-    "../experiments/gpgnode-results/sip/runtimes.data" u 3:($3>=1e5?1e-10:1) smooth cumulative w l ti 'k${\downarrow}$' ls 8
+    "../experiments/gpgnode-results/sip/runtimes.data" u 3:($3>=1e5?1e-10:1) smooth cumulative w l ti 'k${\downarrow}$' ls 8, \
+    "../experiments/gpgnode-results/sip/runtimes.data" u 4:($4>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.', \
+    "../experiments/gpgnode-results/sip/runtimes.data" u 5:($5>=1e5?1e-10:1) smooth cumulative w l notitle ls 8 dt '.'
 

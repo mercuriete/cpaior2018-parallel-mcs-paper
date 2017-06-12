@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 INSTANCES_FILE := sipinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := kdown james-cpp-max-down
+ALGORITHMS := kdown james-cpp-max-down kdown-par/t32 james-cpp-max-down-par/t32
 RESULTS := gpgnode-results/sip
 
-all : $(RESULTS)/runtimes.data $(RESULTS)/nodes.data
+all : $(RESULTS)/runtimes.data
 
 runtimes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.runtime ))
 
@@ -23,6 +23,10 @@ $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	[[ -s $@ ]]
 
 $(RESULTS)/james-cpp-max-down/%.runtime : $(RESULTS)/james-cpp-max-down/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/james-cpp-max-down-par/t32/%.runtime : $(RESULTS)/james-cpp-max-down-par/t32/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 

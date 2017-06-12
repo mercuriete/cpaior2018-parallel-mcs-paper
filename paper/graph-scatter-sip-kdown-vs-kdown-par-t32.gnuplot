@@ -1,16 +1,16 @@
 # vim: set et ft=gnuplot sw=4 :
 
 set terminal tikz standalone color size 2.4in,2.3in font '\footnotesize'
-set output "gen-graph-scatter-33ved-clique-vs-clique-cilk-t32.tex"
+set output "gen-graph-scatter-sip-kdown-vs-kdown-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Clique, Fully labelled'
+set title 'k${\downarrow}$, Large'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
 set xlabel "Sequential Runtime (ms)"
-set ylabel "32 Cilk Workers Runtime (ms)"
+set ylabel "32 Threads Runtime (ms)"
 set logscale xy
 set border 3
 set grid
@@ -29,6 +29,6 @@ set cbrange [0:5]
 unset colorbox
 
 plot \
-    "<shuf ../experiments/gpgnode-results/mcs33ved/runtimes.data" u ($2>=1e5?2e5:$2):($12>=1e5?2e5:$12):((stringcolumn(1))[4:5]eq"10"?1:(stringcolumn(1))[4:5]eq"30"?2:(stringcolumn(1))[4:5]eq"50"?3:(stringcolumn(1))[4:5]eq"70"?4:(stringcolumn(1))[4:5]eq"90"?5:(stringcolumn(1))eq"instance"?1:100) w p pt 6 ps 0.2 lc pal, \
+    "<shuf ../experiments/gpgnode-results/sip/runtimes.data" u ($2>=1e5?2e5:$2):($4>=1e5?2e5:$4) w p pt 6 ps 0.2 lc rgb '#812581', \
    x w l ls 0 notitle
 

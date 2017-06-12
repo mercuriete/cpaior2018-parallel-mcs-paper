@@ -10,7 +10,6 @@ GRAPHS = \
 	gen-graph-cumulative-plain-connected.pdf \
 	gen-graph-cumulative-33ve-connected.pdf \
 	gen-graph-cumulative-sip.pdf \
-	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-plain-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.pdf \
@@ -18,27 +17,24 @@ GRAPHS = \
 	gen-graph-histogram-33v-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33ved-mcsplit-vs-mcsplit-par-t32.pdf \
-	gen-graph-scatter-plain-clique-vs-clique-cilk-t32.pdf \
+	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf \
-	gen-graph-scatter-plain-kdown-vs-kdown-cilk-t32.pdf \
 	gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-clique-par-t32r-vs-clique-par-t32.pdf \
-	gen-graph-scatter-plain-clique-cilk-t32r-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.pdf \
-	gen-graph-scatter-plain-kdown-cilk-t32r-vs-kdown-cilk-t32.pdf \
 	gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf \
-	gen-graph-scatter-33v-clique-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33v-clique-par-t32r-vs-clique-par-t32.pdf \
-	gen-graph-scatter-33v-clique-cilk-t32r-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-33v-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf \
-	gen-graph-scatter-33ved-clique-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf \
-	gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf \
 	gen-graph-scatter-33ved-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
+	gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf \
+	gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf \
+	gen-graph-histogram-sip-kdown-vs-kdown-par-t32.pdf \
+	gen-graph-histogram-sip-mcsplit-vs-mcsplit-par-t32.pdf \
 
 tables : $(TABLES)
 

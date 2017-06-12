@@ -158,6 +158,20 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \caption{Per-instance speedups for vertex-and edge-labelled, directed graphs.}
 \end{figure}
 
+\begin{figure}[t]
+    \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics*{gen-graph-histogram-sip-kdown-vs-kdown-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-histogram-sip-mcsplit-vs-mcsplit-par-t32.pdf}
+
+    \caption{Per-instance speedups for vertex-and edge-labelled, directed graphs.}
+\end{figure}
+
 Cumulative performance plots comparing each parallel algorithm to its sequential version are given
 in ??, using 32 threads on 16 core hyper-threaded Intel Xeon
 E5-2640 v2 systems. The results are consistent: in each case the parallel algorithm is clearly and
