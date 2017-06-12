@@ -1,0 +1,20 @@
+Incumbent size: 1
+Incumbent size: 2
+Incumbent size: 3
+Incumbent size: 4
+Incumbent size: 5
+Incumbent size: 6
+Incumbent size: 7
+Incumbent size: 8
+Incumbent size: 9
+Incumbent size: 10
+Incumbent size: 11
+Incumbent size: 12
+Incumbent size: 13
+Incumbent size: 14
+Incumbent size: 15
+Solution size 15
+(2 -> 35) (3 -> 95) (4 -> 55) (5 -> 56) (8 -> 20) (12 -> 110) (13 -> 51) (15 -> 25) (19 -> 30) (20 -> 96) (21 -> 76) (22 -> 133) (24 -> 39) (27 -> 73) (28 -> 98) 
+Nodes:                      163484858
+CPU time (ms):              100000
+TIMEOUT

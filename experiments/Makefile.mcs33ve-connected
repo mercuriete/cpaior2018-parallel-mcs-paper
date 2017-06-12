@@ -17,11 +17,11 @@ $(RESULTS)/clique/%.out :
 
 $(RESULTS)/james-cpp-max/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -a --connected --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -a --connected --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/james-cpp-max-down/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max-down
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -a --connected --timeout $(TIMEOUT) min_max --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -a --connected --timeout $(TIMEOUT) min_max --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/cp-branching-mac/%.out :
 	mkdir -p $(RESULTS)/cp-branching-mac

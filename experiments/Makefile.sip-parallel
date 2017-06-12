@@ -1,0 +1,23 @@
+SHELL := /bin/bash
+FILTER := -1
+MODULUS := 1
+CATTER := cat
+INSTANCES_FILE := sipinstances.txt
+INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
+TIMEOUT := 100
+ALGORITHMS := kdown-par james-cpp-max-down-par
+STACK_SPACE := 10485760
+RESULTS := gpgnode-results/sip
+N_THREADS := 32
+T_EXTRA :=
+
+all : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/t$(N_THREADS)$(T_EXTRA)/$i.out ))
+
+$(RESULTS)/kdown-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/kdown-par/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; ../parallel-kdown-code/solve_subgraph_isomorphism parallelix --threads $(N_THREADS) --format lad --induced --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/james-cpp-max-down-par/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/james-cpp-max-down-par/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; ../james-cpp-parallel/mcsp -l --threads $(N_THREADS) --timeout $(TIMEOUT) min_max --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+

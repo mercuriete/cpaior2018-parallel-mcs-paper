@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := sipinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique cp-fc kdown james-cpp-max james-cpp-max-down
+ALGORITHMS := kdown james-cpp-max-down
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/sip
 
@@ -25,16 +25,16 @@ $(RESULTS)/cp-fc/%.out :
 
 $(RESULTS)/james-cpp-product/%.out :
 	mkdir -p $(RESULTS)/james-cpp-product
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -l --timeout $(TIMEOUT) min_product $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -l --timeout $(TIMEOUT) min_product $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/james-cpp-product-down/%.out :
 	mkdir -p $(RESULTS)/james-cpp-product-down
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -l --timeout $(TIMEOUT) min_product --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -l --timeout $(TIMEOUT) min_product --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/james-cpp-max/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -l --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -l --timeout $(TIMEOUT) min_max $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/james-cpp-max-down/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max-down
-	ulimit -s $(STACK_SPACE) ; ../../partitioning-common-subgraph/code/james-cpp/mcsp -l --timeout $(TIMEOUT) min_max --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+	ulimit -s $(STACK_SPACE) ; ../james-cpp/mcsp -l --timeout $(TIMEOUT) min_max --big-first $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1

@@ -1,0 +1,27 @@
+Incumbent size: 1
+Upper bound: 119
+Incumbent size: 2
+Upper bound: 118
+Upper bound: 117
+Upper bound: 116
+Upper bound: 115
+Upper bound: 114
+Incumbent size: 3
+Upper bound: 113
+Upper bound: 112
+Incumbent size: 4
+Upper bound: 111
+Upper bound: 110
+Upper bound: 109
+Incumbent size: 5
+Upper bound: 108
+Upper bound: 107
+Incumbent size: 6
+Upper bound: 106
+Incumbent size: 7
+Upper bound: 105
+Solution size 7
+(16 -> 7) (68 -> 101) (78 -> 113) (100 -> 77) (102 -> 88) (104 -> 6) (114 -> 89) 
+Nodes:                      235535130
+CPU time (ms):              100000
+TIMEOUT

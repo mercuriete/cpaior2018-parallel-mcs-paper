@@ -1,0 +1,31 @@
+Incumbent size: 1
+Incumbent size: 2
+Incumbent size: 3
+Incumbent size: 4
+Incumbent size: 5
+Incumbent size: 6
+Incumbent size: 7
+Incumbent size: 8
+Upper bound: 63
+Incumbent size: 9
+Incumbent size: 10
+Incumbent size: 11
+Incumbent size: 12
+Incumbent size: 13
+Incumbent size: 14
+Upper bound: 62
+Incumbent size: 15
+Incumbent size: 16
+Upper bound: 61
+Incumbent size: 17
+Incumbent size: 18
+Incumbent size: 19
+Incumbent size: 20
+Incumbent size: 21
+Upper bound: 60
+Incumbent size: 22
+Solution size 22
+(0 -> 1352) (1 -> 932) (2 -> 1949) (3 -> 1654) (4 -> 568) (5 -> 703) (6 -> 1997) (7 -> 180) (8 -> 1919) (9 -> 1221) (10 -> 663) (12 -> 1762) (13 -> 1864) (14 -> 1343) (15 -> 1209) (16 -> 1658) (18 -> 142) (19 -> 633) (21 -> 1421) (23 -> 158) (24 -> 1005) (26 -> 92) 
+Nodes:                      47691453
+CPU time (ms):              100028
+TIMEOUT

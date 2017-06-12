@@ -1,0 +1,44 @@
+Upper bound: 99
+Upper bound: 98
+Upper bound: 97
+Upper bound: 96
+Upper bound: 95
+Upper bound: 94
+Upper bound: 93
+Incumbent size: 1
+Upper bound: 92
+Incumbent size: 2
+Incumbent size: 3
+Upper bound: 91
+Incumbent size: 4
+Upper bound: 90
+Upper bound: 89
+Upper bound: 88
+Upper bound: 87
+Upper bound: 86
+Incumbent size: 5
+Upper bound: 85
+Upper bound: 84
+Incumbent size: 6
+Upper bound: 83
+Upper bound: 82
+Upper bound: 81
+Incumbent size: 7
+Upper bound: 80
+Upper bound: 79
+Upper bound: 78
+Upper bound: 77
+Upper bound: 76
+Incumbent size: 8
+Upper bound: 75
+Upper bound: 74
+Upper bound: 73
+Upper bound: 72
+Incumbent size: 9
+Upper bound: 71
+Upper bound: 70
+Solution size 9
+(5 -> 34) (28 -> 164) (31 -> 243) (37 -> 201) (39 -> 149) (56 -> 275) (87 -> 94) (90 -> 158) (98 -> 151) 
+Nodes:                      128058827
+CPU time (ms):              100000
+TIMEOUT

@@ -1,0 +1,47 @@
+Incumbent size: 1
+Incumbent size: 2
+Incumbent size: 3
+Incumbent size: 4
+Incumbent size: 5
+Incumbent size: 6
+Incumbent size: 7
+Incumbent size: 8
+Incumbent size: 9
+Incumbent size: 10
+Incumbent size: 11
+Incumbent size: 12
+Incumbent size: 13
+Incumbent size: 14
+Incumbent size: 15
+Incumbent size: 16
+Incumbent size: 17
+Incumbent size: 18
+Incumbent size: 19
+Incumbent size: 20
+Incumbent size: 21
+Incumbent size: 22
+Incumbent size: 23
+Incumbent size: 24
+Incumbent size: 25
+Incumbent size: 26
+Incumbent size: 27
+Incumbent size: 28
+Incumbent size: 29
+Incumbent size: 30
+Incumbent size: 31
+Incumbent size: 32
+Incumbent size: 33
+Incumbent size: 34
+Incumbent size: 35
+Incumbent size: 36
+Incumbent size: 37
+Incumbent size: 38
+Incumbent size: 39
+Incumbent size: 40
+Incumbent size: 41
+Incumbent size: 42
+Solution size 42
+(1 -> 200) (3 -> 199) (4 -> 8) (5 -> 374) (6 -> 171) (7 -> 351) (12 -> 189) (13 -> 372) (14 -> 22) (15 -> 257) (16 -> 293) (19 -> 135) (21 -> 32) (25 -> 118) (28 -> 398) (29 -> 48) (35 -> 134) (36 -> 49) (37 -> 20) (38 -> 380) (39 -> 145) (41 -> 24) (42 -> 76) (43 -> 393) (45 -> 6) (47 -> 33) (53 -> 105) (54 -> 311) (55 -> 166) (56 -> 265) (57 -> 80) (60 -> 26) (62 -> 18) (63 -> 60) (64 -> 287) (65 -> 163) (66 -> 362) (73 -> 388) (74 -> 306) (75 -> 172) (76 -> 98) (79 -> 102) 
+Nodes:                      134324861
+CPU time (ms):              100001
+TIMEOUT

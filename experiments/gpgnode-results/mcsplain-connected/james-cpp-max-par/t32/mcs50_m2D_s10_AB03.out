@@ -1,0 +1,5 @@
+Thread work times 2 4 1 1 2 5 2 3 0 3 2 2 3 4 4 4 4 1 0 2 1 2 2 3 2 3 2 0 5 2 1
+Solution size 6
+(0 -> 1) (1 -> 5) (3 -> 0) (6 -> 2) (8 -> 7) (9 -> 4) 
+Nodes:                      2408
+CPU time (ms):              7
