@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 clique-cilk/t32 clique-cilk/t32r james-cpp-max-par/t32r clique-par/t4 clique-par/t2
+ALGORITHMS := clique james-cpp-max clique-par/t8 clique-par/t16 clique-par/t32 clique-par/t64 clique-par/t32r james-cpp-max-par/t8 james-cpp-max-par/t16 james-cpp-max-par/t32 clique-cilk/t32 clique-cilk/t32r james-cpp-max-par/t32r clique-par/t4 clique-par/t2 clique-prime clique-prime-par/t32 james-cpp-max-prime james-cpp-max-prime-par/t32
 RESULTS := gpgnode-results/mcs33ved
 
 all : $(RESULTS)/runtimes.data
@@ -11,6 +11,10 @@ runtimes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a
 nodes : $(foreach i, $(INSTANCES), $(foreach a, $(ALGORITHMS), $(RESULTS)/$(a)/$i.nodes ))
 
 $(RESULTS)/clique/%.runtime : $(RESULTS)/clique/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/clique-prime/%.runtime : $(RESULTS)/clique-prime/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
@@ -34,6 +38,10 @@ $(RESULTS)/clique-par/t32/%.runtime : $(RESULTS)/clique-par/t32/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/clique-prime-par/t32/%.runtime : $(RESULTS)/clique-prime-par/t32/%.out
+	tail -n1 < $^ | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/clique-par/t32r/%.runtime : $(RESULTS)/clique-par/t32r/%.out
 	tail -n1 < $^ | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
@@ -54,6 +62,10 @@ $(RESULTS)/james-cpp-max/%.runtime : $(RESULTS)/james-cpp-max/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
+$(RESULTS)/james-cpp-max-prime/%.runtime : $(RESULTS)/james-cpp-max-prime/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
 $(RESULTS)/james-cpp-max-par/t4/%.runtime : $(RESULTS)/james-cpp-max-par/t4/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
@@ -63,6 +75,10 @@ $(RESULTS)/james-cpp-max-par/t8/%.runtime : $(RESULTS)/james-cpp-max-par/t8/%.ou
 	[[ -s $@ ]]
 
 $(RESULTS)/james-cpp-max-par/t16/%.runtime : $(RESULTS)/james-cpp-max-par/t16/%.out
+	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/james-cpp-max-prime-par/t32/%.runtime : $(RESULTS)/james-cpp-max-prime-par/t32/%.out
 	grep '^CPU time (ms):' < $^ | cut -d':' -f2 > $@
 	[[ -s $@ ]]
 
