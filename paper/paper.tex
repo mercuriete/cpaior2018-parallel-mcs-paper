@@ -104,6 +104,14 @@ SoLStiCe (ANR-13-BS02-0002-01)}
 \renewcommand{\shortauthors}{R. Hoffmann et al.}
 
 \begin{abstract}
+    We discuss our experiences adapting three recent algorithms for maximum common (connected) subgraph
+    problems to exploit multi-core parallelism. We consider the effects of different work
+    distribution strategies and their interaction with value-ordering heuristics, and propose a
+    search method which is risk-free, reproducible, and scalable, as well as beneficial. Our results
+    show that each algorithm can be parallelised successfully using this strategy, with the
+    multi-core algorithms we create being clearly better than the sequential ones. We then look in
+    more detail at the results, on an instance by instance basis, and discuss how we should be
+    measuring speedups for these kinds of algorithm.
 \end{abstract}
 
 %
