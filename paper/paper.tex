@@ -1,7 +1,7 @@
 % vim: set spell spelllang=en tw=100 :
 
 \documentclass{llncs}
-\usepackage[pass,showframe]{geometry}
+\usepackage[pass]{geometry}
 
 \usepackage{complexity}
 \usepackage{microtype}
@@ -108,7 +108,8 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \hfill
     \includegraphics*{gen-graph-cumulative-sip.pdf}
 
-    \caption{Cumulative performance.}
+    \caption{Cumulative performance. The parallel versions, dotted, are always better in aggregate
+    than the sequential versions, solid.}
 
 \end{figure}
 
@@ -127,7 +128,9 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \hfill
     \includegraphics*{gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \caption{Per-instance speedups for unlabelled, undirected graphs.}
+    \caption{Per-instance speedups for unlabelled, undirected graphs. The histograms show the
+    distribution of speedups for instances whose sequential runtime is at least $50$ milliseconds
+    and no more than $100$ seconds (and so they under-represent superlinear speedups slightly).}
 \end{figure}
 
 \begin{figure}[t]
@@ -190,7 +193,7 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \hfill
     \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
 
-    \caption{Scalability and reproducibility, clique algorithm}
+    \caption{Scalability and reproducibility, clique algorithm.}
 \end{figure}
 
 \begin{figure}[p]
@@ -210,7 +213,7 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \hfill
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf}
 
-    \caption{Scalability and reproducibility, McSplit algorithm}
+    \caption{Scalability and reproducibility, McSplit algorithm.}
 \end{figure}
 
 Cumulative performance plots comparing each parallel algorithm to its sequential version are given

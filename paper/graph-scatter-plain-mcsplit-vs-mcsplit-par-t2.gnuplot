@@ -9,6 +9,8 @@ set title 'McSplit, Unlabelled'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
+set xlabel "Sequential Runtime (ms)"
+set ylabel "2 Threads Runtime (ms)"
 set logscale xy
 set border 3
 set grid
