@@ -1,5 +1,5 @@
-Thread work times 4
+Thread work times 5
 Solution size 10
 (0 -> 4) (1 -> 1) (2 -> 9) (3 -> 13) (4 -> 6) (6 -> 8) (10 -> 5) (12 -> 14) (13 -> 11) (14 -> 12) 
-Nodes:                      10316
-CPU time (ms):              4
+Nodes:                      9908
+CPU time (ms):              5
