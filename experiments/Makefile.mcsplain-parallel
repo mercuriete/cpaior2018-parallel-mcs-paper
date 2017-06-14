@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcsplaininstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique-par kdown-par james-cpp-max-par kdown-cilk clique-cilk
+ALGORITHMS := clique-par kdown-par james-cpp-max-par # kdown-cilk clique-cilk
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcsplain
 N_THREADS := 32
