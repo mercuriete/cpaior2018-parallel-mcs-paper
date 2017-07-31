@@ -1,11 +1,11 @@
 # vim: set et ft=gnuplot sw=4 :
 
 set terminal tikz standalone color size 2.4in,2.3in font '\footnotesize'
-set output "gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.tex"
+set output "gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.tex"
 
 load "magma.pal"
 
-set title 'k${\downarrow}$, Unlabelled'
+set title 'Clique, Fully labelled'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
@@ -28,6 +28,6 @@ set cbrange [0:5]
 unset colorbox
 
 plot \
-    "<shuf ../experiments/gpgnode-results/mcsplain/runtimes.data" u ($22>=1e5?2e5:$22):($16>=1e5?2e5:$16):((stringcolumn(1))[4:5]eq"10"?1:(stringcolumn(1))[4:5]eq"30"?2:(stringcolumn(1))[4:5]eq"50"?3:(stringcolumn(1))[4:5]eq"70"?4:(stringcolumn(1))[4:5]eq"90"?5:(stringcolumn(1))eq"instance"?1:100) w p pt 6 ps 0.2 lc pal, \
+    "<shuf ../experiments/gpgnode-results/mcs33ved/runtimes.data" u ($13>=1e5?2e5:$13):($12>=1e5?2e5:$12):((stringcolumn(1))[4:5]eq"10"?1:(stringcolumn(1))[4:5]eq"30"?2:(stringcolumn(1))[4:5]eq"50"?3:(stringcolumn(1))[4:5]eq"70"?4:(stringcolumn(1))[4:5]eq"90"?5:(stringcolumn(1))eq"instance"?1:100) w p pt 6 ps 0.2 lc pal, \
    x w l ls 0 notitle
 

@@ -46,7 +46,13 @@ GRAPHS = \
 	gen-graph-scatter-plain-mcsplit-par-t2-vs-mcsplit-par-t4.pdf \
 	gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t8.pdf \
 	gen-graph-scatter-plain-mcsplit-par-t8-vs-mcsplit-par-t16.pdf \
-	gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf
+	gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf \
+	gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf \
+	gen-graph-scatter-33ved-clique-vs-clique-cilk-t2.pdf \
+	gen-graph-scatter-33ved-clique-cilk-t2-vs-clique-cilk-t4.pdf \
+	gen-graph-scatter-33ved-clique-cilk-t4-vs-clique-cilk-t8.pdf \
+	gen-graph-scatter-33ved-clique-cilk-t8-vs-clique-cilk-t16.pdf \
+	gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf \
 
 tables : $(TABLES)
 
