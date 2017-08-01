@@ -1,16 +1,14 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.3in font '\footnotesize'
+set terminal tikz standalone color size 1.6in,1.8in font '\tiny'
 set output "gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.tex"
 
 load "magma.pal"
 
-set title 'k${\downarrow}$, Unlabelled'
+set title 'k${\downarrow}$, Unlabelled, 32 vs 32'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
-set xlabel "32 Workers Runtime (repeat, ms)"
-set ylabel "32 Workers Runtime (ms)"
 set logscale xy
 set border 3
 set grid

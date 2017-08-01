@@ -167,91 +167,51 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 
 \subsection{Parallel Search is Better Overall}
 
-\begin{figure*}[p]
+\begin{figure*}[tb]
     \includegraphics*{gen-graph-cumulative-plain.pdf}
     \hfill
     \includegraphics*{gen-graph-cumulative-33v.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-cumulative-33ved.pdf}
     \hfill
-    \includegraphics*{gen-graph-cumulative-plain-connected.pdf}
+    \includegraphics*{gen-graph-cumulative-33ved.pdf}
 
     \vspace*{1em}
 
+    \includegraphics*{gen-graph-cumulative-plain-connected.pdf}
+    \hfill
     \includegraphics*{gen-graph-cumulative-33ve-connected.pdf}
     \hfill
     \includegraphics*{gen-graph-cumulative-sip.pdf}
 
     \caption{Cumulative performance. The parallel versions, dotted, are always better in aggregate
     than the sequential versions, solid.}
-
 \end{figure*}
 
-\begin{figure*}[p]
+\begin{figure*}[tb]
     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-histogram-plain-kdown-vs-kdown-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \caption{Per-instance speedups for unlabelled, undirected graphs. The histograms show the
-    distribution of speedups for instances whose sequential runtime is at least $50$ milliseconds
-    and no more than $100$ seconds (and so they under-represent superlinear speedups slightly).}
-\end{figure*}
-
-\begin{figure*}[t]
     \includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
 
     \vspace*{1em}
 
-    \includegraphics*{gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-histogram-33v-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \caption{Per-instance speedups for vertex-labelled graphs.}
-\end{figure*}
-
-\begin{figure*}[t]
     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-histogram-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \caption{Per-instance speedups for vertex-and edge-labelled, directed graphs.}
-\end{figure*}
-
-\begin{figure*}[t]
     \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-histogram-sip-kdown-vs-kdown-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-histogram-sip-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \caption{Per-instance speedups for vertex-and edge-labelled, directed graphs.}
+    \caption{Per-instance speedups. The $x$-axis is sequential performance and the $y$-axis is 32
+    threaded performance, so points below the diagonal line represent a speedup.}
 \end{figure*}
 
-\begin{figure*}[p]
+\begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
@@ -269,9 +229,9 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
 
     \caption{Scalability and reproducibility, clique algorithm.}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[p]
+\begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-cilk-t2.pdf}
@@ -289,9 +249,9 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf}
 
     \caption{Scalability and reproducibility, clique algorithm, Cilk.}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[p]
+\begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t2.pdf}
@@ -309,7 +269,7 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf}
 
     \caption{Scalability and reproducibility, McSplit algorithm.}
-\end{figure*}
+\end{figure}
 
 Cumulative performance plots comparing each parallel algorithm to its sequential version are given
 in ??, using 32 threads on 16 core hyper-threaded Intel Xeon

@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.2in,2.3in font '\footnotesize'
+set terminal tikz standalone color size 1.4in,1.8in font '\tiny'
 set output "gen-graph-histogram-33v-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
@@ -24,9 +24,6 @@ fhist(seq,par)=(seq>=1e5||seq<5e2?0:1)
 set xrange [min:max+1]
 
 set style fill solid
-
-set xlabel "Speedup"
-set ylabel "Number of instances"
 
 set xtics add ('${\ge}$50' 50)
 

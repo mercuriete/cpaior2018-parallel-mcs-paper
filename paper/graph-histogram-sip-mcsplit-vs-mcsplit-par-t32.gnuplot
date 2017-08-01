@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.2in,2.3in font '\footnotesize'
+set terminal tikz standalone color size 1.4in,1.8in font '\tiny'
 set output "gen-graph-histogram-sip-mcsplit-vs-mcsplit-par-t32.tex"
 
 load "magma.pal"
@@ -22,9 +22,6 @@ shist(seq,par,width)=((0.0+seq)/(0.0+par)>=max?hist(max,width):hist((0.0+seq)/(0
 fhist(seq,par)=(seq>=1e5||seq<5e2?0:1)
 
 set xrange [min:max+1]
-
-set xlabel "Speedup"
-set ylabel "Number of instances"
 
 set style fill solid
 
