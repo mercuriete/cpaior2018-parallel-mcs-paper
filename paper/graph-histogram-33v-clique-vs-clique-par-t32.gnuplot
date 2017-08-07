@@ -1,11 +1,11 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.4in,1.8in font '\tiny'
+set terminal tikz standalone color size 1.4in,1.4in font '\tiny'
 set output "gen-graph-histogram-33v-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Clique, Vertex labelled'
+set title 'Vertex labelled'
 
 set border 3
 set grid

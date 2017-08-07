@@ -5,7 +5,7 @@ set output "gen-graph-scatter-33v-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Clique, Vertex labelled'
+set title 'Vertex labelled'
 
 set xrange [1:2e5]
 set yrange [1:2e5]

@@ -13,6 +13,7 @@ GRAPHS = \
 	gen-graph-as-plain-connected.pdf \
 	gen-graph-as-33ve-connected.pdf \
 	gen-graph-as-sip.pdf \
+	gen-graph-as-clique.pdf \
 	gen-graph-cumulative-plain.pdf \
 	gen-graph-cumulative-33v.pdf \
 	gen-graph-cumulative-33ved.pdf \
@@ -20,13 +21,17 @@ GRAPHS = \
 	gen-graph-cumulative-33ve-connected.pdf \
 	gen-graph-cumulative-sip.pdf \
 	gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-plain-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-plain-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33v-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf \
+	gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33ved-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-scatter-plain-connected-clique-vs-clique-par-t32.pdf \
+	gen-graph-scatter-33ve-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-clique-par-t32r-vs-clique-par-t32.pdf \

@@ -5,7 +5,7 @@ set output "gen-graph-cumulative-33ve-connected.tex"
 
 load "magma.pal"
 
-set title 'Fully labelled, connected'
+set title 'Both labelled, connected'
 
 set xrange [1:1e5]
 set yrange [0:8140]

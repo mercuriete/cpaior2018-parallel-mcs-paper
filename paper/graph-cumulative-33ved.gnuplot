@@ -5,7 +5,7 @@ set output "gen-graph-cumulative-33ved.tex"
 
 load "magma.pal"
 
-set title 'Fully labelled, directed'
+set title 'Both labelled, directed'
 
 set xrange [1:1e5]
 set yrange [0:8140]

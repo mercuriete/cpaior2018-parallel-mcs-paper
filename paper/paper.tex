@@ -248,25 +248,69 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \hfill
     \includegraphics*{gen-graph-cumulative-sip.pdf}
 
-    \caption{Cumulative performance. The parallel versions, dotted, are always better in aggregate
-    than the sequential versions, solid.}
+    \caption{The cumulative number of instances solved over time, for different families and
+    algorithms. The 32 threaded parallel versions (shown using dotted lines) are always better in
+    aggregate than the sequential versions (shown using solid lines).}
 \end{figure*}
 
+% \begin{figure*}[tb]
+%     \includegraphics*{gen-graph-as-plain.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-as-33v.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-as-33ved.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-as-plain-connected.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-as-33ve-connected.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-as-sip.pdf}
+% 
+%     \caption{Aggregate speedups.}
+% \end{figure*}
+
 \begin{figure*}[tb]
-    \includegraphics*{gen-graph-as-plain.pdf}
+    \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-as-33v.pdf}
+    \includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-as-33ved.pdf}
+    \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-plain-connected-clique-vs-clique-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33ve-connected-clique-vs-clique-par-t32.pdf}
 
     \vspace*{1em}
 
-    \includegraphics*{gen-graph-as-plain-connected.pdf}
+    \includegraphics*{gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-as-33ve-connected.pdf}
+    \includegraphics*{gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf}
     \hfill
-    \includegraphics*{gen-graph-as-sip.pdf}
+    \includegraphics*{gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-histogram-plain-connected-clique-vs-clique-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.pdf}
+
+    \caption{On the top row, per-instance speedups, using the clique algorithm. The $x$-axis is
+    sequential performance and the $y$-axis is 32 threaded performance, so points below the diagonal
+    line represent a speedup. Darker points represent instances where the solution is relatively
+    large compared to the order of the input graphs. Below, histograms plotting the distribution of
+    speedups for instances whose sequential runtime was at least 500 milliseconds, and below the
+    timeout.}
 \end{figure*}
+
+\begin{figure}[tb]
+    \hfill
+    \includegraphics{gen-graph-as-clique.pdf}
+    \hfill
+
+    \caption{Aggregate speedups from the clique algorithm using 32 threads, for each supported
+    family of instances.}
+\end{figure}
+
 
 % \begin{figure*}[tb]
 %     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
@@ -293,25 +337,28 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 %     threaded performance, so points below the diagonal line represent a speedup.}
 % \end{figure*}
 % 
-% \begin{figure}[tb]
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t2-vs-clique-par-t4.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t4-vs-clique-par-t8.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t8-vs-clique-par-t16.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
-% 
-%     \caption{Scalability and reproducibility, clique algorithm.}
-% \end{figure}
+\begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33ved-clique-par-t2-vs-clique-par-t4.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics*{gen-graph-scatter-33ved-clique-par-t4-vs-clique-par-t8.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33ved-clique-par-t8-vs-clique-par-t16.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
+
+    \caption{Per-instance speedups from the clique algorithm on vertex- and edge-labelled, directed
+    instances, when going from sequential to two threads in the first plot, then increasing the
+    number of threads in subsequent plots. The final plot shows 32 threads versus a repeated run
+    also with 32 threads.}
+\end{figure}
 % 
 % \begin{figure}[tb]
 %     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}

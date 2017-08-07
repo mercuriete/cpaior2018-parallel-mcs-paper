@@ -1,11 +1,11 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.6in,1.8in font '\tiny'
+set terminal tikz standalone color size 1.8in,2.0in font '\tiny'
 set output "gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Clique, Fully labelled, 32 vs 32'
+set title 'Both labelled, 32 vs 32'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
@@ -27,5 +27,5 @@ unset colorbox
 
 plot \
     "<shuf ../experiments/gpgnode-results/mcs33ved/runtimes.data" u ($8>=1e5?2e5:$8):($6>=1e5?2e5:$6):((stringcolumn(1))[4:5]eq"10"?1:(stringcolumn(1))[4:5]eq"30"?2:(stringcolumn(1))[4:5]eq"50"?3:(stringcolumn(1))[4:5]eq"70"?4:(stringcolumn(1))[4:5]eq"90"?5:(stringcolumn(1))eq"instance"?1:100) w p pt 6 ps 0.2 lc pal, \
-   x w l ls 0 notitle
+   x w l ls 0 title '$1{\times}$' at end
 

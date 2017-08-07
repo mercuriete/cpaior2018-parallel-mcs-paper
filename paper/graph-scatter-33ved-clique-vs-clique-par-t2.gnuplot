@@ -1,16 +1,14 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.6in,1.8in font '\tiny'
+set terminal tikz standalone color size 1.8in,2.0in font '\tiny'
 set output "gen-graph-scatter-33ved-clique-vs-clique-par-t2.tex"
 
 load "magma.pal"
 
-set title 'Clique, Fully labelled'
+set title 'Both labelled, 1 vs 2'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
-set xlabel "Sequential Runtime (ms)"
-set ylabel "2 Threads Runtime (ms)"
 set logscale xy
 set border 3
 set grid

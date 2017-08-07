@@ -5,7 +5,7 @@ set output "gen-graph-scatter-plain-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Clique, Unlabelled'
+set title 'Unlabelled'
 
 set xrange [1:2e5]
 set yrange [1:2e5]

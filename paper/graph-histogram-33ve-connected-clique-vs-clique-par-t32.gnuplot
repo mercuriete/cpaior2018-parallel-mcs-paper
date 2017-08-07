@@ -1,11 +1,11 @@
 # vim: set et ft=gnuplot sw=4 :
 
 set terminal tikz standalone color size 1.4in,1.4in font '\tiny'
-set output "gen-graph-histogram-plain-clique-vs-clique-par-t32.tex"
+set output "gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Unlabelled'
+set title 'Both labelled, connected'
 
 set border 3
 set grid
@@ -27,5 +27,5 @@ set style fill solid
 
 set xtics add ('${\ge}$50' 50)
 
-plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u (shist($2,$7,width)):(fhist($2,$7)) smooth freq w boxes lc '#812581'
+plot "../experiments/gpgnode-results/mcs33ve-connected/runtimes.data" u (shist($2,$4,width)):(fhist($2,$4)) smooth freq w boxes lc '#812581'
 
