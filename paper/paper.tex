@@ -172,7 +172,7 @@ malware detection \citep{DBLP:journals/compsec/ParkRS13}, social network analysi
 \citep{DBLP:journals/tcs/Koch01,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
 Adding the connectedness requirement makes certain special cases solvable in polynomial time,
 including outerplanar graphs of bounded degree \citep{DBLP:journals/algorithms/AkutsuT13} and trees
-\citep{DBLP:conf/mfcs/DroschinskyKM16}, but the general case remains \NP-hard. As illustrated in
+\citep{DBLP:conf/mfcs/DroschinskyKM16}, but the general case remains NP-hard. As illustrated in
 \cref{figure:mcsexample}, the maximum common connected subgraph cannot be deduced from the maximum
 common subgraph.
 
@@ -205,7 +205,7 @@ except when using $\bot$.
 
 ?? Ensuring connectedness
 
-\subsection{The Splitting Algorithm}
+\subsection{Domain Splitting}
 
 Due to the special structure of the maximum common subgraph problem, the following property holds
 throughout the search process using the CP model: any two variables either have domains with no
@@ -217,13 +217,13 @@ $\operatorname{V}(G)$ are stored, and a set of candidate vertices in $H$ is main
 equivalence class. This enables fast propagation of the constraints and smaller memory requirements.
 In addition, the data structure enables good branching heuristics to be calculated cheaply.
 
-\subsection{The $k$-less Subgraph Isomorphism Algorithm}
+\subsection{$k$-less Subgraph Isomorphism}
 
 The algorithm as described by Hoffmann, McCreesh, and Reilly \cite{DBLP:conf/aaai/HoffmannMR17} approaches the subgraph isomorphism problem by asking the question ``if a pattern graph cannot be found in the target, how much of the pattern graph can be found?''. The $k{\downarrow}$ algorithm tries to solve the subgraph isomorphism problem first for $k=0$ (the whole pattern graph can be found in the target), should that be not satisfiable, it tries to solve the problem for $k=1$ (one vertex cannot be matched) should that also not be satisfiable, it iterates $k$ further by a small number to keep the shrinking pattern graph within a reasonable size. By unmatching some vertices  invariants are weakened but kept effective. Specifically, invariants based around paths and degrees of vertices hold.
 
 This technique bridges the subgraph isomorphism problem with the maximal common subgraph problem. The iteration of the decision problem (iterating over $k$) leads to an algorithm with rivalling runtimes.
 
-\subsection{The Clique Encoding}
+\subsection{Encoding as Maximum Clique}
 
 \section{Experiments with Parallel Search}
 
@@ -253,89 +253,105 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 \end{figure*}
 
 \begin{figure*}[tb]
-    \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
+    \includegraphics*{gen-graph-as-plain.pdf}
     \hfill
-    \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
+    \includegraphics*{gen-graph-as-33v.pdf}
     \hfill
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
+    \includegraphics*{gen-graph-as-33ved.pdf}
 
     \vspace*{1em}
 
-    \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}
+    \includegraphics*{gen-graph-as-plain-connected.pdf}
     \hfill
-    \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
+    \includegraphics*{gen-graph-as-33ve-connected.pdf}
     \hfill
-    \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
-
-    \caption{Per-instance speedups. The $x$-axis is sequential performance and the $y$-axis is 32
-    threaded performance, so points below the diagonal line represent a speedup.}
+    \includegraphics*{gen-graph-as-sip.pdf}
 \end{figure*}
 
-\begin{figure}[tb]
-    \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-33ved-clique-par-t2-vs-clique-par-t4.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-par-t4-vs-clique-par-t8.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-33ved-clique-par-t8-vs-clique-par-t16.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
-
-    \caption{Scalability and reproducibility, clique algorithm.}
-\end{figure}
-
-\begin{figure}[tb]
-    \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-cilk-t2.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t2-vs-clique-cilk-t4.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t4-vs-clique-cilk-t8.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t8-vs-clique-cilk-t16.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf}
-
-    \caption{Scalability and reproducibility, clique algorithm, Cilk.}
-\end{figure}
-
-\begin{figure}[tb]
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t2.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t2-vs-mcsplit-par-t4.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t8.pdf}
-
-    \vspace*{1em}
-
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t8-vs-mcsplit-par-t16.pdf}
-    \hfill
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf}
-
-    \caption{Scalability and reproducibility, McSplit algorithm.}
-\end{figure}
+% \begin{figure*}[tb]
+%     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
+% 
+%     \caption{Per-instance speedups. The $x$-axis is sequential performance and the $y$-axis is 32
+%     threaded performance, so points below the diagonal line represent a speedup.}
+% \end{figure*}
+% 
+% \begin{figure}[tb]
+%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t2-vs-clique-par-t4.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t4-vs-clique-par-t8.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t8-vs-clique-par-t16.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t16-vs-clique-par-t32.pdf}
+% 
+%     \caption{Scalability and reproducibility, clique algorithm.}
+% \end{figure}
+% 
+% \begin{figure}[tb]
+%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-cilk-t2.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t2-vs-clique-cilk-t4.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t4-vs-clique-cilk-t8.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t8-vs-clique-cilk-t16.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf}
+% 
+%     \caption{Scalability and reproducibility, clique algorithm, Cilk.}
+% \end{figure}
+% 
+% \begin{figure}[tb]
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t2.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t2-vs-mcsplit-par-t4.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t8.pdf}
+% 
+%     \vspace*{1em}
+% 
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t8-vs-mcsplit-par-t16.pdf}
+%     \hfill
+%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf}
+% 
+%     \caption{Scalability and reproducibility, McSplit algorithm.}
+% \end{figure}
 
 Cumulative performance plots comparing each parallel algorithm to its sequential version are given
 in ??, using 32 threads on 16 core hyper-threaded Intel Xeon

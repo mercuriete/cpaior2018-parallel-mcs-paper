@@ -7,6 +7,12 @@ combined.bib : dblp.bib notindblp.bib
 TABLES =
 
 GRAPHS = \
+	gen-graph-as-plain.pdf \
+	gen-graph-as-33v.pdf \
+	gen-graph-as-33ved.pdf \
+	gen-graph-as-plain-connected.pdf \
+	gen-graph-as-33ve-connected.pdf \
+	gen-graph-as-sip.pdf \
 	gen-graph-cumulative-plain.pdf \
 	gen-graph-cumulative-33v.pdf \
 	gen-graph-cumulative-33ved.pdf \
