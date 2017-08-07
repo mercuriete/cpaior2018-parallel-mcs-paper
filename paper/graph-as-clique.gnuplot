@@ -1,6 +1,7 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.4in font '\footnotesize'
+set terminal tikz standalone color size 2.4in,2.4in font '\footnotesize' preamble '\input{gnuplot-preamble}'
+
 set output "gen-graph-as-clique.tex"
 
 load "magma.pal"

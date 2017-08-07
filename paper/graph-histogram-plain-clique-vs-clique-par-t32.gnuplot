@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.4in,1.4in font '\tiny'
+set terminal tikz standalone color size 1.4in,1.4in font '\tiny' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-histogram-plain-clique-vs-clique-par-t32.tex"
 
 load "magma.pal"
