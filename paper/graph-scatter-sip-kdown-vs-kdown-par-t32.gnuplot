@@ -1,11 +1,11 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.6in,1.8in font '\tiny' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 1.8in,2.0in font '\footnotesize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-scatter-sip-kdown-vs-kdown-par-t32.tex"
 
 load "magma.pal"
 
-set title 'k${\downarrow}$, Large'
+set title 'Large'
 
 set xrange [1:2e5]
 set yrange [1:2e5]

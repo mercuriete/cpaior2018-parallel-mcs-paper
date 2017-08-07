@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.8in,2.0in font '\tiny' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 1.8in,2.0in font '\footnotesize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.tex"
 
 load "magma.pal"

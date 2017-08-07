@@ -7,13 +7,9 @@ combined.bib : dblp.bib notindblp.bib
 TABLES =
 
 GRAPHS = \
-	gen-graph-as-plain.pdf \
-	gen-graph-as-33v.pdf \
-	gen-graph-as-33ved.pdf \
-	gen-graph-as-plain-connected.pdf \
-	gen-graph-as-33ve-connected.pdf \
-	gen-graph-as-sip.pdf \
 	gen-graph-as-clique.pdf \
+	gen-graph-as-kdown.pdf \
+	gen-graph-as-mcsplit.pdf \
 	gen-graph-cumulative-plain.pdf \
 	gen-graph-cumulative-33v.pdf \
 	gen-graph-cumulative-33ved.pdf \
@@ -36,6 +32,7 @@ GRAPHS = \
 	gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-clique-par-t32r-vs-clique-par-t32.pdf \
 	gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.pdf \
+	gen-graph-scatter-plain-kdown-cilk-t32r-vs-kdown-cilk-t32.pdf \
 	gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf \
@@ -47,6 +44,8 @@ GRAPHS = \
 	gen-graph-scatter-33ved-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf \
+	gen-graph-scatter-plain-connected-mcsplit-vs-mcsplit-par-t32.pdf \
+	gen-graph-scatter-33ve-connected-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-histogram-sip-kdown-vs-kdown-par-t32.pdf \
 	gen-graph-histogram-sip-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf \

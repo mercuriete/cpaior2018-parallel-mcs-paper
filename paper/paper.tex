@@ -253,23 +253,7 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     aggregate than the sequential versions (shown using solid lines).}
 \end{figure*}
 
-% \begin{figure*}[tb]
-%     \includegraphics*{gen-graph-as-plain.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-as-33v.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-as-33ved.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-as-plain-connected.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-as-33ve-connected.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-as-sip.pdf}
-% 
-%     \caption{Aggregate speedups.}
-% \end{figure*}
+\subsection{A Closer Look at Clique}
 
 \begin{figure*}[tb]
     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
@@ -303,14 +287,11 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 \end{figure*}
 
 \begin{figure}[tb]
-    \hfill
     \includegraphics{gen-graph-as-clique.pdf}
-    \hfill
 
     \caption{Aggregate speedups from the clique algorithm using 32 threads, for each supported
     family of instances.}
 \end{figure}
-
 
 % \begin{figure*}[tb]
 %     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
@@ -399,6 +380,52 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 % 
 %     \caption{Scalability and reproducibility, McSplit algorithm.}
 % \end{figure}
+
+\subsection{A Closer Look at $k{\downarrow}$}
+
+\begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics{gen-graph-as-kdown.pdf}
+
+    \caption{On the top row, per-instance speedups, using the $k{\downarrow}$ algorithm. The
+    $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. Below,
+    aggregate speedups for both families.}
+\end{figure}
+
+\subsection{A Closer Look at McSplit}
+
+\begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-plain-connected-mcsplit-vs-mcsplit-par-t32.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics*{gen-graph-scatter-33ve-connected-mcsplit-vs-mcsplit-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
+
+    \vspace*{1em}
+
+    \includegraphics{gen-graph-as-mcsplit.pdf}
+
+    \caption{On the top three rows, per-instance speedups, using the splitting algorithm. The
+    $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. On the final
+    row, aggregate speedups for both families.}
+\end{figure}
+
+\subsection{Old Text}
 
 Cumulative performance plots comparing each parallel algorithm to its sequential version are given
 in ??, using 32 threads on 16 core hyper-threaded Intel Xeon
