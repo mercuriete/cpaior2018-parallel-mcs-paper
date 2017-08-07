@@ -8,4 +8,4 @@ gen-*
 *.bbl
 *.blg
 *synctex*
-!plots/*.pdf
+combined.bib
