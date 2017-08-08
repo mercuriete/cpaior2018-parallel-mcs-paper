@@ -397,6 +397,12 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     aggregate speedups for both families.}
 \end{figure}
 
+\begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.pdf}
+
+    \caption{Reproducibility of the $k{\downarrow}$ algorithm.}
+\end{figure}
+
 \subsection{A Closer Look at McSplit}
 
 \begin{figure}[tb]
@@ -423,6 +429,14 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
     \caption{On the top three rows, per-instance speedups, using the splitting algorithm. The
     $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. On the final
     row, aggregate speedups for both families.}
+\end{figure}
+
+\begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
+    \hfill
+    \includegraphics*{gen-graph-scatter-33v-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
+
+    \caption{Reproducibility of the splitting algorithm.}
 \end{figure}
 
 \subsection{Old Text}
