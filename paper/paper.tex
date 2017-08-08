@@ -225,11 +225,45 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 
 \subsection{Encoding as Maximum Clique}
 
-\section{Experiments with Parallel Search}
+\section{Parallel Search}
 
-?? Hardware.
+?? Approach
 
-?? Datasets.
+\section{Empirical Evaluation}
+
+We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
+running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
+hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted.
+Most of our instances come from a standard benchmark set
+\citep{DBLP:journals/prl/SantoFSV03,DBLP:journals/jgaa/ConteFV07} for maximum common subgraph
+problems.  This benchmark set can be used in a number of ways, for different variants of the
+problem. We use it to create five families of instance, as follows:
+
+\begin{description}
+    \item[Unlabelled] instances, by selecting the first ten members of each parameter class where the
+        graphs have up to 50 vertices each---this gives us a total of 4,110 instances.
+
+    \item[Vertex labelled] instances, by selecting the first ten members of each parameter class
+        (and so graphs have up to 100 vertices each), applying the 33\% labelling scheme for
+        vertices only, and treating edges as undirected. This gives 8,140 instances.
+
+    \item[Both labelled, directed] instances, by selecting the first ten members of each parameter
+        class, and applying the 33\% labelling scheme to both vertices and edges. Again, this gives
+        8,140 instances.
+
+    \item[Unlabelled, connected] instances, using the same instances as the \emph{unlabelled} case.
+
+    \item[Both labelled, connected] instances, starting in the same way as the \emph{both labelled,
+        directed} case. These are then converted to undirected graphs by treating edges as
+        undirected, picking the label of the lower-numbered edge.
+\end{description}
+
+\noindent
+Following \citet{DBLP:conf/aaai/HoffmannMR17}, we also work with the 5,725 \textbf{Large} instances
+originally used for studying portfolios of subgraph isomorphism algorithms
+\citep{DBLP:conf/lion/KotthoffMS16}. These graphs are unlabelled and undirected, and can include up
+to 6,671 vertices. We do not use the clique encoding on these instances due to its impractical
+memory requirements for large graphs.
 
 \subsection{Parallel Search is Better Overall}
 
@@ -398,9 +432,11 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 \end{figure}
 
 \begin{figure}[tb]
+    \includegraphics*{gen-graph-scatter-plain-kdown-par-t4-vs-kdown-par-t16.pdf}
+    \hfill
     \includegraphics*{gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.pdf}
 
-    \caption{Reproducibility of the $k{\downarrow}$ algorithm.}
+    \caption{Scalability and reproducibility of the $k{\downarrow}$ algorithm.}
 \end{figure}
 
 \subsection{A Closer Look at McSplit}
@@ -432,11 +468,11 @@ This technique bridges the subgraph isomorphism problem with the maximal common 
 \end{figure}
 
 \begin{figure}[tb]
-    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
+    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t16.pdf}
     \hfill
-    \includegraphics*{gen-graph-scatter-33v-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
+    \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
 
-    \caption{Reproducibility of the splitting algorithm.}
+    \caption{Scalability and reproducibility of the splitting algorithm.}
 \end{figure}
 
 \subsection{Old Text}

@@ -5,7 +5,7 @@ set output "gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.tex"
 
 load "magma.pal"
 
-set title 'McSplit${\downarrow}$, Large'
+set title 'Large'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
