@@ -2,8 +2,6 @@
 
 \documentclass[sigconf]{acmart}
 
-\usepackage{showframe}
-
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cleveref}
@@ -22,6 +20,11 @@
 \Crefname{figure}{Figure}{Figures}
 
 \newcommand{\citepos}[1]{\citet{#1}'s}
+
+% pretty colours
+\definecolor{uofgsandstone}{rgb}{0.321569, 0.278431, 0.231373}
+\definecolor{magmapurple}{rgb}{0.505882, 0.145098, 0.505882}
+\definecolor{magmaorange}{rgb}{0.984314, 0.529412, 0.380392}
 
 % http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
 \newcommand{\shortoverline}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
@@ -150,6 +153,106 @@ SoLStiCe (ANR-13-BS02-0002-01)}
 \maketitle
 
 \section{Introduction}
+
+\begin{figure}[b]
+    \centering
+    \begin{tikzpicture}[scale=0.33]%{{{
+        \begin{scope}
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
+
+            \draw [very thick] (M1) -- (M2);
+            \draw [very thick] (M2) -- (M4);
+            \draw [very thick] (M3) -- (M5);
+            \draw [color=uofgsandstone!60] (M4) -- (M6);
+            \draw [color=uofgsandstone!60] (M5) -- (M6);
+            \draw [very thick] (M3) -- (M1);
+            \draw [color=uofgsandstone!60] (M6) -- (M7);
+            \draw [color=uofgsandstone!60] (M6) -- (M8);
+            \draw [color=uofgsandstone!60] (M6) -- (M9);
+            \draw [very thick] (M7) -- (M9);
+            \draw [very thick] (M8) -- (M9);
+        \end{scope}
+
+        \begin{scope}[xshift=5cm]
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
+
+            \draw [very thick] (M1) -- (M2);
+            \draw [very thick] (M2) -- (M4);
+            \draw [very thick] (M3) -- (M5);
+            \draw [color=uofgsandstone!60] (M4) -- (M6);
+            \draw [color=uofgsandstone!60] (M5) -- (M6);
+            \draw [very thick] (M3) -- (M1);
+            \draw [color=uofgsandstone!60] (M6) -- (M7);
+            \draw [very thick] (M7) -- (M8);
+            \draw [very thick] (M8) -- (M9);
+        \end{scope}
+
+        \begin{scope}[xshift=12cm]
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
+
+            \draw [very thick] (M1) -- (M2);
+            \draw [very thick] (M2) -- (M4);
+            \draw [very thick] (M3) -- (M5);
+            \draw [very thick] (M4) -- (M6);
+            \draw [very thick] (M5) -- (M6);
+            \draw [very thick] (M3) -- (M1);
+            \draw [color=uofgsandstone!60] (M6) -- (M7);
+            \draw [very thick] (M6) -- (M8);
+            \draw [color=uofgsandstone!60] (M6) -- (M9);
+            \draw [color=uofgsandstone!60] (M7) -- (M9);
+            \draw [color=uofgsandstone!60] (M8) -- (M9);
+        \end{scope}
+
+        \begin{scope}[xshift=17cm]
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
+
+            \draw [very thick] (M1) -- (M2);
+            \draw [very thick] (M2) -- (M4);
+            \draw [very thick] (M3) -- (M5);
+            \draw [very thick] (M4) -- (M6);
+            \draw [very thick] (M5) -- (M6);
+            \draw [very thick] (M3) -- (M1);
+            \draw [very thick] (M6) -- (M7);
+            \draw [draw=uofgsandstone!60] (M7) -- (M8);
+            \draw [draw=uofgsandstone!60] (M8) -- (M9);
+        \end{scope}
+\end{tikzpicture}
+\caption{A maximum common subgraph of the first two graphs has eight vertices, shaded. A maximum
+common \emph{connected} subgraph, shown on the right, has only seven vertices.}
+\label{figure:mcsexample}
+\end{figure}
 
 ?? Explain induced, give examples.
 
@@ -284,8 +387,23 @@ memory requirements for large graphs.
 
     \caption{The cumulative number of instances solved over time, for different families and
     algorithms. The 32 threaded parallel versions (shown using dotted lines) are always better in
-    aggregate than the sequential versions (shown using solid lines).}
+aggregate than the sequential versions (shown using solid lines).}\label{figure:cumulative}
 \end{figure*}
+
+In \cref{figure:cumulative} we plot empirical cumulative distribution functions showing the number
+of instances solved over time, for both sequential (solid lines) and parallel (dotted lines)
+versions of each algorithm.  Cumulative plots are commonly used in constraint programming and
+boolean satisfiability for comparing aggregate behaviour of solvers (sometimes with the axes
+reversed, in which case they are called \emph{cactus} plots).  To read these plots, make a choice of
+timeout along the $x$-axis, which uses a log scale. The $y$ value at that point shows the number of
+instances whose runtime (individually) is at most $x$, for a particular algorithm. In other words,
+at any given $x$ value, the highest line shows which algorithm is able to solve the largest number
+of instances using a per-instance timeout of that $x$ value, bearing in mind that the actual sets of
+instances solved by each algorithm may be completely different.
+
+Each plot gives the same conclusion: if we are working with a timeout of at least $10^2$
+milliseconds, then for any problem family and any sequential algorithm, if given the option of
+switching to the corresponding parallel algorithm, then we should do so.
 
 \subsection{A Closer Look at Clique}
 
