@@ -254,7 +254,13 @@ common \emph{connected} subgraph, shown on the right, has only seven vertices.}
 \label{figure:mcsexample}
 \end{figure}
 
-?? Explain induced, give examples.
+A \emph{subgraph isomorphism} is an injective mapping from a \emph{pattern} graph to a \emph{target}
+graph which maps adjacent vertices to adjacent vertices---that is, it \emph{preserves adjacency}. It
+is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent vertices, preserving
+non-adjacency. When working with labelled graphs, a subgraph isomorphism must preserve labels, and
+on directed graphs, it must preserve orientation. A \emph{common induced subgraph} of two graphs $G$
+and $H$ is a pair of induced subgraph isomorphisms from a pattern graph $P$, one to $G$ and one to
+$H$. A \emph{maximum common induced subgraph} is one with as many vertices as possible.
 
 Finding a maximum common subgraph is the key step in measuring the similarity or difference between
 two graphs \citep{DBLP:journals/prl/Bunke97,DBLP:journals/prl/FernandezV01,o:Kriege15}: to determine
@@ -269,22 +275,18 @@ programs \citep{DBLP:conf/icics/GaoRS08}, and circuit designs \citep{DBLP:journa
 malware detection \citep{DBLP:journals/compsec/ParkRS13}, social network analysis
 \citep{DBLP:journals/tkde/FangYZZ15}, graph database query explanations
 \citep{DBLP:journals/jcss/VasilyevaTBL16}, and in character recognition problems
-\citep{DBLP:journals/pr/LuRS91}.
-
-?? Connected, which occurs in many applications
+\citep{DBLP:journals/pr/LuRS91}.  A common variant of the problem requires a largest
+\emph{connected} subgraph
 \citep{DBLP:journals/tcs/Koch01,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
-Adding the connectedness requirement makes certain special cases solvable in polynomial time,
-including outerplanar graphs of bounded degree \citep{DBLP:journals/algorithms/AkutsuT13} and trees
-\citep{DBLP:conf/mfcs/DroschinskyKM16}, but the general case remains NP-hard. As illustrated in
-\cref{figure:mcsexample}, the maximum common connected subgraph cannot be deduced from the maximum
-common subgraph.
+As illustrated in \cref{figure:mcsexample}, the maximum common connected subgraph cannot be deduced
+from the maximum common subgraph.
 
-This paper looks at three recent branch and bound algorithms, each of which is the state of the art
-for certain classes of instance.
-
-The ultimate aim of this chapter is to parallelise a state-of-the-art algorithm for maximum common
-subgraph problems, and to see whether we agree with \citepos{DBLP:conf/ictai/MinotNS15} conclusion
-that doing so is unusually challenging.
+Although both variants are NP-hard, some progress has been made towards solving the problem in
+practice.  This paper looks at three recent branch and bound algorithms for maximum common
+(connected) induced subgraph problems, each of which is the state of the art for certain classes of
+instance. We discuss our experiences in adding parallel tree-search to these three algorithms. In
+each case, our results show that the parallel version of the algorithm is clearly better than the
+sequential version, although a closer look at the results shows many nuances.
 
 \section{Sequential Algorithms}
 
@@ -293,16 +295,18 @@ that doing so is unusually challenging.
 \subsection{Constraint Programming}
 
 The maximum common subgraph problem may be reformulated as a constraint optimisation problem, as
-follows. We pick whichever input graph has fewer vertices, and call it the \emph{pattern}; the other
-graph is called the \emph{target}. The model is then to construct an injective, partial mapping from
-the pattern to the target, preserving both adjacency and non-adjacency. Thus, for each
-vertex in the pattern, we create a variable, whose domain ranges over each vertex in the target
-graph, plus an additional value $\bot$. We then have three sets of constraints. The first set says
-that for each pair of adjacent vertices in the pattern (that is, for each edge in the pattern),
-if neither of these vertices are mapped to $\bot$ then these vertices must be mapped to an adjacent
-pair of target vertices. The second set is similar, but looks at non-adjacent pairs (or non-edges).
-Finally, the third set ensures injectivity, by enforcing that the variables must be all different
-except when using $\bot$.
+follows.  Observe that an equivalent definition of a common subgraph of graphs $G$ and $H$ is an
+injective partial mapping from $G$ to $H$ which preserves both adjacency and non-adjacency. Hence we
+pick whichever input graph has fewer vertices, and call it the \emph{pattern}; the other graph is
+called the \emph{target}. The model is then to construct an injective, partial mapping from the
+pattern to the target, preserving both adjacency and non-adjacency. Thus, for each vertex in the
+pattern, we create a variable, whose domain ranges over each vertex in the target graph, plus an
+additional value $\bot$. We then have three sets of constraints. The first set says that for each
+pair of adjacent vertices in the pattern (that is, for each edge in the pattern), if neither of
+these vertices are mapped to $\bot$ then these vertices must be mapped to an adjacent pair of target
+vertices. The second set is similar, but looks at non-adjacent pairs (or non-edges).  Finally, the
+third set ensures injectivity, by enforcing that the variables must be all different except when
+using $\bot$.
 
 ?? Either by binary constraints between all pairs, or a specialised propagator.
 
