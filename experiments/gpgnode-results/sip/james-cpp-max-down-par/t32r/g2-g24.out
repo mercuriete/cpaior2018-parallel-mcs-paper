@@ -1,0 +1,7 @@
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1 1 1 0 0 0 0 0
+Upper bound: 9
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Solution size 9
+(0 -> 8) (1 -> 1) (2 -> 36) (4 -> 22) (5 -> 20) (6 -> 3) (7 -> 4) (8 -> 27) (9 -> 40) 
+Nodes:                      730
+CPU time (ms):              5

@@ -1,0 +1,38 @@
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 120
+Thread work times 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+Upper bound: 119
+Thread work times 2 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0
+Upper bound: 118
+Thread work times 3 1 1 1 1 1 1 2 1 2 0 1 1 2 0 1 0 2 2 1 0 0 1 1 3 1 0 1 3 0 1
+Upper bound: 117
+Thread work times 2 1 0 1 3 0 1 0 0 1 1 3 0 1 0 2 1 1 1 2 0 1 1 1 1 2 1 1 1 2 3
+Upper bound: 116
+Thread work times 4 2 3 2 1 1 1 1 1 0 0 1 1 2 2 1 2 1 2 0 1 2 0 1 1 1 1 1 1 0 1
+Upper bound: 115
+Thread work times 2 6 2 0 2 2 1 1 1 1 4 2 5 3 0 3 2 1 1 1 0 2 1 1 1 1 3 5 2 0 1
+Upper bound: 114
+Thread work times 2 9 1 1 2 1 2 2 2 1 0 1 7 2 1 1 2 0 1 1 1 1 1 2 7 2 2 8 6 2 1
+Upper bound: 113
+Thread work times 15 2 1 13 2 1 1 2 1 0 2 2 3 2 2 1 1 2 2 14 12 3 2 3 1 2 1 1 14 0 2
+Upper bound: 112
+Thread work times 25 2 3 0 3 2 23 2 1 4 3 1 21 0 1 0 23 2 2 1 3 1 2 3 3 23 2 2 2 2 1
+Upper bound: 111
+Thread work times 44 2 3 43 3 3 1 2 2 4 2 2 2 3 42 2 3 3 3 2 4 2 41 3 2 1 4 41 3 3 2
+Upper bound: 110
+Thread work times 76 5 74 1 4 75 5 3 4 3 3 4 2 4 5 5 4 73 2 4 5 4 2 5 4 5 4 72 2 4 2
+Upper bound: 109
+Thread work times 131 4 130 2 6 5 6 5 5 7 131 6 6 129 5 6 6 7 127 6 4 5 6 9 6 4 7 5 4 6 6
+Upper bound: 108
+Thread work times 7 6 6 213 7 6 6 7 7 7 8 8 7 212 8 209 6 7 209 9 8 9 7 8 9 5 9 9 213 8 11
+Upper bound: 107
+Thread work times 10 335 11 11 11 12 11 10 9 12 13 13 13 13 11 12 331 9 11 15 334 12 10 335 11 10 11 11 13 333 12
+Upper bound: 106
+Thread work times 2654 15 19 15 16 19 19 21 2650 18 16 17 17 16 18 2651 15 17 12 18 20 16 16 17 2653 17 19 2651 17 17 16
+Upper bound: 105
+Thread work times 96446 33 34 37 37 36 35 37 39 31 35 41 42 43 34 96450 34 38 35 96447 32 38 38 38 37 96448 35 38 96449 37 46
+Solution size 10
+(6 -> 114) (7 -> 32) (8 -> 30) (19 -> 2) (31 -> 34) (43 -> 111) (66 -> 54) (78 -> 79) (90 -> 71) (102 -> 46) 
+Nodes:                      154140534
+CPU time (ms):              100002
+TIMEOUT

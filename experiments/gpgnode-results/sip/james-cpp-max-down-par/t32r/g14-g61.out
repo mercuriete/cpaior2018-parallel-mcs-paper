@@ -1,0 +1,20 @@
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 1 1 0 0 0 1 1 1
+Upper bound: 49
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+Upper bound: 48
+Thread work times 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Upper bound: 47
+Thread work times 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0
+Upper bound: 46
+Thread work times 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0
+Upper bound: 45
+Thread work times 0 0 0 0 0 0 3 1 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0
+Upper bound: 44
+Thread work times 2 16 2 2 2 15 2 3 2 2 1 2 2 2 2 2 16 15 2 2 2 2 14 2 2 2 2 2 1 2 2
+Upper bound: 43
+Thread work times 99950 99952 17 99949 17 17 17 17 17 17 16 17 17 17 18 99953 17 17 16 17 16 17 16 18 99951 16 16 16 16 16 17
+Solution size 8
+(6 -> 40) (11 -> 25) (22 -> 15) (28 -> 28) (31 -> 12) (34 -> 27) (35 -> 38) (45 -> 13) 
+Nodes:                      264191670
+CPU time (ms):              100003
+TIMEOUT

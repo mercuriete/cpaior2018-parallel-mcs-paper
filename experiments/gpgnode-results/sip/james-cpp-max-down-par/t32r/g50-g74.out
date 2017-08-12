@@ -1,0 +1,116 @@
+Thread work times 4 1 1 1 1 1 1 1 1 2 2 2 2 1 3 3 3 2 1 3 1 2 1 2 3 1 3 1 2 3 4
+Upper bound: 127
+Thread work times 3 0 0 1 1 1 1 2 0 0 0 0 2 2 2 1 1 1 1 1 1 2 0 0 2 0 0 2 0 0 2
+Upper bound: 126
+Thread work times 1 4 3 1 1 2 0 2 2 2 3 2 3 3 2 2 2 0 3 0 0 2 0 0 3 0 3 1 3 0 2
+Upper bound: 125
+Thread work times 3 0 0 3 2 3 3 4 2 3 3 3 3 3 4 2 2 0 1 0 2 3 3 3 0 2 2 0 3 4 5
+Upper bound: 124
+Thread work times 8 7 6 0 6 4 0 6 4 4 4 4 0 4 4 4 4 0 4 5 6 4 5 4 4 3 4 4 5 4 6
+Upper bound: 123
+Thread work times 3 6 8 5 8 5 5 4 3 4 6 5 4 1 3 0 6 5 6 5 5 5 5 4 6 5 5 5 7 5 9
+Upper bound: 122
+Thread work times 5 9 5 5 9 5 4 8 5 4 4 5 0 0 0 0 4 5 5 5 4 4 4 5 8 4 3 5 0 5 11
+Upper bound: 121
+Thread work times 5 14 2 5 5 5 6 5 13 11 4 2 1 3 0 11 5 0 4 5 5 5 4 2 4 5 5 8 1 3 3
+Upper bound: 120
+Thread work times 17 4 0 5 5 3 2 4 6 4 0 3 1 5 3 4 0 6 2 4 5 14 3 15 16 7 5 15 0 0 4
+Upper bound: 119
+Thread work times 6 21 20 2 20 3 4 4 5 3 5 5 0 5 6 0 5 5 0 5 20 0 16 5 5 5 5 5 4 0 0
+Upper bound: 118
+Thread work times 2 4 2 5 2 5 24 5 26 5 5 0 4 5 5 5 4 5 5 0 26 5 5 2 2 3 27 5 25 5 5
+Upper bound: 117
+Thread work times 33 0 5 5 0 0 5 5 4 5 5 5 5 4 1 31 3 3 31 0 5 4 28 2 4 4 4 6 4 5 30
+Upper bound: 116
+Thread work times 42 4 4 4 1 40 4 5 3 39 2 5 5 38 3 5 5 40 5 5 2 2 7 5 0 5 2 3 5 5 3
+Upper bound: 115
+Thread work times 4 4 4 1 4 4 5 6 6 4 5 5 49 5 4 3 5 7 5 5 46 6 6 4 46 3 5 49 46 4 4
+Upper bound: 114
+Thread work times 57 1 6 6 1 4 4 7 5 7 4 5 6 6 1 4 4 5 56 4 4 6 2 5 6 5 4 1 56 53 55
+Upper bound: 113
+Thread work times 3 6 65 3 62 5 4 62 66 3 6 5 7 2 64 5 5 6 1 5 5 4 4 4 4 5 5 6 2 7 5
+Upper bound: 112
+Thread work times 79 1 5 5 4 4 1 5 0 5 7 0 1 5 1 77 74 9 4 3 4 77 75 0 2 5 8 3 8 8 8
+Upper bound: 111
+Thread work times 86 6 7 2 3 3 7 5 85 2 2 5 6 83 2 5 5 6 9 6 85 6 6 6 4 1 2 84 6 5 6
+Upper bound: 110
+Thread work times 100 4 2 6 7 95 4 2 5 3 6 4 5 6 5 7 5 4 3 4 7 98 5 7 6 7 4 8 99 99 6
+Upper bound: 109
+Thread work times 4 3 8 9 104 0 8 5 107 2 2 6 6 106 2 102 5 7 5 2 7 0 4 3 4 0 1 109 4 5 4
+Upper bound: 108
+Thread work times 7 6 122 8 5 3 6 1 4 8 8 3 6 6 8 8 9 121 6 5 1 3 120 3 6 5 8 5 121 119 4
+Upper bound: 107
+Thread work times 7 7 6 0 7 5 6 1 10 6 8 0 10 135 2 9 132 1 2 8 10 140 6 0 4 7 3 2 141 7 140
+Upper bound: 106
+Thread work times 152 149 6 8 7 0 0 8 7 7 151 8 5 9 3 2 7 5 10 8 149 8 151 4 7 9 1 2 3 9 7
+Upper bound: 105
+Thread work times 167 169 4 9 9 4 11 8 5 8 8 7 2 9 169 168 1 2 7 10 9 166 4 6 7 10 5 11 2 7 10
+Upper bound: 104
+Thread work times 9 7 7 201 202 7 5 6 7 6 6 7 3 6 8 5 202 5 9 12 8 10 5 4 204 8 6 2 5 8 204
+Upper bound: 103
+Thread work times 4 5 216 0 10 10 6 11 7 12 5 216 8 214 217 0 9 7 5 6 9 7 10 216 7 7 7 5 7 9 5
+Upper bound: 102
+Thread work times 239 10 237 7 2 238 12 237 8 11 237 10 1 6 3 7 9 5 4 12 10 9 3 8 8 5 2 7 6 8 6
+Upper bound: 101
+Thread work times 6 269 6 8 9 266 267 10 8 7 6 7 10 6 5 6 9 6 8 269 0 7 8 10 4 6 7 5 11 1 266
+Upper bound: 100
+Thread work times 12 294 10 8 4 7 5 4 9 10 7 293 7 7 5 8 5 10 5 5 290 8 5 9 9 9 6 292 8 14 293
+Upper bound: 99
+Thread work times 11 8 4 9 4 7 12 334 334 8 12 11 9 12 335 8 9 10 4 8 0 7 336 9 12 8 5 8 12 10 332
+Upper bound: 98
+Thread work times 356 3 10 11 354 9 11 8 9 3 3 9 3 8 11 5 5 11 2 11 7 9 10 5 355 1 352 9 12 9 348
+Upper bound: 97
+Thread work times 408 8 8 408 9 407 3 13 15 13 408 14 12 12 11 3 4 9 0 11 11 14 3 2 11 11 405 0 2 9 6
+Upper bound: 96
+Thread work times 11 437 8 11 4 4 10 8 436 12 10 10 2 6 10 11 7 10 10 10 436 8 435 9 10 13 12 5 436 7 11
+Upper bound: 95
+Thread work times 509 5 10 7 8 8 8 13 12 14 12 12 8 4 11 11 10 4 7 12 9 13 8 505 508 13 4 508 8 11 506
+Upper bound: 94
+Thread work times 8 12 527 13 11 3 6 9 12 12 9 3 11 527 11 11 7 12 532 10 10 9 11 11 7 10 9 531 12 1 533
+Upper bound: 93
+Thread work times 14 10 11 9 11 15 14 9 9 568 568 569 11 568 10 11 14 11 11 8 6 7 13 14 11 14 9 14 12 10 568
+Upper bound: 92
+Thread work times 617 15 615 12 614 14 12 8 11 15 9 10 7 11 2 0 12 616 10 9 9 13 13 11 0 9 15 11 612 13 12
+Upper bound: 91
+Thread work times 669 15 15 668 10 7 14 668 13 10 11 12 8 18 1 11 13 14 11 15 668 14 14 15 13 9 14 8 14 11 666
+Upper bound: 90
+Thread work times 725 13 16 10 16 13 14 6 3 10 12 12 13 15 724 13 12 11 725 13 10 14 7 725 15 12 9 11 14 14 723
+Upper bound: 89
+Thread work times 778 9 12 8 12 13 14 11 11 10 13 10 11 14 778 15 14 11 12 8 9 6 8 16 11 15 781 778 17 780 13
+Upper bound: 88
+Thread work times 837 12 13 835 15 12 11 14 13 13 12 12 14 17 11 13 7 12 15 17 836 13 13 12 13 12 15 836 10 836 13
+Upper bound: 87
+Thread work times 13 13 12 12 898 12 898 19 13 13 0 9 15 17 9 16 898 14 899 15 13 15 10 14 11 17 16 19 14 897 13
+Upper bound: 86
+Thread work times 1002 16 12 14 16 16 1001 15 13 16 1000 12 19 1000 14 16 18 14 16 13 11 15 14 13 11 1000 14 11 18 6 14
+Upper bound: 85
+Thread work times 1016 21 21 5 1015 1015 1016 18 5 14 14 1011 10 8 18 16 14 18 21 23 15 15 17 14 21 26 16 19 15 12 4
+Upper bound: 84
+Thread work times 1055 14 14 18 21 1060 25 18 16 17 14 15 15 15 16 7 19 17 18 17 16 16 10 19 20 17 14 16 1058 1060 1060
+Upper bound: 83
+Thread work times 1118 1118 17 12 17 17 1117 1106 15 13 10 23 18 17 17 25 15 16 1116 17 18 15 16 16 16 20 7 14 19 19 19
+Upper bound: 82
+Thread work times 1377 15 17 17 14 18 18 19 21 20 1375 21 1373 17 1376 15 20 11 16 19 1375 18 17 17 15 16 16 15 15 20 16
+Upper bound: 81
+Thread work times 1696 16 17 11 17 16 16 17 20 19 22 18 22 18 18 1694 1695 21 23 1693 16 17 16 20 1695 20 16 17 22 16 26
+Upper bound: 80
+Thread work times 2234 2231 17 21 16 2233 18 15 19 18 1 2234 17 20 17 17 23 13 17 24 24 18 17 16 16 17 15 19 26 2234 15
+Upper bound: 79
+Thread work times 3297 3295 22 24 23 24 25 22 21 20 20 19 20 3296 19 20 19 7 18 19 22 22 20 3296 20 17 19 12 21 20 3296
+Upper bound: 78
+Thread work times 13 4790 19 4791 18 19 18 20 19 19 21 21 18 18 11 19 23 23 22 21 12 24 4790 24 28 24 4790 20 24 12 4792
+Upper bound: 77
+Thread work times 7085 17 19 26 22 12 20 13 28 9 21 22 19 14 19 7084 7084 26 21 24 22 16 7083 5 20 7083 27 20 25 22 8
+Upper bound: 76
+Thread work times 10470 10462 17 6 20 21 18 21 21 22 19 24 23 21 10467 28 10470 11 21 19 11 18 24 10469 22 22 19 21 21 20 22
+Upper bound: 75
+Thread work times 15609 20 21 20 9 21 20 15598 22 20 20 20 20 25 19 26 22 25 32 15608 26 26 13 15607 25 25 20 21 20 15608 23
+Upper bound: 74
+Thread work times 19 28 14 22363 22361 19 24 21 21 22 24 20 22361 21 24 20 22 24 21 27 22363 23 16 22 22 23 21 20 23 22362 24
+Upper bound: 73
+Thread work times 21 18 22 23 23 19 29 26 21 24 29 21 34 24 25 36 31 16542 16550 16548 20 8 18 27 23 24 16548 16547 22 19 24
+Solution size 5
+(13 -> 561) (34 -> 583) (50 -> 423) (95 -> 562) (107 -> 60) 
+Nodes:                      77695071
+CPU time (ms):              100004
+TIMEOUT
