@@ -5,7 +5,7 @@ CATTER := cat
 INSTANCES_FILE := mcs33vedinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) | if [[ $(FILTER) == -1 ]] ; then cat ; else awk "(NR % $(MODULUS)) == ($(FILTER) % $(MODULUS))" ; fi | $(CATTER) )
 TIMEOUT := 100
-ALGORITHMS := clique-par james-cpp-max-par clique-cilk clique-prime-par james-cpp-max-prime-par
+ALGORITHMS := clique-par james-cpp-max-par clique-cilk clique-cilkdeep clique-cilkfor clique-prime-par james-cpp-max-prime-par
 STACK_SPACE := 10485760
 RESULTS := gpgnode-results/mcs33ved
 N_THREADS := 32
@@ -20,6 +20,14 @@ $(RESULTS)/clique-par/t$(N_THREADS)$(T_EXTRA)/%.out :
 $(RESULTS)/clique-cilk/t$(N_THREADS)$(T_EXTRA)/%.out :
 	mkdir -p $(RESULTS)/clique-cilk/t$(N_THREADS)$(T_EXTRA)
 	ulimit -s $(STACK_SPACE) ; env CILK_NWORKERS=$(N_THREADS) ../cilk-clique-code/solve_max_common_subgraph --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/clique-cilkfor/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/clique-cilkfor/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; env CILK_NWORKERS=$(N_THREADS) ../cilk-clique-code/solve_max_common_subgraph --parallel-for --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
+
+$(RESULTS)/clique-cilkdeep/t$(N_THREADS)$(T_EXTRA)/%.out :
+	mkdir -p $(RESULTS)/clique-cilkdeep/t$(N_THREADS)$(T_EXTRA)
+	ulimit -s $(STACK_SPACE) ; env CILK_NWORKERS=$(N_THREADS) ../cilk-clique-code/solve_max_common_subgraph --deep --timeout $(TIMEOUT) $(shell grep "^`basename $*` " < $(INSTANCES_FILE) | cut -d' ' -f2-3 ) > >(tee $@ ) 2>&1
 
 $(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)/%.out :
 	mkdir -p $(RESULTS)/james-cpp-max-par/t$(N_THREADS)$(T_EXTRA)
