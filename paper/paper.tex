@@ -364,31 +364,12 @@ and where it is expected that the solution will involve most of the smaller grap
 expected to be low). The implementation we work with only handles unlabelled instances, and does
 not support the connected variant.
 
-\section{Parallel Search}
+\section{Benchmark Instances}
 
-\subsection{Anomalies}
-
-\subsection{Parallel Maximum Clique}
-
-?? For the clique algorithm.
-
-?? Discuss the TOPC paper.
-
-?? Reproducible
-
-\subsection{Parallel Constraint-Based Search}
-
-?? Approach for kdown and mcsplit
-
-\section{Empirical Evaluation}
-
-We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
-running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
-hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted.
-Most of our instances come from a standard benchmark set
-\citep{DBLP:journals/prl/SantoFSV03,DBLP:journals/jgaa/ConteFV07} for maximum common subgraph
-problems.  This benchmark set can be used in a number of ways, for different variants of the
-problem. We use it to create five families of instance, as follows:
+Most of the benchmark instances we will use come from a standard database for maximum common
+subgraph problems \citep{DBLP:journals/prl/SantoFSV03,DBLP:journals/jgaa/ConteFV07}. This benchmark
+set can be used in a number of ways, for different variants of the problem. We use it to create five
+families of instance, as follows:
 
 \begin{description}
     \item[Unlabelled] instances, by selecting the first ten members of each parameter class where the
@@ -413,8 +394,37 @@ problem. We use it to create five families of instance, as follows:
 Following \citet{DBLP:conf/aaai/HoffmannMR17}, we also work with the 5,725 \textbf{Large} instances
 originally used for studying portfolios of subgraph isomorphism algorithms
 \citep{DBLP:conf/lion/KotthoffMS16}. These graphs are unlabelled and undirected, and can include up
-to 6,671 vertices. We do not use the clique encoding on these instances due to its impractical
-memory requirements for large graphs.
+to 6,671 vertices. We do not use the clique encoding on these instances due to its
+memory requirements.
+
+
+\section{Parallel Search}
+
+?? Tree search. History.
+
+\subsection{Anomalies}
+
+\subsection{Parallel Maximum Clique}
+
+?? For the clique algorithm.
+
+?? Discuss the TOPC paper.
+
+?? Reproducible
+
+\subsection{Parallel Constraint-Based Search}
+
+?? Approach for kdown and mcsplit
+
+?? kdown isn't quite conventional branch and bound.
+
+?? mcsplit uses in-place data structures
+
+\section{Empirical Evaluation}
+
+We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
+running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
+hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted.
 
 \subsection{Parallel Search is Better Overall}
 
