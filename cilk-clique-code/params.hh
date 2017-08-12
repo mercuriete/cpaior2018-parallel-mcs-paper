@@ -25,6 +25,8 @@ struct Params
 
     /// Use parallel for instead of spawn?
     bool parallel_for = false;
+
+    bool deep = false;
 };
 
 #endif

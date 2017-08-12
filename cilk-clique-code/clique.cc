@@ -366,7 +366,7 @@ namespace
 
                     auto v = p_order[n];
 
-                    cilk_spawn [this, &c, shrinking_p, v] {
+                    if (params.deep && c.size() < 2) {
                         auto new_c = c;
 
                         // consider taking v
@@ -380,7 +380,24 @@ namespace
                             expand(new_c, new_p);
                         else
                             incumbent.update(new_c);
-                    }();
+                    }
+                    else {
+                        cilk_spawn [this, &c, shrinking_p, v] {
+                            auto new_c = c;
+
+                            // consider taking v
+                            new_c.push_back(v);
+
+                            // filter p to contain vertices adjacent to v
+                            FixedBitSet<n_words_> new_p = shrinking_p;
+                            graph.intersect_with_row(v, new_p);
+
+                            if (! new_p.empty())
+                                expand(new_c, new_p);
+                            else
+                                incumbent.update(new_c);
+                        }();
+                    }
 
                     // now consider not taking v
                     shrinking_p.unset(v);

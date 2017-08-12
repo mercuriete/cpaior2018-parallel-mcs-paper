@@ -205,6 +205,8 @@ auto main(int argc, char * argv[]) -> int
             ("unlabelled",                            "Make the graph unlabelled)")
             ("no-edge-labels",                        "Get rid of edge labels, but keep vertex labels")
             ("undirected",                            "Make the graph undirected")
+            ("parallel-for", "Use parallel for")
+            ("deep", "Steal deeper")
             ;
 
         po::options_description all_options{ "All options" };
@@ -244,6 +246,9 @@ auto main(int argc, char * argv[]) -> int
 
         /* Figure out what our options should be. */
         Params params;
+
+        params.parallel_for = options_vars.count("parallel-for");
+        params.deep = options_vars.count("deep");
 
         /* Create graphs */
         auto graphs = std::make_pair(
