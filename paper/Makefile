@@ -44,6 +44,8 @@ GRAPHS = \
 	gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf \
 	gen-graph-scatter-33ved-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf \
+	gen-graph-scatter-sip-kdown-par-t32r-vs-kdown-par-t32.pdf \
+	gen-graph-scatter-sip-kdown-cilk-t32r-vs-kdown-cilk-t32.pdf \
 	gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-plain-connected-mcsplit-vs-mcsplit-par-t32.pdf \
 	gen-graph-scatter-33ve-connected-mcsplit-vs-mcsplit-par-t32.pdf \

@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.3in font '\footnotesize' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 2.4in,2.2in font '\footnotesize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-cumulative-sip.tex"
 
 load "magma.pal"
