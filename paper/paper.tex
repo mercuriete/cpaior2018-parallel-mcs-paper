@@ -2,15 +2,11 @@
 
 \documentclass[sigconf]{acmart}
 
-\usepackage{showframe}
-
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cleveref}
 \usepackage{tikz}
 \usepackage{nicefrac}
-
-\usepackage{placeins}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -110,17 +106,18 @@ SoLStiCe (ANR-13-BS02-0002-01)}
 }
 
 % The default list of authors is too long for headers}
-\renewcommand{\shortauthors}{R. Hoffmann et al.}
+\renewcommand{\shortauthors}{R. Hoffmann, C. McCreesh et al.}
 
 \begin{abstract}
-    We discuss our experiences adapting three recent algorithms for maximum common (connected) subgraph
-    problems to exploit multi-core parallelism. We consider the effects of different work
-    distribution strategies and their interaction with value-ordering heuristics, and propose a
-    search method which is risk-free, reproducible, and scalable, as well as beneficial. Our results
-    show that each algorithm can be parallelised successfully using this strategy, with the
+    We discuss our experiences adapting three recent algorithms for maximum common (connected)
+    subgraph problems to exploit multi-core parallelism. These algorithms are heavily irregular and
+    very sensitive to search order changes, and so do not easily lend themselves to parallel search.
+    Nonetheless, our results show that each algorithm can be parallelised successfully, with the
     multi-core algorithms we create being clearly better than the sequential ones. We then look in
-    more detail at the results, on an instance by instance basis, and discuss how we should be
-    measuring speedups for these kinds of algorithm.
+    more detail at the results, and discuss how we should be
+    measuring speedups for these kinds of algorithm. Because of the difficulty in measuring an
+    average speedup when so-called anomalous (superlinear and sublinear) speedups are common, we
+    propose a new measure called \emph{aggregate speedup}.
 \end{abstract}
 
 \begin{CCSXML}
@@ -153,7 +150,7 @@ SoLStiCe (ANR-13-BS02-0002-01)}
 \ccsdesc[500]{Theory of computation~Branch-and-bound}
 \ccsdesc[300]{Theory of computation~Constraint and logic programming}
 
-\keywords{Maximum common subgraph, Parallel branch and bound, Constraint programming}
+\keywords{Maximum common subgraph, Parallel branch and bound}
 
 \maketitle
 
@@ -304,7 +301,7 @@ problem, whilst the other two approaches have a constraint programming feel to t
 A clique in a graph is a subgraph where every vertex is adjacent to every other. There is a
 well-known reduction from the maximum common subgraph problem to the problem of finding a maximum
 clique in an \emph{association graph}
-\citep{o:Levi73,DBLP:journals/siamcomp/BalasY86,o:DurandPBT99,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/cp/McCreeshNPS16}, which, when combined with
+\citep{o:Levi73,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/cp/McCreeshNPS16}, which, when combined with
 a modern maximum clique solver \citep{DBLP:journals/ol/SegundoMRH13}, is the current best approach for
 solving the problem on labelled graphs \citep{DBLP:conf/cp/McCreeshNPS16}. A modified clique-like
 algorithm can also be used to solve the maximum common connected subgraph problem, by ensuring
@@ -335,7 +332,11 @@ values to variables, maximising the number of variables not set to $\bot$. The s
 this technique is a dedicated implementation of a forward-checking branch and bound search over this
 model \citep{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}.
 
-?? Ensuring connectedness
+Two approaches exist for ensuring connectedness: either a conventional global constraint and
+propagator can be used \citep{DBLP:conf/cp/McCreeshNPS16}, or a special branching rule can be used
+to enforce connectedness during search \citep{DBLP:conf/mco/VismaraV08}. The two techniques are
+broadly comparable performance-wise \citep{DBLP:conf/cp/McCreeshNPS16}, but the branching rule is
+much simpler to implement.
 
 \subsection{Domain Splitting}
 
@@ -348,7 +349,9 @@ using different supporting algorithms and data structures.  Rather than storing 
 vertex in the pattern graph, equivalence classes of vertices in both graphs are stored in a special
 data structure which is modified in-place and restored upon backtracking. This enables fast
 propagation of the constraints and smaller memory requirements. In addition, this data structure
-enables stronger branching heuristics to be calculated cheaply.
+enables stronger branching heuristics to be calculated cheaply. The McSplit algorithm effectively
+dominates conventional constraint programming approaches, being consistently over an order of
+magnitude faster.
 
 \subsection{$k$-less Subgraph Isomorphism}
 
@@ -400,47 +403,72 @@ originally used for studying portfolios of subgraph isomorphism algorithms
 to 6,671 vertices. We do not use the clique encoding on these instances due to its
 memory requirements.
 
-
 \section{Parallel Search}
 
 The clique and $k{\downarrow}$ algorithms already make use of fine granularity bit-parallelism. To
 introduce more coarse-grained thread parallelism, we will parallelise the search process: viewing
-backtracking search as forming a tree, we can explore different portions of the tree on different
-processors.
-
-?? quick history
-
-?? Anomalies
+backtracking search as forming a tree, we can explore different portions of the tree using different
+threads. We use a shared incumbent, so better solutions found by one thread can be used others
+immediately. This technique has a long history \citep{o:BaderHC05}. Of particular
+interest to us are so-called \emph{anomalies}
+\citep{DBLP:journals/cacm/LaiS84,DBLP:journals/tc/LiW86,DBLP:conf/irregular/BruinKT95}:
+because we are not performing a fixed amount of work, we should have no expectation of a linear
+speedup, and instead we could see a sublinear speedup (much less than $n$ from $n$ processors) or a
+superlinear speedup (much more than $n$ from $n$ processors). An absolute slowdown (speedup much
+less than 1) is also possible under some models.
 
 \subsection{Parallel Maximum Clique}
 
-The maximum clique algorithm underlying . Differs only by a preprocessing step.
+Thread-parallel versions of state-of-the-art maximum clique algorithms have already been produced
+\citep{DBLP:journals/algorithms/McCreeshP13,DBLP:journals/jcisd/DepolliKRTJ13,DBLP:conf/icde/XiangGA13}.
+\citet{DBLP:journals/topc/McCreeshP15} compare several of these approaches, and make an important
+observation: although work balance is a problem due to the irregularity of the search tree, often
+the interaction between search order and parallel work decomposition is the dominating factor in
+determining speedups. They explain why anomalies are in fact common in practice: many clique problem
+instances benefit immensely from having found a strong incumbent, but have solutions which are
+either unique or rare, and are hard to find. They propose a work splitting mechanism which offsets
+anomalies, guaranteeing reproducibility (two runs with the same instance on the same hardware will
+give similar runtimes), scalability (increasing the number of cores cannot make things worse), and
+no absolute slowdowns.  Additionally, this mechanism explicitly offsets the commitment to early
+branching choices, where search ordering heuristics are most likely to be inaccurate
+\citep{DBLP:conf/ijcai/HarveyG95,DBLP:conf/cp/ChuSS09}.
 
-The clique-inspired connected algorithm described by \citet{} may be parallelised in exactly the
-same way.
-
-?? Note the very high number of recursive calls per second. Fitting everything in cache. Not
-compatible with framework abstractions.
-
-?? Splitting depth. Balance.
-
-?? Discuss the TOPC paper.  ?? Reproducible, anomalies, etc
-
-\subsection{Anomalies}
+We will use this mechanism for our experiments.  The clique-based maximum common subgraph algorithm
+effectively differs only in the preprocessing stage, and the clique-inspired connected algorithm
+described by \citet{DBLP:conf/cp/McCreeshNPS16} is sufficiently similar that may be parallelised in
+exactly the same way. Based upon preliminary experiments, we use a splitting depth limit of five
+rather than the original three, since maximum common subgraph instances appear to be even more
+irregular than normal clique problem instances.
 
 \subsection{Parallel Constraint-Based Search}
 
-?? Approach for kdown and mcsplit
+A similar approach may be used for the $k{\downarrow}$ algorithm. Although it is not quite a
+conventional branch and bound algorithm, each individual $k$ pass is a tree search, and may be
+parallelised. For each pass, we use the same work splitting mechanism as in the clique algorithm,
+starting by splitting only at the top level of search to explicitly introduce diversity, and then
+iteratively increasing the splitting depth as additional work is needed (up to a limit of five
+levels deep).
 
-?? kdown isn't quite conventional branch and bound.
+Because the $k{\downarrow}$ algorithm uses a conventional constraint programming domain store, there
+is no need to use recomputation; the state is naturally copied at each branching point.
 
-?? mcsplit uses in-place data structures
+In principle the McSplit algorithm may be parallelised in exactly the same way. However, this
+algorithm makes heavy use of an in-place, backtrackable data structure, which is not copied for
+recursive calls. In order to introduce the \emph{potential} for parallelism, we must make
+copies of the state data structure. Implemented na{\"\i}vely, this can give an order of magnitude
+slowdown to the sequential algorithm, which can be hard to recover using parallelism. To lessen the
+effects, rather than copying state for each recursive call, we copy once before the main branching
+loop, and then copy that copy in each ``helper'' thread, replaying the branching loop without making
+duplicate recursive calls.  (We are not convinced that a better approach is not possible\ldots)
 
 \section{Empirical Evaluation}
 
 We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
 running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
-hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted.
+hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted, but
+we do not expect speedups of 32 even in the best case.
+
+?? Hundred second timeout.
 
 \subsection{Parallel Search is Better Overall}
 
@@ -463,26 +491,6 @@ hyper-threading is enabled, so we run experiments with 32 threads except where o
     algorithms. The 32 threaded parallel versions (shown using dotted lines) are always better in
 aggregate than the sequential versions (shown using solid lines).}\label{figure:cumulative}
 \end{figure*}
-
-In \cref{figure:cumulative} we plot empirical cumulative distribution functions showing the number
-of instances solved over time, for both sequential (solid lines) and parallel (dotted lines)
-versions of each algorithm.  Cumulative plots are commonly used in constraint programming and
-boolean satisfiability for comparing aggregate behaviour of solvers in the presence of timeouts.
-(Sometimes the axes are reversed, in which case they are called \emph{cactus} plots.)  To read these
-plots, make a choice of timeout along the $x$-axis, which uses a log scale. The $y$ value at that
-point shows the number of instances whose runtime (individually) is at most $x$, for a particular
-algorithm. In other words, at any given $x$ value, the highest line shows which algorithm is able to
-solve the largest number of instances using a per-instance timeout of that $x$ value, bearing in
-mind that the actual sets of instances solved by each algorithm may be completely different.
-
-Each plot gives the same conclusion: if we are working with a timeout of at least $10^2$
-milliseconds, then for any problem family and any sequential algorithm, if given the option of
-switching to the corresponding parallel algorithm, then we should do so.
-
-However, although they are good at showing general trends, cumulative plots can hide interesting
-details. We therefore now take a closer look at each of the three algorithms.
-
-\subsection{A Closer Look at Clique}
 
 \begin{figure*}[p]
     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
@@ -515,67 +523,32 @@ details. We therefore now take a closer look at each of the three algorithms.
     timeout.}\label{figure:cliquespeedups}
 \end{figure*}
 
-In the top row of \cref{figure:cliquespeedups}, we see scatter plots comparing the sequential and
-parallel runtimes of the clique algorithm on an instance by instance basis, using a log-log plot.
-Instances which timed out using one algorithm but not the other are shown as points along the outer
-axes. Points below the $x{-}y$ diagonal line represent speedups. The colour of the points indicates
-the relative size of the solution---darker points represent instances where the solution uses most
-of the vertices of the input graphs.
+In \cref{figure:cumulative} we plot empirical cumulative distribution functions showing the number
+of instances solved over time, for both sequential (solid lines) and parallel (dotted lines)
+versions of each algorithm.  Cumulative plots are commonly used in constraint programming and
+boolean satisfiability for comparing aggregate behaviour of solvers in the presence of timeouts.
+(Sometimes the axes are reversed, in which case they are called \emph{cactus} plots.)  To read these
+plots, make a choice of timeout along the $x$-axis, which uses a log scale. The $y$ value at that
+point shows the number of instances whose runtime (individually) is at most $x$, for a particular
+algorithm. In other words, at any given $x$ value, the highest line shows which algorithm is able to
+solve the largest number of instances using a per-instance timeout of that $x$ value, bearing in
+mind that the actual sets of instances solved by each algorithm may be completely different.
 
-?? Quick summary
+Each plot gives the same conclusion: if we are working with a timeout of at least $10^2$
+milliseconds, then for any problem family and any sequential algorithm, if given the option of
+switching to the corresponding parallel algorithm, then we should do so.
 
-?? Try to turn this into a number, giving a speedup.
+However, although they are good at showing general trends, cumulative plots can hide interesting
+details. We therefore now take a closer look at each of the three algorithms.
 
-?? Best fit line. Pretend they are outliners. Can get away with it if they are rare enough, but they
-are not for many algorithms.
-
-?? Histograms. Ignore low runtimes. Also have to ignore instances solved in parallel but not
-sequential. Underestimate superlinear speedups. We do not consider this to be a particularly
-satisfactory way of measuring speedups.
-
-?? We propose a different way of . Refer back to the cumulative plots. The usual way of reading
-these plots is to pick whichever line is furthest up, and measuring the vertical difference between
-lines says how many more the parallel algorithm can solve than the sequential algorithm can with a
-particular choice of timeout. However, measuring the \emph{horizontal} distance between lines also
-conveys information. Suppose the sequential algorithm can solve $y$ instances with a selected timeout
-of $s$. By moving to the left on a cumulative plot, we can find the timeout $p$ required for the
-parallel algorithm to solve the same number of instances, bearing in mind that \emph{the two sets of
-instances could in principle have completely different members}. We define the \emph{aggregate
-speedup} to be $\nicefrac{s}{p}$; this can be expressed as a function of time (i.e.\ $s$) or of the
-number of instances solved ($y$).
+\subsection{Clique Results In Depth}
 
 \begin{figure}[p]
     \includegraphics{gen-graph-as-clique.pdf}
 
     \caption{Aggregate speedups from 32 threads on 16 hyper-threaded cores, shown as a function of
-    sequential runtime, for each family supported by the clique algorithm.}
+    sequential runtime, for each family supported by the clique algorithm.}\label{figure:cliqueas}
 \end{figure}
-
-% \begin{figure*}[tb]
-%     \includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-sip-kdown-vs-kdown-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
-% 
-%     \caption{Per-instance speedups. The $x$-axis is sequential performance and the $y$-axis is 32
-%     threaded performance, so points below the diagonal line represent a speedup.}
-% \end{figure*}
-% 
 \begin{figure}[p]
     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf}
     \hfill
@@ -596,50 +569,80 @@ number of instances solved ($y$).
     \caption{Per-instance speedups from the clique algorithm on vertex- and edge-labelled, directed
     instances, when going from sequential to two threads in the first plot, then increasing the
     number of threads in subsequent plots. The final plot shows 32 threads versus a repeated run
-    also with 32 threads.}
+    also with 32 threads.}\label{figure:cliquescale}
 \end{figure}
-% 
-% \begin{figure}[tb]
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-cilk-t2.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t2-vs-clique-cilk-t4.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t4-vs-clique-cilk-t8.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t8-vs-clique-cilk-t16.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf}
-% 
-%     \caption{Scalability and reproducibility, clique algorithm, Cilk.}
-% \end{figure}
-% 
-% \begin{figure}[tb]
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t2.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t2-vs-mcsplit-par-t4.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t8.pdf}
-% 
-%     \vspace*{1em}
-% 
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t8-vs-mcsplit-par-t16.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.pdf}
-% 
-%     \caption{Scalability and reproducibility, McSplit algorithm.}
-% \end{figure}
 
-\subsection{A Closer Look at $k{\downarrow}$}
+In the top row of \cref{figure:cliquespeedups}, we see scatter plots comparing the sequential and
+parallel runtimes of the clique algorithm on an instance by instance basis, using a log-log plot.
+Instances which timed out using one algorithm but not the other are shown as points along the outer
+axes. Points below the $x{-}y$ diagonal line represent speedups. The colour of the points indicates
+the relative size of the solution---darker points represent instances where the solution uses most
+of the vertices of the input graphs. (We use these conventions for scatter plots throughout this
+paper.)
+
+Broadly speaking, the results are similar on each of the five families. For runtimes below 100
+milliseconds, overheads and the preprocessing step dominate, and we are usually only able to achieve
+a small speedup. At higher runtimes, most speedups appear to be between ten and twenty, except on
+the final family, where they are mostly between five and ten. For a few instances, the speedups are
+lower (but they are still clearly speedups), whilst in the first four families, we also see evidence
+of super-linear speedups being relatively common.
+
+However, attempting to determine a speedup by staring at a scatter plot is not particularly
+quantitative. We could attempt to find a best fit line through these points, pretending that the
+superlinear speedups are outliners. We could perhaps get away with this if outliers were rare
+enough, but in practice we are not expecting linear speedups, and for the other two algorithms, we
+will see that superlinear speedups are even more common. Alternatively, we could rig our experiments
+to remove anomalies, by priming search with a known-optimal
+solution---\citet{DBLP:journals/topc/McCreeshP15} criticise this practice in more detail.
+
+A more principled approach is given in the bottom row of \cref{figure:cliquespeedups}. For instances
+where the sequential run both succeeded and took at least 500 milliseconds, we plot the distribution
+of speedups obtained. These histograms confirm our informal observations. However, these plots are
+not particularly satisfactory: in order to calculate a speedup, we can only consider instances where
+the sequential algorithm succeeded. These plots therefore underestimate superlinear speedups.
+
+To avoid this weakness, we propose a new way of characterising speedups. Refer back to the
+cumulative plots in \cref{figure:cumulative}. The usual way of comparing two algorithms on these
+plots is to measuring the vertical difference between lines, which says how many more instances the
+parallel algorithm can solve than the sequential algorithm can with a particular choice of timeout.
+However, measuring the \emph{horizontal} distance between lines also conveys information. Suppose
+the sequential algorithm can solve $y$ instances with a selected timeout of $s$. By moving to the
+left on a cumulative plot, we can find the timeout $p$ required for the parallel algorithm to solve
+the same number of instances, bearing in mind that \emph{the two sets of instances could in
+principle have completely different members}. We therefore define the \emph{aggregate speedup} to be
+$\nicefrac{s}{p}$; this can be expressed as a function of time (i.e.\ $s$) or of the number of
+instances solved ($y$).
+
+We plot aggregate speedups as a function of time in \cref{figure:cliqueas}. For a sequential timeout
+of one hundred seconds, we get speedups of twenty to twenty eight in the unlabelled, vertex
+labelled, and both labelled, directed cases. In the unlabelled connected case, our aggregate speedup
+is thirty seven, which (when taking hyper-threading into account) is strongly super-linear.  With
+some detailed knowledge of the underlying sequential algorithm, this should perhaps not surprise us:
+for instances with a large solution, once we have found that solution, a proof of optimality is
+relatively easy. However, finding that solution can be unusually hard, particularly since the
+branching strategy for the connected constraint necessarily interferes with the tailored search
+order used by modern clique algorithms.  In contrast, for the both labelled connected case, our
+aggregate speedup is only six. A closer inspection of the results shows that the search tree is
+unusually narrow and deep for these instances, making work balance harder and contention higher.
+
+What about scalability and reproducibility? The first plot in \cref{figure:cliquescale} show the
+effects of going from sequential to threaded with two cores, and the next four plots show the
+effects of doubling the number of threads each time. These plots show that most of the superlinear
+effects occur with fairly small numbers of threads, with nearly all of the benefits of increased
+diversity in search being obtained once eight threads are used. As expected, in no case does
+increasing the number of threads make things substantially worse, although going from sixteen to
+thirty two threads does show some small slowdowns---this is due to hyper-threading.
+
+The final plot in \cref{figure:cliquescale} shows that runtimes are reproducible: running the same
+instance on the same hardware twice takes almost exactly the same amount of time. (We could not
+reproduce the three outliers in a third run---we suspect other system programs may have woken up
+and caused slight interference during the second run.)
+
+These results are hopefully comforting: they show that anomalies can be controlled, and that
+switching to a parallel algorithm is not only better, but also safe from a scientific
+reproducibility perspective.
+
+\subsection{$k{\downarrow}$ Results In Depth}
 
 \begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-plain-kdown-vs-kdown-par-t32.pdf}
@@ -650,20 +653,47 @@ number of instances solved ($y$).
 
     \includegraphics{gen-graph-as-kdown.pdf}
 
-    \caption{On the top row, per-instance speedups, using the $k{\downarrow}$ algorithm. The
-    $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. Below,
-    aggregate speedups for both families.}
-\end{figure}
+    \vspace*{1em}
 
-\begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-plain-kdown-par-t4-vs-kdown-par-t16.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-kdown-par-t32r-vs-kdown-par-t32.pdf}
 
-    \caption{Scalability and reproducibility of the $k{\downarrow}$ algorithm.}
+    \caption{On the top row, per-instance speedups, using the $k{\downarrow}$ algorithm. The
+    $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. Below,
+    aggregate speedups for both families. Finally, scalability and reproducibility.}\label{figure:kdownscatters}
 \end{figure}
 
-\subsection{A Closer Look at McSplit}
+In \cref{figure:kdownscatters} we show per-instance and aggregate speedups for the $k{\downarrow}$
+algorithm. On unlabelled instances, we see a range of speedups between slightly less than one and
+ten, with an aggregate speedup of four. These results are not as good as with the clique algorithm.
+A closer look at the results suggests that memory bandwidth is to blame: although we have somewhat
+more than sixteen times as much processing power available to us, our available memory bandwidth at
+best doubles from introducing parallelism. Unlike the clique algorithm, which has very small,
+cache-friendly data structures which are modified in-place, the state for the $k{\downarrow}$
+algorithm is large and much of the runtime is spent copying data structures.
+
+For the large instances, our aggregate speedup is higher, at over ten. This has two causes: for
+larger graphs, the computational effort per recursive call increases by more than the amount the
+memory copying does, reducing the memory bandwidth problem slightly, and additionally a much larger
+number of super-linear speedups occurred with this family of instances. We could perhaps anticipate
+this latter effect: in many of these instances the maximum common subgraph covers all or nearly all
+of the smaller of the two graphs, and so once it is found, the proof of optimality is trivial.
+However, finding a witness can be difficult. We should also expect value ordering heuristics in
+these algorithms to be weak at the top of search (they are based upon degree, and many graphs do not
+have a large degree spread), and so the benefits of high-up diversity can be extremely large
+\citep{DBLP:conf/ijcai/HarveyG95,DBLP:conf/cp/ChuSS09,DBLP:journals/topc/McCreeshP15}. Indeed,
+similar results were seen with a parallel version of the subgraph isomorphism algorithm upon which
+$k{\downarrow}$ is based \citep{DBLP:conf/cp/McCreeshP15}.
+
+The final row of \cref{figure:kdownscatters} shows that as with the clique algorithm, this
+parallelism is reproducible, and that runtimes do not get worse when the number of threads is
+increased. (Although not shown, we also tried to parallelise $k{\downarrow}$ using randomised
+work-stealing from Intel Cilk Plus---similar to the clique algorithm
+\citep{DBLP:journals/topc/McCreeshP15}, doing so gives generally reasonable results on average, but
+now repeat runtimes can differ by more than an order of magnitude.)
+
+\subsection{McSplit Results In Depth}
 
 \begin{figure}[tb]
     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
@@ -682,21 +712,28 @@ number of instances solved ($y$).
     \hfill
     \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \vspace*{1em}
-
-    \includegraphics{gen-graph-as-mcsplit.pdf}
-
-    \caption{On the top three rows, per-instance speedups, using the splitting algorithm. The
-    $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. On the final
-    row, aggregate speedups for both families.}
+    \caption{Per-instance speedups, using the splitting algorithm. The $x$-axis is sequential
+    performance and the $y$-axis is 32 threaded performance.}\label{figure:mcsplitscatter}
 \end{figure}
 
+Finally, we look at our attempts to parallelise the McSplit algorithm. Recall that doing so required
+heavy modifications to the algorithm, introducing significant amounts of speculative copying of a
+data structure that is usually backtrackable and modified in-place. \Cref{figure:mcsplitscatter}
+shows ?? what?
+
+?? Aggregate speedups in \cref{figure:mcsplitas}. Also show scalability and reproducibility.
+
 \begin{figure}[tb]
+    \includegraphics{gen-graph-as-mcsplit.pdf}
+
+    \vspace*{1em}
+
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t16.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
 
-    \caption{Scalability and reproducibility of the splitting algorithm.}
+    \caption{On the top row row, aggregate speedups for the McSplit algorithm. Below, scalability
+    and reproducibility.}\label{figure:mcsplitas}
 \end{figure}
 
 % \subsection{Cilk}
@@ -719,7 +756,12 @@ number of instances solved ($y$).
 
 ?? There is more to be done.
 
-\FloatBarrier
+?? Note the very high number of recursive calls per second. Fitting everything in cache. Not
+compatible with framework abstractions. Recomputation versus state copying.
+
+?? Aggregate speedups. Use of multiple measures.
+
+?? Same algorithm, different instance families, very sensitive
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{combined}

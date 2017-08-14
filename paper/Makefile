@@ -2,7 +2,7 @@ all : tables graphs combined.bib
 	latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode %O %S' -shell-escape paper
 
 combined.bib : dblp.bib notindblp.bib
-	cat dblp.bib notindblp.bib > combined.bib
+	cat dblp.bib notindblp.bib | sed -e '/crossref/d' > combined.bib
 
 TABLES =
 

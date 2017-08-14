@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 INSTANCES_FILE := sipinstances.txt
 INSTANCES := $(shell cut -d' ' -f1 $(INSTANCES_FILE) )
-ALGORITHMS := kdown james-cpp-max-down kdown-par/t32 james-cpp-max-down-par/t32
+ALGORITHMS := kdown james-cpp-max-down kdown-par/t32 james-cpp-max-down-par/t32 kdown-par/t32r kdown-cilk/t32 kdown-cilk/t32r
 RESULTS := gpgnode-results/sip
 
 all : $(RESULTS)/runtimes.data
@@ -35,6 +35,18 @@ $(RESULTS)/kdown/%.runtime : $(RESULTS)/kdown/%.out
 	[[ -s $@ ]]
 
 $(RESULTS)/kdown-par/t32/%.runtime : $(RESULTS)/kdown-par/t32/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/kdown-par/t32r/%.runtime : $(RESULTS)/kdown-par/t32r/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/kdown-cilk/t32/%.runtime : $(RESULTS)/kdown-cilk/t32/%.out
+	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
+	[[ -s $@ ]]
+
+$(RESULTS)/kdown-cilk/t32r/%.runtime : $(RESULTS)/kdown-cilk/t32r/%.out
 	tail -n2 < $^ | head -n1 | cut -d' ' -f1 > $@
 	[[ -s $@ ]]
 

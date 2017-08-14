@@ -5,7 +5,7 @@ set output "gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t16.tex"
 
 load "magma.pal"
 
-set title 'Unlabelled'
+set title 'Unlabelled, 4 vs 16'
 
 set xrange [1:2e5]
 set yrange [1:2e5]

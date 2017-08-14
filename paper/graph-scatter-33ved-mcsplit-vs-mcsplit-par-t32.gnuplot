@@ -5,7 +5,7 @@ set output "gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.tex"
 
 load "magma.pal"
 
-set title 'Both labelled, Seq vs 32'
+set title 'Both labelled'
 
 set xrange [1:2e5]
 set yrange [1:2e5]
