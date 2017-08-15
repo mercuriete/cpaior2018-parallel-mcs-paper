@@ -9,3 +9,4 @@ gen-*
 *.blg
 *synctex*
 combined.bib
+comment.cut
