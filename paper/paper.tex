@@ -276,7 +276,7 @@ malware \citep{DBLP:conf/icics/GaoRS08,DBLP:journals/compsec/ParkRS13}, and soci
 \citep{DBLP:journals/tkde/FangYZZ15}. A common variant of the problem requires a largest
 \emph{connected} subgraph
 \citep{DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
-As illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be determined
+As illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be inferred
 from the maximum common subgraph.
 
 Although both variants are NP-hard, recently progress has been made towards solving the problem in
@@ -294,7 +294,7 @@ problem, whilst the other two approaches have a constraint programming feel to t
 
 \subsection{Reduction to Maximum Clique}
 
-A clique in a graph is a subgraph where every vertex is adjacent to every other. There is a
+A \emph{clique} in a graph is a subgraph where every vertex is adjacent to every other. There is a
 well-known reduction from the maximum common subgraph problem to the problem of finding a maximum
 clique in an \emph{association graph}
 \citep{o:Levi73,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/cp/McCreeshNPS16}, which, when combined with
@@ -310,25 +310,25 @@ vertices.
 
 \subsection{Constraint Programming}
 
-The maximum common subgraph problem may be reformulated as a constraint optimisation problem, as
-follows.  Observe that an equivalent definition of a common subgraph of graphs $G$ and $H$ is an
-injective \emph{partial} mapping from $G$ to $H$ which preserves both adjacency and non-adjacency.
-Hence we pick whichever input graph has fewer vertices, and call it the \emph{pattern}; the other
-graph is called the \emph{target}. The model then follows from this new definition: for each vertex
-in the pattern, we create a variable, whose domain ranges over each vertex in the target graph, plus
-an additional value $\bot$ representing an unmapped vertex. We then have three sets of constraints.
-The first set says that for each pair of adjacent vertices in the pattern (that is, for each edge in
-the pattern), if neither of these vertices are mapped to $\bot$ then these vertices must be mapped
-to an adjacent pair of target vertices. The second set is similar, but looks at non-adjacent pairs
-(or non-edges).  Finally, the third set ensures injectivity, by enforcing that the variables must be
-all different except when using $\bot$. This final set of constraints may either be implemented
-using binary constraints between all pairs of variables, or a special global ``all different except
-$\bot$'' propagator \citep{DBLP:conf/cp/PetitRB01}. The objective is simply to find an assignment of
-values to variables, maximising the number of variables not set to $\bot$. The state of the art for
-this technique is a dedicated (non-toolkit) implementation of a forward-checking branch and bound
-search over this
-model \citep{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}; attempts to parallelise this
-algorithm by static decomposition have had limited success \citep{DBLP:conf/ictai/MinotNS15}.
+The maximum common induced subgraph problem may be reformulated as a constraint optimisation
+problem, as follows.  Observe that an equivalent definition of a common subgraph of graphs $G$ and
+$H$ is an injective \emph{partial} mapping from $G$ to $H$ which preserves both adjacency and
+non-adjacency.  Hence we pick whichever input graph has fewer vertices, and call it the
+\emph{pattern}; the other graph is called the \emph{target}. The model then follows from this new
+definition: for each vertex in the pattern, we create a variable, whose domain ranges over each
+vertex in the target graph, plus an additional value $\bot$ representing an unmapped vertex. We then
+have three sets of constraints.  The first set says that for each pair of adjacent vertices in the
+pattern (that is, for each edge in the pattern), if neither of these vertices are mapped to $\bot$
+then these vertices must be mapped to an adjacent pair of target vertices. The second set is
+similar, but looks at non-adjacent pairs (or non-edges).  Finally, the third set ensures
+injectivity, by enforcing that the variables must be all different except when using $\bot$. This
+final set of constraints may either be implemented using binary constraints between all pairs of
+variables, or a special global ``all different except $\bot$'' propagator
+\citep{DBLP:conf/cp/PetitRB01}. The objective is simply to find an assignment of values to
+variables, maximising the number of variables not set to $\bot$. The state of the art for this
+technique is a dedicated (non-toolkit) implementation of a forward-checking branch and bound search
+over this model \citep{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}; attempts to parallelise
+this algorithm by static decomposition have had limited success \citep{DBLP:conf/ictai/MinotNS15}.
 
 Two approaches exist for ensuring connectedness: either a conventional global constraint and
 propagator can be used \citep{DBLP:conf/cp/McCreeshNPS16}, or a special branching rule can be used
@@ -336,7 +336,7 @@ to enforce connectedness during search \citep{DBLP:conf/mco/VismaraV08}. The two
 broadly comparable performance-wise \citep{DBLP:conf/cp/McCreeshNPS16}, but the branching rule is
 much simpler to implement.
 
-\subsection{Domain Splitting}
+\subsection{Domain Splitting (McSplit)}
 
 \citet{o:McCreeshPT17} observe that due to the special structure of the maximum common subgraph
 problem, the following property holds throughout the search process using the constraint programming
@@ -529,7 +529,7 @@ of instances solved over time, for both sequential (solid lines) and parallel (d
 versions of each algorithm.  Cumulative plots are commonly used in constraint programming and
 boolean satisfiability experiments for comparing the aggregate behaviour of solvers in the presence
 of timeouts.  (Sometimes the axes are reversed, in which case they are called \emph{cactus} plots.)
-To read these plots, make a choice of timeout along the $x$-axis, which uses a log scale. The $y$
+To read these plots, make a choice of timeout along the $x$-axis (which uses a log scale). The $y$
 value at that point shows the number of instances whose runtime (individually) is at most $x$, for a
 particular algorithm. In other words, at any given $x$ value, the highest line shows which algorithm
 is able to solve the largest number of instances using a per-instance timeout of that $x$ value,
