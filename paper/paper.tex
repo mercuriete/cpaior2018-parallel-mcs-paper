@@ -407,7 +407,7 @@ memory requirements.
 The clique and $k{\downarrow}$ algorithms already make use of fine-granularity bit-parallelism. To
 introduce more coarse-grained thread parallelism, we will parallelise the search process: viewing
 backtracking search as forming a tree, we can explore different portions of the tree using different
-threads. We use a shared incumbent, so better solutions found by one thread can be used others
+threads. We use a shared incumbent, so better solutions found by one thread can be used by others
 immediately. This technique has a long history \citep{o:BaderHC05}. Of particular
 interest to us are so-called \emph{anomalies}
 \citep{DBLP:journals/cacm/LaiS84,DBLP:journals/tc/LiW86,DBLP:conf/irregular/BruinKT95}:
@@ -435,7 +435,7 @@ are common.
 
 We will use this mechanism for our experiments.  The clique-based maximum common subgraph algorithm
 effectively differs only in the preprocessing stage, and the clique-inspired connected algorithm
-described by \citet{DBLP:conf/cp/McCreeshNPS16} is sufficiently similar that may be parallelised in
+described by \citet{DBLP:conf/cp/McCreeshNPS16} is sufficiently similar that it may be parallelised in
 exactly the same way. Based upon preliminary experiments, we use a splitting depth limit of five
 rather than the original three, since maximum common subgraph instances appear to give even more
 irregular search trees than normal clique problem instances.
@@ -458,7 +458,8 @@ copies of the state data structure. Implemented na{\"\i}vely, this can give an o
 slowdown to the sequential algorithm, which can be hard to recover using parallelism. To lessen the
 effects, rather than copying state for each recursive call, we copy once before the main branching
 loop, and then copy that copy in each ``helper'' thread, replaying the branching loop without making
-duplicate recursive calls.  (We are not convinced that a better approach is not possible\ldots)
+duplicate recursive calls.  (We believe a better approach using partial recomputation may be
+possible, and intend to investigate this further in the future.)
 
 \section{Empirical Evaluation}
 
