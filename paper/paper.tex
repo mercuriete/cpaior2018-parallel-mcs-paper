@@ -110,9 +110,9 @@
     subgraph problems to exploit multi-core parallelism. These algorithms are heavily irregular and
     very sensitive to search order changes, and so do not easily lend themselves to parallel search.
     Nonetheless, our results show that each algorithm can be parallelised successfully, with the
-    multi-core algorithms we create being clearly better than the sequential ones. We then look in
+    threaded algorithms we create being clearly better than the sequential ones. We then look in
     more detail at the results, and discuss how we should be
-    measuring speedups for this kind of algorithm. Because of the difficulty in measuring an
+    measuring speedups for this kind of algorithm. Because of the difficulty in quantifying an
     average speedup when so-called anomalous (superlinear and sublinear) speedups are common, we
     propose a new measure called \emph{aggregate speedup}.
 \end{abstract}
@@ -254,6 +254,17 @@ common \emph{connected} subgraph, shown on the right, has only seven vertices.}
 \label{figure:mcsexample}
 \end{figure}
 
+Finding a maximum common subgraph is the key step in measuring the similarity or difference between
+two graphs \citep{DBLP:journals/prl/Bunke97,DBLP:journals/prl/FernandezV01,o:Kriege15}: to determine
+the difference between two graphs, we find what they have in common, and then take everything left
+over. Because of this, maximum common subgraph problems frequently arise in biology and chemistry
+\citep{DBLP:journals/jcamd/RaymondW02a,o:EhrlichR11,DBLP:journals/dam/GayFMSS14} where graphs
+represent molecules or reactions, and also in computer vision
+\citep{DBLP:journals/jair/CookH94,DBLP:conf/gbrpr/CombierDS13}, computer-aided manufacturing
+\citep{o:LuoWSN17}, the analysis of programs and malware
+\citep{DBLP:conf/icics/GaoRS08,DBLP:journals/compsec/ParkRS13}, crisis management
+\citep{o:DelavalladeFLL16}, and social network analysis \citep{DBLP:journals/tkde/FangYZZ15}.
+
 A \emph{subgraph isomorphism} is an injective mapping from a \emph{pattern} graph to a \emph{target}
 graph which maps adjacent vertices to adjacent vertices---that is, it \emph{preserves adjacency}. It
 is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent vertices, preserving
@@ -264,20 +275,10 @@ $H$. A \emph{maximum common induced subgraph} is one with as many vertices as po
 \emph{maximum common partial subgraph} problem is non-induced, with as many edges as
 possible; this paper discusses only induced problems.)
 
-Finding a maximum common subgraph is the key step in measuring the similarity or difference between
-two graphs \citep{DBLP:journals/prl/Bunke97,DBLP:journals/prl/FernandezV01,o:Kriege15}: to determine
-the difference between two graphs, we find what they have in common, and then take everything left
-over. Because of this, maximum common subgraph problems frequently arise in biology and chemistry
-\citep{DBLP:journals/jcamd/RaymondW02a,o:EhrlichR11,DBLP:journals/dam/GayFMSS14} where graphs
-represent molecules or reactions, and also in computer vision
-\citep{DBLP:journals/jair/CookH94,DBLP:conf/gbrpr/CombierDS13}, computer-aided manufacturing
-\citep{o:LuoWSN17}, crisis management \citep{o:DelavalladeFLL16}, the analysis of programs and
-malware \citep{DBLP:conf/icics/GaoRS08,DBLP:journals/compsec/ParkRS13}, and social network analysis
-\citep{DBLP:journals/tkde/FangYZZ15}. A common variant of the problem requires a largest
-\emph{connected} subgraph
-\citep{DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
-As illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be inferred
-from the maximum common subgraph.
+ A common variant of the problem requires a largest \emph{connected} subgraph
+ \citep{DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.  As
+ illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be inferred
+ from the maximum common subgraph.
 
 Although both variants are NP-hard, recently progress has been made towards solving the problem in
 practice.  This paper looks at three recent branch and bound algorithms for maximum common
@@ -297,16 +298,14 @@ problem, whilst the other two approaches have a constraint programming feel to t
 A \emph{clique} in a graph is a subgraph where every vertex is adjacent to every other. There is a
 well-known reduction from the maximum common subgraph problem to the problem of finding a maximum
 clique in an \emph{association graph}
-\citep{o:Levi73,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/cp/McCreeshNPS16}, which, when combined with
-a modern maximum clique solver \citep{DBLP:journals/ol/SegundoMRH13}, is the current best approach for
-solving the problem on labelled graphs \citep{DBLP:conf/cp/McCreeshNPS16}. A modified clique-like
-algorithm can also be used to solve the maximum common connected subgraph problem, by ensuring
-connectedness during search \citep{DBLP:conf/cp/McCreeshNPS16}; again, this is the best known way of
-solving the problem on labelled graphs.
-
-A major downside of the maximum clique approach is that the association graph encoding is extremely
-memory-intensive, limiting its practical use to pairs of graphs with no more than a few hundred
-vertices.
+\citep{o:Levi73,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/cp/McCreeshNPS16}, which, when combined
+with a modern maximum clique solver \citep{DBLP:journals/ol/SegundoMRH13}, is the current best
+approach for solving the problem on labelled graphs \citep{DBLP:conf/cp/McCreeshNPS16}. A modified
+clique-like algorithm can also be used to solve the maximum common connected subgraph problem, by
+ensuring connectedness during search \citep{DBLP:conf/cp/McCreeshNPS16}; again, this is the best
+known way of solving the problem on labelled graphs. However, the association graph encoding is
+extremely memory-intensive, limiting its practical use to pairs of graphs with no more than a few
+hundred vertices.
 
 \subsection{Constraint Programming}
 
@@ -541,7 +540,7 @@ milliseconds, then for any problem family and any sequential algorithm, if given
 switching to the corresponding parallel algorithm, then we should do so.
 
 However, although they are good at showing general trends, cumulative plots can hide interesting
-details. We therefore now take a closer look at each of the three algorithms.
+details. We therefore now take a closer look at each of the three algorithms in turn.
 
 \subsection{Clique Results In Depth}
 
@@ -761,23 +760,23 @@ overheads that fail to pay off, rather than being anomalies in the classical sen
 \section{Conclusion}
 
 We have parallelised three state-of-the-art maximum common (connected) subgraph algorithms with a
-reasonable degree of success by using dynamic work-splitting. The parallel algorithms are not just
-better in aggregate, but also preserve the desirable reproducibility properties of sequential
-algorithms. A large part of our success was down to using parallelism to explicitly introduce
-diversity into the search process, offsetting weak early value-ordering branching choices.
-
-Despite having a branch and bound flavour, all three of the sequential algorithms had their own
-difficulties and performance characteristics which prevented them from cleanly fitting into common
-abstraction frameworks.
+reasonable degree of success by using dynamic work-splitting. Despite having a branch and bound
+flavour, all three sequential algorithms had their own difficulties and performance characteristics
+which prevented them from cleanly fitting into common abstraction frameworks. Nonetheless, our
+results show that the parallel algorithms are not just better in aggregate, but also preserve the
+desirable reproducibility properties of sequential algorithms. A large part of our success was down
+to using parallelism to explicitly introduce diversity into the search process, offsetting weak
+early value-ordering branching choices.
 
 There is room for improvement, particularly with respect to work balance. However, improvements to
 work balance must not come at the expense of the search order properties, nor at the cost of
-increased overheads. We would also like to see distributed versions of these algorithms.
+increased overheads. We would also like to see distributed versions of these algorithms, to make use
+of clusters of multi-core machines.
 
-We introduced the idea of \emph{aggregate speedups}, to deal with measuring a speedup in the
-presence of anomalies. These figures informed part of our analysis, but our results highlight the
-importance of viewing results in multiple ways, and in using large families of instances with
-different characteristics when evaluating parallel search algorithms.
+Aside from the parallel algorithms, we introduced the idea of \emph{aggregate speedups}, to deal
+with measuring a speedup in the presence of anomalies. These figures informed part of our analysis,
+but our results highlight the importance of viewing results in multiple ways, and in using large
+families of instances with different characteristics when evaluating parallel search algorithms.
 
 \appendix
 \begin{acks}
