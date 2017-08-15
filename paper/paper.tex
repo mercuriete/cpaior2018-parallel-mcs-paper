@@ -111,7 +111,7 @@
     very sensitive to search order changes, and so do not easily lend themselves to parallel search.
     Nonetheless, our results show that each algorithm can be parallelised successfully, with the
     threaded algorithms we create being clearly better than the sequential ones. We then look in
-    more detail at the results, and discuss speedups should be measured for this kind of algorithm.
+    more detail at the results, and discuss how speedups should be measured for this kind of algorithm.
     Because of the difficulty in quantifying an average speedup when so-called anomalous
     speedups (superlinear and sublinear) are common, we propose a new measure called \emph{aggregate
     speedup}.
@@ -210,8 +210,8 @@ programming, Irregular parallelism, Parallel tree-search}
             \node[draw, circle, fill=magmaorange, inner sep=0.2pt, font=\small] (M4) at (210:1.5) {\phantom{0}};
             \node[draw, circle, fill=magmaorange, inner sep=0.2pt, font=\small] (M5) at (330:1.5) {\phantom{0}};
             \node[draw, circle, fill=magmaorange, inner sep=0.2pt, font=\small] (M6) at (270:1.5) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.2pt, font=\small] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.2pt, font=\small] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.2pt, font=\small] (M7) at ($(330:1.5) + (M6)$) {\phantom{0}};
+            \node[draw, circle, fill=magmaorange, inner sep=0.2pt, font=\small] (M8) at ($(210:1.5) + (M6)$) {\phantom{0}};
             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.2pt, font=\small] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
 
             \draw [very thick] (M1) -- (M2);
@@ -466,7 +466,7 @@ possible, and intend to investigate this further in the future.)
 We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
 running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
 hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted, but
-we do not expect speedups of 32 even in the best case.  We run all our experiments with a one
+we do not expect speedups of 32 even in the ideal case.  We run all our experiments with a one
 hundred second timeout for each instance. All of our sequential runtimes are from optimised
 implementations which were not designed with parallelism in mind---that is, speedups from
 parallelism are genuine improvements over the state of the art.
