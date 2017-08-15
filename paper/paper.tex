@@ -357,7 +357,7 @@ A different take on the constraint programming model is presented by
 subgraph isomorphism problem, asking the question ``if a pattern graph cannot be found in the
 target, how much of the pattern graph can be found?''. The $k{\downarrow}$ algorithm tries to solve
 the subgraph isomorphism problem first for $k=0$ (asking whether the whole pattern graph can be found in the
-target). Should that be not satisfiable, it tries to solve the problem for $k=1$ (one vertex cannot
+target). Should that not be satisfiable, it tries to solve the problem for $k=1$ (one vertex cannot
 be matched), and should that also not be satisfiable, it iteratively increases $k$ until the result
 is satisfiable. The advantage of this approach is that strong invariants using paths and the degrees
 of vertices may be used to prune large portions of the search space.
