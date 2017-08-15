@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.0in font '\footnotesize' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 2.4in,1.5in font '\footnotesize' preamble '\input{gnuplot-preamble}'
 
 set output "gen-graph-as-mcsplit.tex"
 
@@ -67,6 +67,6 @@ plot \
     '<./asify.sh gen-as-alt-33v-mcsplit-par.data gen-as-alt-33v-mcsplit-seq.data' u 3:($3/$2) w l title '\raisebox{-0.25mm}{Vertex}' at end ls 2, \
     '<./asify.sh gen-as-alt-33ved-mcsplit-par.data gen-as-alt-33ved-mcsplit-seq.data' u 3:($3/$2) w l title '\raisebox{2mm}{Both, dir.}' at end ls 4, \
     '<./asify.sh gen-as-alt-plain-connected-mcsplit-par.data gen-as-alt-plain-connected-mcsplit-seq.data' u 3:($3/$2) w l title 'Unlabelled, conn.' at end ls 6, \
-    '<./asify.sh gen-as-alt-33ve-connected-mcsplit-par.data gen-as-alt-33ve-connected-mcsplit-seq.data' u 3:($3/$2) w l title 'Both, conn.' at end ls 7, \
+    '<./asify.sh gen-as-alt-33ve-connected-mcsplit-par.data gen-as-alt-33ve-connected-mcsplit-seq.data' u 3:($3/$2) w l title '\raisebox{-1mm}{Both, conn.}' at end ls 7, \
     '<./asify.sh gen-as-alt-sip-mcsplit-par.data gen-as-alt-sip-mcsplit-seq.data' u 3:($3/$2) w l title 'Large' at end ls 8
 

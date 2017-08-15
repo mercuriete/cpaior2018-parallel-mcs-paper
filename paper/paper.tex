@@ -58,9 +58,6 @@
 
 \begin{document}
 \title[Observations from Parallelising Three Subgraph Algorithms]{Observations from Parallelising Three Maximum Common (Connected) Subgraph Algorithms}
-\titlenote{This work was supported by the Engineering and Physical Sciences
-    Research Council [grant numbers EP/K503058/1, EP/M508056, and EP/P026842/1] and the ANR project
-SoLStiCe (ANR-13-BS02-0002-01)}
 
 \author{Ruth Hoffmann}
 \affiliation{%
@@ -115,7 +112,7 @@ SoLStiCe (ANR-13-BS02-0002-01)}
     Nonetheless, our results show that each algorithm can be parallelised successfully, with the
     multi-core algorithms we create being clearly better than the sequential ones. We then look in
     more detail at the results, and discuss how we should be
-    measuring speedups for these kinds of algorithm. Because of the difficulty in measuring an
+    measuring speedups for this kind of algorithm. Because of the difficulty in measuring an
     average speedup when so-called anomalous (superlinear and sublinear) speedups are common, we
     propose a new measure called \emph{aggregate speedup}.
 \end{abstract}
@@ -150,140 +147,142 @@ SoLStiCe (ANR-13-BS02-0002-01)}
 \ccsdesc[500]{Theory of computation~Branch-and-bound}
 \ccsdesc[300]{Theory of computation~Constraint and logic programming}
 
-\keywords{Maximum common subgraph, Parallel branch and bound}
+\keywords{Maximum common subgraph, Maximum clique, Parallel branch and bound, Constraint
+programming, Irregular parallelism, Parallel tree search}
 
 \maketitle
 
 \section{Introduction}
 
-\begin{figure}[b]
-    \centering
-    \begin{tikzpicture}[scale=0.33]%{{{
-        \begin{scope}
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
-
-            \draw [very thick] (M1) -- (M2);
-            \draw [very thick] (M2) -- (M4);
-            \draw [very thick] (M3) -- (M5);
-            \draw [color=uofgsandstone!60] (M4) -- (M6);
-            \draw [color=uofgsandstone!60] (M5) -- (M6);
-            \draw [very thick] (M3) -- (M1);
-            \draw [color=uofgsandstone!60] (M6) -- (M7);
-            \draw [color=uofgsandstone!60] (M6) -- (M8);
-            \draw [color=uofgsandstone!60] (M6) -- (M9);
-            \draw [very thick] (M7) -- (M9);
-            \draw [very thick] (M8) -- (M9);
-        \end{scope}
-
-        \begin{scope}[xshift=5cm]
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
-
-            \draw [very thick] (M1) -- (M2);
-            \draw [very thick] (M2) -- (M4);
-            \draw [very thick] (M3) -- (M5);
-            \draw [color=uofgsandstone!60] (M4) -- (M6);
-            \draw [color=uofgsandstone!60] (M5) -- (M6);
-            \draw [very thick] (M3) -- (M1);
-            \draw [color=uofgsandstone!60] (M6) -- (M7);
-            \draw [very thick] (M7) -- (M8);
-            \draw [very thick] (M8) -- (M9);
-        \end{scope}
-
-        \begin{scope}[xshift=12cm]
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
-
-            \draw [very thick] (M1) -- (M2);
-            \draw [very thick] (M2) -- (M4);
-            \draw [very thick] (M3) -- (M5);
-            \draw [very thick] (M4) -- (M6);
-            \draw [very thick] (M5) -- (M6);
-            \draw [very thick] (M3) -- (M1);
-            \draw [color=uofgsandstone!60] (M6) -- (M7);
-            \draw [very thick] (M6) -- (M8);
-            \draw [color=uofgsandstone!60] (M6) -- (M9);
-            \draw [color=uofgsandstone!60] (M7) -- (M9);
-            \draw [color=uofgsandstone!60] (M8) -- (M9);
-        \end{scope}
-
-        \begin{scope}[xshift=17cm]
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
-            \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
-            \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
-
-            \draw [very thick] (M1) -- (M2);
-            \draw [very thick] (M2) -- (M4);
-            \draw [very thick] (M3) -- (M5);
-            \draw [very thick] (M4) -- (M6);
-            \draw [very thick] (M5) -- (M6);
-            \draw [very thick] (M3) -- (M1);
-            \draw [very thick] (M6) -- (M7);
-            \draw [draw=uofgsandstone!60] (M7) -- (M8);
-            \draw [draw=uofgsandstone!60] (M8) -- (M9);
-        \end{scope}
-\end{tikzpicture}
-\caption{A maximum common subgraph of the first two graphs has eight vertices, shaded. A maximum
-common \emph{connected} subgraph, shown on the right, has only seven vertices.}
-\label{figure:mcsexample}
-\end{figure}
+% \begin{figure}[b]
+%     \centering
+%     \begin{tikzpicture}[scale=0.33]%{{{
+%         \begin{scope}
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
+% 
+%             \draw [very thick] (M1) -- (M2);
+%             \draw [very thick] (M2) -- (M4);
+%             \draw [very thick] (M3) -- (M5);
+%             \draw [color=uofgsandstone!60] (M4) -- (M6);
+%             \draw [color=uofgsandstone!60] (M5) -- (M6);
+%             \draw [very thick] (M3) -- (M1);
+%             \draw [color=uofgsandstone!60] (M6) -- (M7);
+%             \draw [color=uofgsandstone!60] (M6) -- (M8);
+%             \draw [color=uofgsandstone!60] (M6) -- (M9);
+%             \draw [very thick] (M7) -- (M9);
+%             \draw [very thick] (M8) -- (M9);
+%         \end{scope}
+% 
+%         \begin{scope}[xshift=5cm]
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, fill=magmapurple, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
+% 
+%             \draw [very thick] (M1) -- (M2);
+%             \draw [very thick] (M2) -- (M4);
+%             \draw [very thick] (M3) -- (M5);
+%             \draw [color=uofgsandstone!60] (M4) -- (M6);
+%             \draw [color=uofgsandstone!60] (M5) -- (M6);
+%             \draw [very thick] (M3) -- (M1);
+%             \draw [color=uofgsandstone!60] (M6) -- (M7);
+%             \draw [very thick] (M7) -- (M8);
+%             \draw [very thick] (M8) -- (M9);
+%         \end{scope}
+% 
+%         \begin{scope}[xshift=12cm]
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M8) at ($(330:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(270:1.5) + (M6)$) {\phantom{0}};
+% 
+%             \draw [very thick] (M1) -- (M2);
+%             \draw [very thick] (M2) -- (M4);
+%             \draw [very thick] (M3) -- (M5);
+%             \draw [very thick] (M4) -- (M6);
+%             \draw [very thick] (M5) -- (M6);
+%             \draw [very thick] (M3) -- (M1);
+%             \draw [color=uofgsandstone!60] (M6) -- (M7);
+%             \draw [very thick] (M6) -- (M8);
+%             \draw [color=uofgsandstone!60] (M6) -- (M9);
+%             \draw [color=uofgsandstone!60] (M7) -- (M9);
+%             \draw [color=uofgsandstone!60] (M8) -- (M9);
+%         \end{scope}
+% 
+%         \begin{scope}[xshift=17cm]
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M1) at (90:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M2) at (150:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M3) at (30:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M4) at (210:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M5) at (330:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M6) at (270:1.5) {\phantom{0}};
+%             \node[draw, circle, fill=magmaorange, inner sep=0.5pt, font=\normalsize] (M7) at ($(210:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M8) at ($(270:1.5) + (M6)$) {\phantom{0}};
+%             \node[draw, circle, draw=uofgsandstone!60, fill=white, inner sep=0.5pt, font=\normalsize] (M9) at ($(330:1.5) + (M8)$) {\phantom{0}};
+% 
+%             \draw [very thick] (M1) -- (M2);
+%             \draw [very thick] (M2) -- (M4);
+%             \draw [very thick] (M3) -- (M5);
+%             \draw [very thick] (M4) -- (M6);
+%             \draw [very thick] (M5) -- (M6);
+%             \draw [very thick] (M3) -- (M1);
+%             \draw [very thick] (M6) -- (M7);
+%             \draw [draw=uofgsandstone!60] (M7) -- (M8);
+%             \draw [draw=uofgsandstone!60] (M8) -- (M9);
+%         \end{scope}
+% \end{tikzpicture}
+% \caption{A maximum common subgraph of the first two graphs has eight vertices, shaded. A maximum
+% common \emph{connected} subgraph, shown on the right, has only seven vertices.}
+% \label{figure:mcsexample}
+% \end{figure}
 
 A \emph{subgraph isomorphism} is an injective mapping from a \emph{pattern} graph to a \emph{target}
 graph which maps adjacent vertices to adjacent vertices---that is, it \emph{preserves adjacency}. It
 is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent vertices, preserving
-non-adjacency. When working with labelled graphs, a subgraph isomorphism must preserve labels, and
+non-adjacency. When working with labelled graphs, a subgraph isomorphism must also preserve labels, and
 on directed graphs, it must preserve orientation. A \emph{common induced subgraph} of two graphs $G$
 and $H$ is a pair of induced subgraph isomorphisms from a pattern graph $P$, one to $G$ and one to
-$H$. A \emph{maximum common induced subgraph} is one with as many vertices as possible.
+$H$. A \emph{maximum common induced subgraph} is one with as many vertices as possible. (The
+\emph{maximum common partial subgraph} problem is non-induced, with as many edges as
+possible; this paper discusses only induced problems.)
 
 Finding a maximum common subgraph is the key step in measuring the similarity or difference between
 two graphs \citep{DBLP:journals/prl/Bunke97,DBLP:journals/prl/FernandezV01,o:Kriege15}: to determine
 the difference between two graphs, we find what they have in common, and then take everything left
 over. Because of this, maximum common subgraph problems frequently arise in biology and chemistry
 \citep{DBLP:journals/jcamd/RaymondW02a,o:EhrlichR11,DBLP:journals/dam/GayFMSS14} where graphs
-represent molecules, but also in applications including computer vision
+represent molecules or reactions, and also in computer vision
 \citep{DBLP:journals/jair/CookH94,DBLP:conf/gbrpr/CombierDS13}, computer-aided manufacturing
-\citep{o:LuoWSN17}, crisis management \citep{o:DelavalladeFLL16}, deanonymising datasets
-\citep{o:SharadD13}, the analysis of source code \citep{DBLP:journals/tkde/DjokoCH97} and binary
-programs \citep{DBLP:conf/icics/GaoRS08}, in
-malware detection \citep{DBLP:journals/compsec/ParkRS13}, social network analysis
+\citep{o:LuoWSN17}, crisis management \citep{o:DelavalladeFLL16}, the analysis of programs and
+malware \citep{DBLP:conf/icics/GaoRS08,DBLP:journals/compsec/ParkRS13}, social network analysis
 \citep{DBLP:journals/tkde/FangYZZ15}, graph database query explanations
 \citep{DBLP:journals/jcss/VasilyevaTBL16}, and in character recognition problems
 \citep{DBLP:journals/pr/LuRS91}.  A common variant of the problem requires a largest
 \emph{connected} subgraph
 \citep{DBLP:journals/tcs/Koch01,DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
-As illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be determined
-from the maximum common subgraph.
 
-Although both variants are NP-hard, some progress has been made towards solving the problem in
+% As illustrated in \cref{figure:mcsexample}, a maximum common connected subgraph cannot be determined
+% from the maximum common subgraph.
+
+Although both variants are NP-hard, recently progress has been made towards solving the problem in
 practice.  This paper looks at three recent branch and bound algorithms for maximum common
 (connected) induced subgraph problems, each of which is the state of the art for certain classes of
 instance. We discuss our experiences in adding parallel tree-search to these three algorithms. In
@@ -329,8 +328,10 @@ all different except when using $\bot$. This final set of constraints may either
 using binary constraints between all pairs of variables, or a special global ``all different except
 $\bot$'' propagator \citep{DBLP:conf/cp/PetitRB01}. The objective is simply to find an assignment of
 values to variables, maximising the number of variables not set to $\bot$. The state of the art for
-this technique is a dedicated implementation of a forward-checking branch and bound search over this
-model \citep{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}.
+this technique is a dedicated (non-toolkit) implementation of a forward-checking branch and bound
+search over this
+model \citep{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}; attempts to parallelise this
+algorithm by static decomposition have had limited success \citep{DBLP:conf/ictai/MinotNS15}.
 
 Two approaches exist for ensuring connectedness: either a conventional global constraint and
 propagator can be used \citep{DBLP:conf/cp/McCreeshNPS16}, or a special branching rule can be used
@@ -356,7 +357,7 @@ magnitude faster.
 \subsection{$k$-less Subgraph Isomorphism}
 
 A different take on the constraint programming model is presented by
-\citet{DBLP:conf/aaai/HoffmannMR17}. They approach the maximum common subgraph via the
+\citet{DBLP:conf/aaai/HoffmannMR17}. They approach maximum common subgraph via the
 subgraph isomorphism problem, asking the question ``if a pattern graph cannot be found in the
 target, how much of the pattern graph can be found?''. The $k{\downarrow}$ algorithm tries to solve
 the subgraph isomorphism problem first for $k=0$ (asking whether the whole pattern graph can be found in the
@@ -374,8 +375,9 @@ not support the connected variant.
 
 Most of the benchmark instances we will use come from a standard database for maximum common
 subgraph problems \citep{DBLP:journals/prl/SantoFSV03,DBLP:journals/jgaa/ConteFV07}. This benchmark
-set can be used in a number of ways, for different variants of the problem. We use it to create five
-families of instance, as follows:
+set can be used in a number of ways, for different variants of the problem. Following other recent
+work \citep{DBLP:conf/cp/McCreeshNPS16,DBLP:conf/aaai/HoffmannMR17,o:McCreeshPT17}, we use it to
+create five families of instance, as follows:
 
 \begin{description}
     \item[Unlabelled] instances, by selecting the first ten members of each parameter class where the
@@ -405,7 +407,7 @@ memory requirements.
 
 \section{Parallel Search}
 
-The clique and $k{\downarrow}$ algorithms already make use of fine granularity bit-parallelism. To
+The clique and $k{\downarrow}$ algorithms already make use of fine-granularity bit-parallelism. To
 introduce more coarse-grained thread parallelism, we will parallelise the search process: viewing
 backtracking search as forming a tree, we can explore different portions of the tree using different
 threads. We use a shared incumbent, so better solutions found by one thread can be used others
@@ -413,14 +415,14 @@ immediately. This technique has a long history \citep{o:BaderHC05}. Of particula
 interest to us are so-called \emph{anomalies}
 \citep{DBLP:journals/cacm/LaiS84,DBLP:journals/tc/LiW86,DBLP:conf/irregular/BruinKT95}:
 because we are not performing a fixed amount of work, we should have no expectation of a linear
-speedup, and instead we could see a sublinear speedup (much less than $n$ from $n$ processors) or a
-superlinear speedup (much more than $n$ from $n$ processors). An absolute slowdown (speedup much
-less than 1) is also possible under some models.
+speedup, and instead we could see a sublinear speedup (much less than $n$ from $n$ processors, if
+speculative work turns out to be wasted) or a superlinear speedup (much more than $n$ from $n$
+processors, if a strong incumbent is found more quickly). An absolute slowdown (a speedup much less
+than 1) is also possible under some models.
 
 \subsection{Parallel Maximum Clique}
 
-Thread-parallel versions of state-of-the-art maximum clique algorithms have already been produced
-\citep{DBLP:journals/algorithms/McCreeshP13,DBLP:journals/jcisd/DepolliKRTJ13,DBLP:conf/icde/XiangGA13}.
+Thread-parallel versions of state-of-the-art maximum clique algorithms have already been produced.
 \citet{DBLP:journals/topc/McCreeshP15} compare several of these approaches, and make an important
 observation: although work balance is a problem due to the irregularity of the search tree, often
 the interaction between search order and parallel work decomposition is the dominating factor in
@@ -431,14 +433,15 @@ anomalies, guaranteeing reproducibility (two runs with the same instance on the 
 give similar runtimes), scalability (increasing the number of cores cannot make things worse), and
 no absolute slowdowns.  Additionally, this mechanism explicitly offsets the commitment to early
 branching choices, where search ordering heuristics are most likely to be inaccurate
-\citep{DBLP:conf/ijcai/HarveyG95,DBLP:conf/cp/ChuSS09}.
+\citep{DBLP:conf/ijcai/HarveyG95,DBLP:conf/cp/ChuSS09}. Under this approach, superlinear speedups
+are common.
 
 We will use this mechanism for our experiments.  The clique-based maximum common subgraph algorithm
 effectively differs only in the preprocessing stage, and the clique-inspired connected algorithm
 described by \citet{DBLP:conf/cp/McCreeshNPS16} is sufficiently similar that may be parallelised in
 exactly the same way. Based upon preliminary experiments, we use a splitting depth limit of five
-rather than the original three, since maximum common subgraph instances appear to be even more
-irregular than normal clique problem instances.
+rather than the original three, since maximum common subgraph instances appear to give even more
+irregular search trees than normal clique problem instances.
 
 \subsection{Parallel Constraint-Based Search}
 
@@ -447,10 +450,9 @@ conventional branch and bound algorithm, each individual $k$ pass is a tree sear
 parallelised. For each pass, we use the same work splitting mechanism as in the clique algorithm,
 starting by splitting only at the top level of search to explicitly introduce diversity, and then
 iteratively increasing the splitting depth as additional work is needed (up to a limit of five
-levels deep).
-
-Because the $k{\downarrow}$ algorithm uses a conventional constraint programming domain store, there
-is no need to use recomputation; the state is naturally copied at each branching point.
+levels deep).  Because the $k{\downarrow}$ algorithm uses a conventional constraint programming
+domain store, there is no need to use recomputation; the state is naturally copied at each branching
+point.
 
 In principle the McSplit algorithm may be parallelised in exactly the same way. However, this
 algorithm makes heavy use of an in-place, backtrackable data structure, which is not copied for
@@ -466,9 +468,10 @@ duplicate recursive calls.  (We are not convinced that a better approach is not 
 We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
 running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
 hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted, but
-we do not expect speedups of 32 even in the best case.
-
-?? Hundred second timeout.
+we do not expect speedups of 32 even in the best case.  We run all our experiments with a one
+hundred second timeout for each instance. All of our sequential runtimes are from optimised
+implementations which were not designed with parallelism in mind---that is, they are genuine
+improvements over the state of the art.
 
 \subsection{Parallel Search is Better Overall}
 
@@ -526,13 +529,14 @@ aggregate than the sequential versions (shown using solid lines).}\label{figure:
 In \cref{figure:cumulative} we plot empirical cumulative distribution functions showing the number
 of instances solved over time, for both sequential (solid lines) and parallel (dotted lines)
 versions of each algorithm.  Cumulative plots are commonly used in constraint programming and
-boolean satisfiability for comparing aggregate behaviour of solvers in the presence of timeouts.
-(Sometimes the axes are reversed, in which case they are called \emph{cactus} plots.)  To read these
-plots, make a choice of timeout along the $x$-axis, which uses a log scale. The $y$ value at that
-point shows the number of instances whose runtime (individually) is at most $x$, for a particular
-algorithm. In other words, at any given $x$ value, the highest line shows which algorithm is able to
-solve the largest number of instances using a per-instance timeout of that $x$ value, bearing in
-mind that the actual sets of instances solved by each algorithm may be completely different.
+boolean satisfiability experiments for comparing the aggregate behaviour of solvers in the presence
+of timeouts.  (Sometimes the axes are reversed, in which case they are called \emph{cactus} plots.)
+To read these plots, make a choice of timeout along the $x$-axis, which uses a log scale. The $y$
+value at that point shows the number of instances whose runtime (individually) is at most $x$, for a
+particular algorithm. In other words, at any given $x$ value, the highest line shows which algorithm
+is able to solve the largest number of instances using a per-instance timeout of that $x$ value,
+bearing in mind that the actual sets of instances solved by each algorithm may be completely
+different.
 
 Each plot gives the same conclusion: if we are working with a timeout of at least $10^2$
 milliseconds, then for any problem family and any sequential algorithm, if given the option of
@@ -575,7 +579,7 @@ details. We therefore now take a closer look at each of the three algorithms.
 In the top row of \cref{figure:cliquespeedups}, we see scatter plots comparing the sequential and
 parallel runtimes of the clique algorithm on an instance by instance basis, using a log-log plot.
 Instances which timed out using one algorithm but not the other are shown as points along the outer
-axes. Points below the $x{-}y$ diagonal line represent speedups. The colour of the points indicates
+borders. Points below the $x{-}y$ diagonal line represent speedups. The colour of the points indicates
 the relative size of the solution---darker points represent instances where the solution uses most
 of the vertices of the input graphs. (We use these conventions for scatter plots throughout this
 paper.)
@@ -583,40 +587,41 @@ paper.)
 Broadly speaking, the results are similar on each of the five families. For runtimes below 100
 milliseconds, overheads and the preprocessing step dominate, and we are usually only able to achieve
 a small speedup. At higher runtimes, most speedups appear to be between ten and twenty, except on
-the final family, where they are mostly between five and ten. For a few instances, the speedups are
-lower (but they are still clearly speedups), whilst in the first four families, we also see evidence
-of super-linear speedups being relatively common.
+the final family of both labelled connected instances, where they are mostly between five and ten.
+For a few instances, the speedups are lower (but they are still clearly speedups), whilst in the
+first four families, we also see evidence of superlinear speedups being relatively common.
 
 However, attempting to determine a speedup by staring at a scatter plot is not particularly
-quantitative. We could attempt to find a best fit line through these points, pretending that the
-superlinear speedups are outliners. We could perhaps get away with this if outliers were rare
-enough, but in practice we are not expecting linear speedups, and for the other two algorithms, we
-will see that superlinear speedups are even more common. Alternatively, we could rig our experiments
-to remove anomalies, by priming search with a known-optimal
-solution---\citet{DBLP:journals/topc/McCreeshP15} criticise this practice in more detail.
+quantitative. We \emph{could} attempt to find a best fit line through these points, pretending that
+the superlinear speedups are outliners. We might perhaps get away with this if outliers were rare
+enough, but in practice we are not expecting linear speedups (and for the other two algorithms, we
+will see that superlinear speedups are even more common). Alternatively, we could rig our
+experiments to remove anomalies, by priming search with a known-optimal
+solution---\citet{DBLP:journals/topc/McCreeshP15} criticise this disappointingly common practice in
+more detail.
 
 A more principled approach is given in the bottom row of \cref{figure:cliquespeedups}. For instances
 where the sequential run both succeeded and took at least 500 milliseconds, we plot the distribution
 of speedups obtained. These histograms confirm our informal observations. However, these plots are
-not particularly satisfactory: in order to calculate a speedup, we can only consider instances where
-the sequential algorithm succeeded. These plots therefore underestimate superlinear speedups.
+still not especially satisfactory: in order to calculate a speedup, we can only consider instances
+where the sequential algorithm succeeded. These plots therefore underestimate superlinear speedups.
 
 To avoid this weakness, we propose a new way of characterising speedups. Refer back to the
 cumulative plots in \cref{figure:cumulative}. The usual way of comparing two algorithms on these
-plots is to measuring the vertical difference between lines, which says how many more instances the
-parallel algorithm can solve than the sequential algorithm can with a particular choice of timeout.
-However, measuring the \emph{horizontal} distance between lines also conveys information. Suppose
-the sequential algorithm can solve $y$ instances with a selected timeout of $s$. By moving to the
-left on a cumulative plot, we can find the timeout $p$ required for the parallel algorithm to solve
-the same number of instances, bearing in mind that \emph{the two sets of instances could in
-principle have completely different members}. We therefore define the \emph{aggregate speedup} to be
-$\nicefrac{s}{p}$; this can be expressed as a function of time (i.e.\ $s$) or of the number of
-instances solved ($y$).
+plots is by measuring the vertical difference between lines, which would tell us how many more
+instances the parallel algorithm can solve than the sequential algorithm can with a particular
+choice of timeout.  However, measuring the \emph{horizontal} distance between lines also conveys
+information. Suppose the sequential algorithm can solve $y$ instances with a selected timeout of
+$s$. By moving to the left on a cumulative plot, we can find the timeout $p$ required for the
+parallel algorithm to solve the same number of instances, bearing in mind that \emph{the two sets of
+instances could in principle have completely different members}. We therefore define the
+\emph{aggregate speedup} to be $\nicefrac{s}{p}$; this can be expressed as a function of time (i.e.\
+$s$) or of the number of instances solved ($y$).
 
 We plot aggregate speedups as a function of time in \cref{figure:cliqueas}. For a sequential timeout
 of one hundred seconds, we get speedups of twenty to twenty eight in the unlabelled, vertex
 labelled, and both labelled, directed cases. In the unlabelled connected case, our aggregate speedup
-is thirty seven, which (when taking hyper-threading into account) is strongly super-linear.  With
+is thirty seven, which (when taking hyper-threading into account) is strongly superlinear.  With
 some detailed knowledge of the underlying sequential algorithm, this should perhaps not surprise us:
 for instances with a large solution, once we have found that solution, a proof of optimality is
 relatively easy. However, finding that solution can be unusually hard, particularly since the
@@ -638,7 +643,7 @@ instance on the same hardware twice takes almost exactly the same amount of time
 reproduce the three outliers in a third run---we suspect other system programs may have woken up
 and caused slight interference during the second run.)
 
-These results are hopefully comforting: they show that anomalies can be controlled, and that
+These results are comforting: they show that anomalies can be controlled, and that
 switching to a parallel algorithm is not only better, but also safe from a scientific
 reproducibility perspective.
 
@@ -653,7 +658,7 @@ reproducibility perspective.
 
     \includegraphics{gen-graph-as-kdown.pdf}
 
-    \vspace*{1em}
+    \vspace*{0.2em}
 
     \includegraphics*{gen-graph-scatter-plain-kdown-par-t4-vs-kdown-par-t16.pdf}
     \hfill
@@ -667,19 +672,19 @@ reproducibility perspective.
 In \cref{figure:kdownscatters} we show per-instance and aggregate speedups for the $k{\downarrow}$
 algorithm. On unlabelled instances, we see a range of speedups between slightly less than one and
 ten, with an aggregate speedup of four. These results are not as good as with the clique algorithm.
-A closer look at the results suggests that memory bandwidth is to blame: although we have somewhat
-more than sixteen times as much processing power available to us, our available memory bandwidth at
-best doubles from introducing parallelism. Unlike the clique algorithm, which has very small,
+A closer look suggests that memory bandwidth is to blame: although we have somewhat more than
+sixteen times as much processing power available to us, our available memory bandwidth at best
+doubles from introducing parallelism. Unlike the clique algorithm, which has very small,
 cache-friendly data structures which are modified in-place, the state for the $k{\downarrow}$
 algorithm is large and much of the runtime is spent copying data structures.
 
 For the large instances, our aggregate speedup is higher, at over ten. This has two causes: for
 larger graphs, the computational effort per recursive call increases by more than the amount the
 memory copying does, reducing the memory bandwidth problem slightly, and additionally a much larger
-number of super-linear speedups occurred with this family of instances. We could perhaps anticipate
+number of superlinear speedups occurred with this family of instances. We could perhaps anticipate
 this latter effect: in many of these instances the maximum common subgraph covers all or nearly all
 of the smaller of the two graphs, and so once it is found, the proof of optimality is trivial.
-However, finding a witness can be difficult. We should also expect value ordering heuristics in
+However, finding a witness can be difficult. We should also expect value-ordering heuristics in
 these algorithms to be weak at the top of search (they are based upon degree, and many graphs do not
 have a large degree spread), and so the benefits of high-up diversity can be extremely large
 \citep{DBLP:conf/ijcai/HarveyG95,DBLP:conf/cp/ChuSS09,DBLP:journals/topc/McCreeshP15}. Indeed,
@@ -695,73 +700,93 @@ now repeat runtimes can differ by more than an order of magnitude.)
 
 \subsection{McSplit Results In Depth}
 
-\begin{figure}[tb]
+\begin{figure}[p]
     \includegraphics*{gen-graph-scatter-plain-mcsplit-vs-mcsplit-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-33v-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \vspace*{1em}
+    \vspace*{0.2em}
 
     \includegraphics*{gen-graph-scatter-33ved-mcsplit-vs-mcsplit-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-connected-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \vspace*{1em}
+    \vspace*{0.2em}
 
     \includegraphics*{gen-graph-scatter-33ve-connected-mcsplit-vs-mcsplit-par-t32.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.pdf}
 
-    \caption{Per-instance speedups, using the splitting algorithm. The $x$-axis is sequential
-    performance and the $y$-axis is 32 threaded performance.}\label{figure:mcsplitscatter}
-\end{figure}
+    \vspace*{0.6em}
 
-Finally, we look at our attempts to parallelise the McSplit algorithm. Recall that doing so required
-heavy modifications to the algorithm, introducing significant amounts of speculative copying of a
-data structure that is usually backtrackable and modified in-place. \Cref{figure:mcsplitscatter}
-shows ?? what?
-
-?? Aggregate speedups in \cref{figure:mcsplitas}. Also show scalability and reproducibility.
-
-\begin{figure}[tb]
     \includegraphics{gen-graph-as-mcsplit.pdf}
 
-    \vspace*{1em}
+    \vspace*{0.2em}
 
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t4-vs-mcsplit-par-t16.pdf}
     \hfill
     \includegraphics*{gen-graph-scatter-plain-mcsplit-par-t32r-vs-mcsplit-par-t32.pdf}
 
-    \caption{On the top row row, aggregate speedups for the McSplit algorithm. Below, scalability
-    and reproducibility.}\label{figure:mcsplitas}
+    \caption{On the first three rows, per-instance speedups, using McSplit. On the
+    fourth row, aggregate speedups, and on the final row, scalability and
+    reproducibility.}\label{figure:mcsplitscatter}
 \end{figure}
 
-% \subsection{Cilk}
-%
-% \begin{figure}[tb]
-%     \includegraphics*{gen-graph-scatter-33ved-clique-par-t32r-vs-clique-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-33ved-clique-cilk-t32r-vs-clique-cilk-t32.pdf}
-%
-%     \vspace*{1em}
-%
-%     \includegraphics*{gen-graph-scatter-sip-kdown-par-t32r-vs-kdown-par-t32.pdf}
-%     \hfill
-%     \includegraphics*{gen-graph-scatter-sip-kdown-cilk-t32r-vs-kdown-cilk-t32.pdf}
-%
-%     \caption{Reproducibility using Cilk.}
-% \end{figure}
+Finally, we look at our attempts to parallelise the McSplit algorithm. Recall that doing so required
+heavy modifications to the algorithm, introducing significant amounts of speculative copying of a
+data structure that is usually backtrackable and modified in-place. For unlabelled, unlabelled
+connected, and large instances, \cref{figure:mcsplitscatter} shows a particularly high proportion of
+strongly superlinear speedups. This is because the McSplit algorithm is focussed upon
+exploring the search space very quickly, and its branching heuristics do not have the advantage of
+the domain filtering performed by $k{\downarrow}$, or the rich inter-domain knowledge coming from
+the combination of the association graph encoding and the colour ordering used by clique algorithms.
+Thus making a correct value-ordering choice at the top of search is harder for McSplit than for
+other algorithms, and so increased diversity can be particularly beneficial.
+
+For the large instances, we see evidence of work balance problems. McSplit's use of a ``smallest
+domain first'' variable-ordering heuristic, combined with the presence of $\bot$ in domains, tends
+to produce narrow (nearly binary) and deep search trees. These balance problems are even more
+evident in the labelled cases (where following a guessed assignment, many domains are left with only
+two values), and often lead to little to no speedup being obtained.
+
+The scatter plots also show occasional absolute slowdowns, sometimes by up to an order of magnitude.
+These are due to the changes which had to be made to the sequential algorithm (and because we are
+benchmarking against the sequential algorithm, not a parallel algorithm with one thread), rather
+than search order effects. In cases where parallelism cannot be exploited, the cost of speculatively
+copying domains at each level of search can dominate the runtimes. Because of this, fixing work
+balance problems by increasing the splitting depth typically makes matters much worse, not better.
+
+What about scalability and reproducibility? The final row of \cref{figure:mcsplitscatter} presents a
+less ideal picture than for the previous two algorithms---again, this is due to speculative
+overheads that fail to pay off, rather than being anomalies in the classical sense.
 
 \section{Conclusion}
 
-?? There is more to be done.
+We have parallelised three state-of-the-art maximum common (connected) subgraph algorithms with a
+reasonable degree of success by using dynamic work-splitting. The parallel algorithms are not just
+better in aggregate, but also preserve the desirable reproducibility properties of sequential
+algorithms. A large part of our success was down to using parallelism to explicitly introduce
+diversity into the search process, offsetting weak early value-ordering branching choices.
 
-?? Note the very high number of recursive calls per second. Fitting everything in cache. Not
-compatible with framework abstractions. Recomputation versus state copying.
+Despite having a branch and bound flavour, all three of the sequential algorithms had their own
+difficulties and performance characteristics which prevented them from cleanly fitting into common
+abstraction frameworks.
 
-?? Aggregate speedups. Use of multiple measures.
+There is room for improvement, particularly with respect to work balance. However, improvements to
+work balance must not come at the expense of the search order properties, nor at the cost of
+increased overheads. We would also like to see distributed versions of these algorithms.
 
-?? Same algorithm, different instance families, very sensitive
+We introduced the idea of \emph{aggregate speedups}, to deal with measuring a speedup in the
+presence of anomalies. These figures informed part of our analysis, but our results highlight the
+importance of viewing results in multiple ways, and in using large families of instances with
+different characteristics when evaluating parallel search algorithms.
+
+\appendix
+\begin{acks}
+    This work was supported by the Engineering and Physical Sciences Research Council [grant
+numbers EP/K503058/1, EP/M508056, and EP/P026842/1] and the ANR project SoLStiCe
+(ANR-13-BS02-0002-01).
+\end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{combined}
