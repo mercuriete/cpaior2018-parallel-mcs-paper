@@ -3,7 +3,7 @@
 set terminal tikz standalone color size 1.4in,1.8in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-histogram-33ved-mcsplit-vs-mcsplit-par-t32.tex"
 
-load "magma.pal"
+load "viridis.pal"
 
 set title 'McSplit, Fully labelled'
 

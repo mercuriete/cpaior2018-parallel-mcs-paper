@@ -3,7 +3,7 @@
 set terminal tikz standalone color size 1.8in,2.0in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.tex"
 
-load "magma.pal"
+load "viridis.pal"
 
 set title 'Clique, Fully labelled'
 

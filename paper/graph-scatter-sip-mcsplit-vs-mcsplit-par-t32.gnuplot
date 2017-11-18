@@ -10,12 +10,12 @@ set key textcolor rgb "black"
 set tics textcolor rgb "black"
 set label textcolor rgb "black"
 
-load "magma.pal"
+load "viridis.pal"
 
 set title 'Large'
 
-set xrange [1:2e5]
-set yrange [1:2e5]
+set xrange [1:2e6]
+set yrange [1:2e6]
 set logscale xy
 set border 3
 set grid
@@ -26,14 +26,14 @@ set key off
 set format x '$10^{%T}$'
 set format y '$10^{%T}$'
 
-set xtics add ('' 1e5) add ('fail' 2e5)
-set ytics add ('' 1e5) add ('fail' 2e5)
+set xtics add ('' 1e6) add ('fail' 2e6)
+set ytics add ('' 1e6) add ('fail' 2e6)
 
 set palette negative
 set cbrange [0:5]
 unset colorbox
 
 plot \
-    "<shuf ../experiments/gpgnode-results/sip/runtimes.data" u ($3>=1e5?2e5:$3):($5>=1e5?2e5:$5) w p pt 6 ps 0.2 lc rgb '#812581', \
+    "<shuf ../experiments/fatanode-results/sip/runtimes.data" u ($3>=1e6?2e6:$3):($5>=1e6?2e6:$5) w p pt 6 ps 0.2 lc rgb '#812581', \
    x w l ls 0 notitle
 

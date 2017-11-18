@@ -24,7 +24,7 @@ n=50
 width=(max-min)/n
 hist(x,width)=width*floor((0.0+x)/width)+width/2.0
 shist(seq,par,width)=((0.0+seq)/(0.0+par)>=max?hist(max,width):hist((0.0+seq)/(0.0+par),width))
-fhist(seq,par)=(seq>=1e5||seq<5e2?0:1)
+fhist(seq,par)=(seq>=1e6||seq<5e2?0:1)
 
 set xrange [min:max+1]
 
@@ -32,5 +32,5 @@ set style fill solid
 
 set xtics add ('${\ge}$50' 50)
 
-plot "../experiments/gpgnode-results/mcsplain-connected/runtimes.data" u (shist($2,$4,width)):(fhist($2,$4)) smooth freq w boxes lc '#812581'
+plot "../experiments/fatanode-results/mcsplain-connected/runtimes.data" u (shist($2,$4,width)):(fhist($2,$4)) smooth freq w boxes lc '#812581'
 

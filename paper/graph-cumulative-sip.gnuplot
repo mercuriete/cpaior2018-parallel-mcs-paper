@@ -14,7 +14,7 @@ load "magma.pal"
 
 set title 'Large'
 
-set xrange [1:1e5]
+set xrange [1:1e6]
 set yrange [0:5725]
 set xlabel "Runtime (ms)"
 set ylabel "Number solved"
@@ -28,8 +28,8 @@ set format x '$10^{%T}$'
 set ytics add ('5725' 5725)
 
 plot \
-    "../experiments/gpgnode-results/sip/runtimes.data" u 2:($2>=1e5?1e-10:1) smooth cumulative w l ti 'k${\downarrow}$' ls 8, \
-    "../experiments/gpgnode-results/sip/runtimes.data" u 3:($3>=1e5?1e-10:1) smooth cumulative w l ti 'McSplit${\downarrow}$' ls 5, \
-    "../experiments/gpgnode-results/sip/runtimes.data" u 4:($4>=1e5?1e-10:1) smooth cumulative w l notitle ls 8 dt '.', \
-    "../experiments/gpgnode-results/sip/runtimes.data" u 5:($5>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.'
+    "../experiments/fatanode-results/sip/runtimes.data" u 2:($2>=1e6?1e-10:1) smooth cumulative w l ti 'k${\downarrow}$' ls 8, \
+    "../experiments/fatanode-results/sip/runtimes.data" u 3:($3>=1e6?1e-10:1) smooth cumulative w l ti 'McSplit${\downarrow}$' ls 5, \
+    "../experiments/fatanode-results/sip/runtimes.data" u 4:($4>=1e6?1e-10:1) smooth cumulative w l notitle ls 8 dt '.', \
+    "../experiments/fatanode-results/sip/runtimes.data" u 5:($5>=1e6?1e-10:1) smooth cumulative w l notitle ls 5 dt '.'
 

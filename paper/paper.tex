@@ -374,13 +374,11 @@ possible, and intend to investigate this further in the future.)
 
 \section{Empirical Evaluation}
 
-We perform our experiments on systems with dual Intel Xeon E5-2640 v2 processors and 64GBytes RAM,
-running Ubuntu 14.04, with GCC 5.3.0 as the compiler. Each machine has a total of sixteen cores, and
-hyper-threading is enabled, so we run experiments with 32 threads except where otherwise noted, but
-we do not expect speedups of 32 even in the ideal case.  We run all our experiments with a one
-hundred second timeout for each instance. All of our sequential runtimes are from optimised
-implementations which were not designed with parallelism in mind---that is, speedups from
-parallelism are genuine improvements over the state of the art.
+We perform our experiments on systems with dual Intel Xeon E5-2697A v4 processors and 512GBytes RAM,
+running Ubuntu 17.04, with GCC 6.3.0 as the compiler. Each machine has a total of thirty two cores.
+We run all our experiments with a one thousand second timeout for each instance. All of our
+sequential runtimes are from optimised implementations which were not designed with parallelism in
+mind---that is, speedups from parallelism are genuine improvements over the state of the art.
 
 \subsection{Parallel Search is Better Overall}
 
@@ -600,7 +598,7 @@ reproducibility perspective.
     \caption{In the first two plots, per-instance speedups, using the $k{\downarrow}$ algorithm. The
     $x$-axis is sequential performance and the $y$-axis is 32 threaded performance. Next,
     scalability and reproducibility, and finally, aggregate speedups for both
-    families.}\label{figure:kdownscatters}
+    families (shown using both types of hardware).}\label{figure:kdownscatters}
 \end{figure}
 
 In \cref{figure:kdownscatters} we show per-instance and aggregate speedups for the $k{\downarrow}$

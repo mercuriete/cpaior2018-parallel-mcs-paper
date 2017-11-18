@@ -25,10 +25,10 @@ set format x '$10^{%T}$'
 seqcol=2
 parcol=4
 starttime=5e2
-runtimes="../experiments/gpgnode-results/mcsplain-connected/runtimes.data"
+runtimes="../experiments/fatanode-results/mcsplain-connected/runtimes.data"
 
 plot \
-    runtimes u ((column(seqcol)>=1e5&&column(parcol)>=1e5)?1:(column(parcol)==0?1:column(parcol)>=1e5?1e5:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e5?1e5:column(seqcol))):((column(seqcol)>=1e5&&column(parcol)>=1e5)?0:1) smooth cum w l ls 1, \
-    runtimes u (column(seqcol)<starttime||(column(seqcol)>=1e5&&column(parcol)>=1e5)?1:(column(parcol)==0?1:column(parcol)>=1e5?1e5:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e5?1e5:column(seqcol))):(column(seqcol)<starttime||(column(seqcol)>=1e5&&column(parcol)>=1e5)?0:1) smooth cum w l ls 6, \
-    runtimes u (column(seqcol)<starttime||(column(seqcol)>=1e5&&column(parcol)>=1e5)?1:(column(parcol)==0?1:column(parcol)>=1e5?1e6:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e5?1e6:column(seqcol))):(column(seqcol)<starttime||(column(seqcol)>=1e5&&column(parcol)>=1e5)?0:1) smooth cum w l ls 8
+    runtimes u ((column(seqcol)>=1e6&&column(parcol)>=1e6)?1:(column(parcol)==0?1:column(parcol)>=1e6?1e6:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e6?1e6:column(seqcol))):((column(seqcol)>=1e6&&column(parcol)>=1e6)?0:1) smooth cum w l ls 1, \
+    runtimes u (column(seqcol)<starttime||(column(seqcol)>=1e6&&column(parcol)>=1e6)?1:(column(parcol)==0?1:column(parcol)>=1e6?1e6:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e6?1e6:column(seqcol))):(column(seqcol)<starttime||(column(seqcol)>=1e6&&column(parcol)>=1e6)?0:1) smooth cum w l ls 6, \
+    runtimes u (column(seqcol)<starttime||(column(seqcol)>=1e6&&column(parcol)>=1e6)?1:(column(parcol)==0?1:column(parcol)>=1e6?1e7:column(parcol))/(column(seqcol)==0?1:column(seqcol)>=1e6?1e7:column(seqcol))):(column(seqcol)<starttime||(column(seqcol)>=1e6&&column(parcol)>=1e6)?0:1) smooth cum w l ls 8
 

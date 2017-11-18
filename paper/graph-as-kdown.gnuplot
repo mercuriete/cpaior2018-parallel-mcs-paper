@@ -13,7 +13,7 @@ set output "gen-graph-as-kdown.tex"
 
 load "magma.pal"
 
-set xrange [1:1e5]
+set xrange [1:1e6]
 set xlabel "Sequential runtime (ms)"
 set ylabel "Aggregate speedup"
 set logscale x
@@ -26,26 +26,37 @@ set key off
 set format x '%.0f'
 set format y '%.0f'
 
+set table 'gen-as-alt-plain-kdown-seq-gpg.data'
+plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u ($4>=1e5?1e5:$4):($4>=1e5?1e-10:1) smooth cumulative
+
+set table 'gen-as-alt-plain-kdown-par-gpg.data'
+plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u ($16>=1e5?1e5:$16):($16>=1e5?1e-10:1) smooth cumulative
+
+set table 'gen-as-alt-sip-kdown-seq-gpg.data'
+plot "../experiments/gpgnode-results/sip/runtimes.data" u ($2>=1e5?1e5:$2):($2>=1e5?1e-10:1) smooth cumulative
+
+set table 'gen-as-alt-sip-kdown-par-gpg.data'
+plot "../experiments/gpgnode-results/sip/runtimes.data" u ($4>=1e5?1e5:$4):($4>=1e5?1e-10:1) smooth cumulative
+
 set table 'gen-as-alt-plain-kdown-seq.data'
-plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u 4:($4>=1e5?1e-10:1) smooth cumulative
+plot "../experiments/fatanode-results/mcsplain/runtimes.data" u 4:($4>=1e6?1e-10:1) smooth cumulative
 
 set table 'gen-as-alt-plain-kdown-par.data'
-plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u 16:($16>=1e5?1e-10:1) smooth cumulative
+plot "../experiments/fatanode-results/mcsplain/runtimes.data" u 7:($7>=1e6?1e-10:1) smooth cumulative
 
 set table 'gen-as-alt-sip-kdown-seq.data'
-plot "../experiments/gpgnode-results/sip/runtimes.data" u 2:($2>=1e5?1e-10:1) smooth cumulative
+plot "../experiments/fatanode-results/sip/runtimes.data" u 2:($2>=1e6?1e-10:1) smooth cumulative
 
 set table 'gen-as-alt-sip-kdown-par.data'
-plot "../experiments/gpgnode-results/sip/runtimes.data" u 4:($4>=1e5?1e-10:1) smooth cumulative
+plot "../experiments/fatanode-results/sip/runtimes.data" u 4:($4>=1e6?1e-10:1) smooth cumulative
 
 unset table
 
 set format x '$10^{%T}$'
 unset format y
-set yrange [0:20]
+set yrange [0:30]
 set ytics add ('$1$' 1) ('' 0)
 
 plot \
     '<./asify.sh gen-as-alt-plain-kdown-par.data gen-as-alt-plain-kdown-seq.data' u 3:($3/$2) w l title 'Unlabelled' at end ls 1, \
     '<./asify.sh gen-as-alt-sip-kdown-par.data gen-as-alt-sip-kdown-seq.data' u 3:($3/$2) w l title 'Large' at end ls 8
-

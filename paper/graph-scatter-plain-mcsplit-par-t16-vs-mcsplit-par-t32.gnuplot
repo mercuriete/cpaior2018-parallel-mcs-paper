@@ -3,7 +3,7 @@
 set terminal tikz standalone color size 1.8in,2.0in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-scatter-plain-mcsplit-par-t16-vs-mcsplit-par-t32.tex"
 
-load "magma.pal"
+load "viridis.pal"
 
 set title 'Unlabelled'
 

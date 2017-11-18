@@ -10,7 +10,7 @@ set key textcolor rgb "black"
 set tics textcolor rgb "black"
 set label textcolor rgb "black"
 
-load "magma.pal"
+load "viridis.pal"
 
 set title 'Both labelled, 8 vs 16'
 

@@ -14,7 +14,7 @@ load "magma.pal"
 
 set title 'Vertex labelled'
 
-set xrange [1:1e5]
+set xrange [1:1e6]
 set yrange [0:8140]
 set xlabel "Runtime (ms)"
 set ylabel "Number solved"
@@ -28,8 +28,8 @@ set format x '$10^{%T}$'
 set ytics add ('8140' 8140) add ('' 8000)
 
 plot \
-    "../experiments/gpgnode-results/mcs33v/runtimes.data" u 2:($2>=1e5?1e-10:1) smooth cumulative w l ti 'Clique' ls 2, \
-    "../experiments/gpgnode-results/mcs33v/runtimes.data" u 3:($3>=1e5?1e-10:1) smooth cumulative w l ti 'McSplit' ls 5, \
-    "../experiments/gpgnode-results/mcs33v/runtimes.data" u 6:($6>=1e5?1e-10:1) smooth cumulative w l notitle ls 2 dt '.', \
-    "../experiments/gpgnode-results/mcs33v/runtimes.data" u 11:($11>=1e5?1e-10:1) smooth cumulative w l notitle ls 5 dt '.'
+    "../experiments/fatanode-results/mcs33v/runtimes.data" u 2:($2>=1e6?1e-10:1) smooth cumulative w l ti 'Clique' ls 2, \
+    "../experiments/fatanode-results/mcs33v/runtimes.data" u 3:($3>=1e6?1e-10:1) smooth cumulative w l ti 'McSplit' ls 5, \
+    "../experiments/fatanode-results/mcs33v/runtimes.data" u 4:($4>=1e6?1e-10:1) smooth cumulative w l notitle ls 2 dt '.', \
+    "../experiments/fatanode-results/mcs33v/runtimes.data" u 5:($5>=1e6?1e-10:1) smooth cumulative w l notitle ls 5 dt '.'
 
