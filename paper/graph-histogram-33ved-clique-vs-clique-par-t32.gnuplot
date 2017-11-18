@@ -1,11 +1,16 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.4in,1.4in font '\tiny' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 1.4in,1.3in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-histogram-33ved-clique-vs-clique-par-t32.tex"
 
-load "magma.pal"
+set style line 102 lc rgb '#a0a0a0' lt 1 lw 1
+set border ls 102
+set colorbox border 102
+set key textcolor rgb "black"
+set tics textcolor rgb "black"
+set label textcolor rgb "black"
 
-set title 'Both labelled, directed'
+load "magma.pal"
 
 set border 3
 set grid

@@ -1,7 +1,14 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.8in,2.0in font '\footnotesize' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 1.8in,2.0in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-scatter-sip-mcsplit-vs-mcsplit-par-t32.tex"
+
+set style line 102 lc rgb '#a0a0a0' lt 1 lw 1
+set border ls 102
+set colorbox border 102
+set key textcolor rgb "black"
+set tics textcolor rgb "black"
+set label textcolor rgb "black"
 
 load "magma.pal"
 

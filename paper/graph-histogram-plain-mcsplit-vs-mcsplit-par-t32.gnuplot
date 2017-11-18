@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 1.4in,1.8in font '\tiny' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 1.4in,1.8in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 set output "gen-graph-histogram-plain-mcsplit-vs-mcsplit-par-t32.tex"
 
 load "magma.pal"

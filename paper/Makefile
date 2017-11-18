@@ -2,7 +2,7 @@ all : tables graphs combined.bib
 	latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode %O %S' -shell-escape paper
 
 combined.bib : dblp.bib notindblp.bib
-	cat dblp.bib notindblp.bib | sed -e '/crossref/d' > combined.bib
+	cat dblp.bib notindblp.bib | sed -e '/url/d' > combined.bib
 
 TABLES =
 
@@ -70,6 +70,11 @@ GRAPHS = \
 	gen-graph-scatter-33ved-clique-cilk-t4-vs-clique-cilk-t8.pdf \
 	gen-graph-scatter-33ved-clique-cilk-t8-vs-clique-cilk-t16.pdf \
 	gen-graph-scatter-33ved-clique-cilk-t16-vs-clique-cilk-t32.pdf \
+	gen-graph-pp-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp-33v-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp-33ved-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp-plain-connected-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp-33ve-connected-clique-vs-clique-par-t32.pdf
 
 tables : $(TABLES)
 

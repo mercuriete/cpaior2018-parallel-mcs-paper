@@ -1,6 +1,13 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.0in font '\footnotesize' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 3.0in,2.2in font '\scriptsize' preamble '\input{gnuplot-preamble}'
+
+set style line 102 lc rgb '#a0a0a0' lt 1 lw 1
+set border ls 102
+set colorbox border 102
+set key textcolor rgb "black"
+set tics textcolor rgb "black"
+set label textcolor rgb "black"
 
 set output "gen-graph-as-clique.tex"
 
