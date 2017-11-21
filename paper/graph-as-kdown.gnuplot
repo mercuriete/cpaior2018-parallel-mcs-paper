@@ -26,18 +26,6 @@ set key off
 set format x '%.0f'
 set format y '%.0f'
 
-set table 'gen-as-alt-plain-kdown-seq-gpg.data'
-plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u ($4>=1e5?1e5:$4):($4>=1e5?1e-10:1) smooth cumulative
-
-set table 'gen-as-alt-plain-kdown-par-gpg.data'
-plot "../experiments/gpgnode-results/mcsplain/runtimes.data" u ($16>=1e5?1e5:$16):($16>=1e5?1e-10:1) smooth cumulative
-
-set table 'gen-as-alt-sip-kdown-seq-gpg.data'
-plot "../experiments/gpgnode-results/sip/runtimes.data" u ($2>=1e5?1e5:$2):($2>=1e5?1e-10:1) smooth cumulative
-
-set table 'gen-as-alt-sip-kdown-par-gpg.data'
-plot "../experiments/gpgnode-results/sip/runtimes.data" u ($4>=1e5?1e5:$4):($4>=1e5?1e-10:1) smooth cumulative
-
 set table 'gen-as-alt-plain-kdown-seq.data'
 plot "../experiments/fatanode-results/mcsplain/runtimes.data" u 4:($4>=1e6?1e-10:1) smooth cumulative
 

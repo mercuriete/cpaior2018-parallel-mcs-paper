@@ -21,6 +21,8 @@ set ytics nomirror
 set size square
 set key off
 set format x '$10^{%T}$'
+set xtics add ('1' 1) add ('10' 10)
+set arrow 1 from 1, 0 to 1, 3000 lc rgb '#a0a0a0' back nohead
 
 seqcol=2
 parcol=4
