@@ -98,7 +98,7 @@ anomalous speedups are common.
 
 There are three competitive approaches for the maximum common subgraph problem, each being the
 strongest on certain classes of instance. The first involves a reduction to the maximum clique
-problem, whilst the other two approaches have a constraint programming feel to them.
+problem, whilst the other two approaches are inspired by constraint programming.
 
 \subsection{Reduction to Maximum Clique}
 
@@ -149,7 +149,7 @@ common subgraph problem, the following property holds throughout the search proc
 constraint programming model: any two variables either have domains with no values in common (with
 the possible exception of $\bot$), or have identical domains. The McSplit algorithm exploits this
 property. It explores essentially the same search tree as the basic forward-checking constraint
-programming model, but using different supporting algorithms and data structures.  Rather than
+programming approach, but using different supporting algorithms and data structures.  Rather than
 storing a domain for each vertex in the pattern graph, equivalence classes of vertices in both
 graphs are stored in a special data structure which is modified in-place and restored upon
 backtracking. This enables fast propagation of the constraints and smaller memory requirements. In
@@ -163,7 +163,7 @@ downwards.
 
 \subsection{$k$-less Subgraph Isomorphism}
 
-A different take on the constraint programming model is presented by
+A different take on the constraint programming approach is presented by
 Hoffmann et al.\ \cite{DBLP:conf/aaai/HoffmannMR17}. They approach maximum common subgraph via the
 subgraph isomorphism problem, asking the question ``if a pattern graph cannot be found in the
 target, how much of the pattern graph can be found?''. The $k{\downarrow}$ algorithm tries to solve
@@ -243,7 +243,7 @@ instances: due to the combination of a low solution density, good value-ordering
 strong bound function in cases where the optimal solution is relatively large, it is often the case
 that the runtime is determined almost entirely by how long it takes to find an optimal solution,
 with the proof of optimality being nearly trivial.  Indeed, attempts to parallelise the basic
-constraint programming model by static decomposition have had limited success
+constraint programming approach by static decomposition have had limited success
 \cite{DBLP:conf/ictai/MinotNS15}.
 
 \subsection{Parallel Maximum Clique}
