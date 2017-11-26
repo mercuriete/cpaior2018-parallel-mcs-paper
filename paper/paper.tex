@@ -72,14 +72,14 @@ represent molecules or reactions, and also in computer vision
 
 A \emph{subgraph isomorphism} is an injective mapping from a \emph{pattern} graph to a \emph{target}
 graph which \emph{preserves adjacency}---that is, if it maps adjacent vertices to adjacent vertices.
-The isomorphism is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent vertices, preserving
-non-adjacency. When working with labelled graphs, a subgraph isomorphism must also preserve labels, and
-on directed graphs, it must preserve orientation. A \emph{common induced subgraph} of two graphs $G$
-and $H$ is a pair of induced subgraph isomorphisms from a pattern graph $P$, one to $G$ and one to
-$H$. A \emph{maximum common induced subgraph} is one with as many vertices as possible. (The
-\emph{maximum common partial subgraph} problem is non-induced, with as many edges as
-possible; this paper discusses only induced problems.)
-A common variant of the problem requires a largest \emph{connected} subgraph
+The isomorphism is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent
+vertices, preserving non-adjacency as well. When working with labelled graphs, a subgraph
+isomorphism must preserve labels, and on directed graphs, it must preserve orientation. A
+\emph{common induced subgraph} of two graphs $G$ and $H$ is a pair of induced subgraph isomorphisms
+from a pattern graph $P$, one to $G$ and one to $H$. A \emph{maximum common induced subgraph} is one
+with as many vertices as possible. (The \emph{maximum common partial subgraph} problem is
+non-induced, with as many edges as possible; this paper discusses only induced problems.) A common
+variant of the problem requires a largest \emph{connected} subgraph
 \cite{DBLP:journals/jcamd/RaymondW02a,DBLP:conf/mco/VismaraV08,o:EhrlichR11,o:LuoWSN17}.
 
 Although both the connected and non-connected variants are NP-hard, recently progress has been made
@@ -142,7 +142,7 @@ to enforce connectedness during search \cite{DBLP:conf/mco/VismaraV08}. The two 
 broadly comparable performance-wise \cite{DBLP:conf/cp/McCreeshNPS16}, but the branching rule is
 much simpler to implement.
 
-\subsection{Domain Splitting (McSplit)}
+\subsection{Domain Splitting (McSplit and McSplit$\downarrow$)}
 
 McCreesh et al.\ \cite{o:McCreeshPT17} observe that due to the special structure of the maximum
 common subgraph problem, the following property holds throughout the search process using the
@@ -156,6 +156,10 @@ backtracking. This enables fast propagation of the constraints and smaller memor
 addition, this data structure enables stronger branching heuristics to be calculated cheaply. The
 McSplit algorithm effectively dominates conventional constraint programming approaches, being
 consistently over an order of magnitude faster.
+
+The McSplit$\downarrow$ algorithm is a variant designed for instances where we expect nearly all of
+the smaller graph to be found. It branches first on result size, from largest possible result
+downwards.
 
 \subsection{$k$-less Subgraph Isomorphism}
 
@@ -171,7 +175,7 @@ prune large portions of the search space.
 
 This algorithm is aimed primarily at large instances, where the two graphs are of different orders,
 and where it is expected that the solution will involve most of the smaller graph (that is, $k$ is
-expected to be low). The sequential implementation we work with does not support labels or the
+expected to be low). The sequential implementation we start with does not support labels or the
 connected variant.
 
 \section{Benchmark Instances}
@@ -180,7 +184,7 @@ Most of the benchmark instances we will use come from a standard database for ma
 subgraph problems \cite{DBLP:journals/prl/SantoFSV03,DBLP:journals/jgaa/ConteFV07}. This benchmark
 set can be used in a number of ways, for different variants of the problem. Following other recent
 work \cite{DBLP:conf/cp/McCreeshNPS16,DBLP:conf/aaai/HoffmannMR17,o:McCreeshPT17}, we use it to
-create five families of instance, as follows:
+create five families of instances, as follows:
 
 \begin{description}
     \item[Unlabelled] instances, by selecting the first ten members of each parameter class where the
@@ -327,7 +331,7 @@ the highest line shows which algorithm is able to solve the largest number of in
 per-instance timeout of that $x$ value, bearing in mind that the actual sets of instances solved by
 each algorithm may be completely different.
 
-With one exception, each plot gives the same conclusion: if we are working with a timeout of at
+With one exception, each plot gives the same conclusion: if we are working with a solving time of at
 least $10^2$ milliseconds, then for any problem family and any sequential algorithm, if given the
 option of switching to the corresponding parallel algorithm, then we should do so. For the McSplit
 algorithm on both labelled, connected instances, the parallel algorithm does not quite catch up to
@@ -426,7 +430,7 @@ A more principled approach is given in the second column of \cref{figure:cliques
 instances where the sequential run both succeeded and took at least 500 milliseconds, we plot the
 distribution of speedups obtained. These histograms confirm our informal observations. However,
 these plots are still not especially satisfactory: in order to calculate a speedup, we can only
-consider instances where the sequential algorithm succeeded, and so these plots therefore underestimate
+consider instances where the sequential algorithm succeeded, and so these plots underestimate
 superlinear speedups. The choice of a 500 millisecond minimum sequential runtime is also rather
 arbitrary, and is acceptable only if we expect the parallel algorithms will only be used on
 relatively hard instances.
@@ -436,15 +440,16 @@ profile is a cumulative plot of the relative performance of the parallel algorit
 algorithm---instances occurring to the left of the vertical $x = 1$ line are speedups. Each plot
 shows three options as different lines. The `all' line include easy instances whose sequential
 runtime is below 500 milliseconds, whilst the other two lines include them. The `hard' line treats
-sequential timeouts as having been solved at the time limit, whilst the `par10' line treats timeouts
-as taking ten times longer than the timeout (this convention is common in portfolios).
+sequential timeouts as having been solved at the time limit, whilst the `PAR10' line treats timeouts
+as taking ten times longer than the timeout (this convention is common in portfolios
+\cite{DBLP:conf/aaai/XuHL10}).
 
 Unfortunately, these three lines can paint very different pictures. For example, for unlabelled
 instances on the top row, if we include easy instances, it appears that parallelism is better on
 just over half of the instances, whilst if we exclude them, parallelism is always beneficial. If we
-do not use the par10 scheme, the performance profile also suggests that there are around 500
-instances where the speedup is below 10, whilst using par10 correctly shows that such instances are
-rare. However, par10 is only effective in this regard because the ``typical'' speedup is in the
+do not use the PAR10 scheme, the performance profile also suggests that there are around 500
+instances where the speedup is below 10, whilst using PAR10 correctly shows that such instances are
+rare. However, PAR10 is only effective in this regard because the ``typical'' speedup is in the
 region of 10 (and this is a particular inconvenience because we seek a way of characterising
 speedups which does not rely upon us already knowing that 10 is a reasonable choice of penalty).
 

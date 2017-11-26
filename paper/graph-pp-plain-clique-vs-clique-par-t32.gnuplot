@@ -35,7 +35,7 @@ set arrow 2 from 0.3, 2600 to 3, 2600 ls 1 front
 set label 3 at 3e0, 800 center 'Hard' front
 set arrow 3 from 3e0, 1000 to 8e-1, 1600 ls 6 front
 
-set label 4 at 2.7e-2, 1880 right 'Par10' front
+set label 4 at 2.7e-2, 1880 right 'PAR10' front
 set arrow 4 from 2e-2, 1800 to 1e-1, 1600 ls 8 front
 
 plot \
