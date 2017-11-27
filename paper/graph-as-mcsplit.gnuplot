@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz standalone color size 2.4in,2.5in font '\scriptsize' preamble '\input{gnuplot-preamble}'
+set terminal tikz standalone color size 2.4in,2.8in font '\scriptsize' preamble '\input{gnuplot-preamble}'
 
 set style line 102 lc rgb '#a0a0a0' lt 1 lw 1
 set border ls 102
@@ -66,8 +66,8 @@ unset table
 
 set format x '$10^{%T}$'
 unset format y
-set yrange [0:20]
-set ytics add ('$1$' 1) ('' 0)
+set yrange [0:32]
+set ytics add ('$1$' 1) ('' 0) ('$32$' 32)
 
 plot \
     '<./asify.sh gen-as-alt-plain-mcsplit-par.data gen-as-alt-plain-mcsplit-seq.data' u 3:($3/$2) w l title 'Unlabelled' at end ls 1, \

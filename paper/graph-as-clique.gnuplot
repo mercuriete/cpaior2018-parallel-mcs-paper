@@ -61,7 +61,7 @@ unset table
 set format x '$10^{%T}$'
 unset format y
 set yrange [0:50]
-set ytics add ('$1$' 1) ('' 0)
+set ytics add ('$1$' 1) ('' 0) ('$32$' 32)
 
 plot \
     '<./asify.sh gen-as-alt-plain-clique-par.data gen-as-alt-plain-clique-seq.data' u 3:($3/$2) w l title 'Unlabelled' at end ls 1, \

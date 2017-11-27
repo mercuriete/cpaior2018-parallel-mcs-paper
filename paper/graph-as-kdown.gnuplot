@@ -42,8 +42,8 @@ unset table
 
 set format x '$10^{%T}$'
 unset format y
-set yrange [0:30]
-set ytics add ('$1$' 1) ('' 0)
+set yrange [0:32]
+set ytics add ('$1$' 1) ('' 0) ('$32$' 32)
 
 plot \
     '<./asify.sh gen-as-alt-plain-kdown-par.data gen-as-alt-plain-kdown-seq.data' u 3:($3/$2) w l title 'Unlabelled' at end ls 1, \
