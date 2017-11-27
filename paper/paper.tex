@@ -71,7 +71,7 @@ represent molecules or reactions, and also in computer vision
 \cite{o:DelavalladeFLL16}, and social network analysis \cite{DBLP:journals/tkde/FangYZZ15}.
 
 A \emph{subgraph isomorphism} is an injective mapping from a \emph{pattern} graph to a \emph{target}
-graph which \emph{preserves adjacency}---that is, if it maps adjacent vertices to adjacent vertices.
+graph which \emph{preserves adjacency}---that is, it maps adjacent vertices to adjacent vertices.
 The isomorphism is \emph{induced} if additionally it maps non-adjacent vertices to non-adjacent
 vertices, preserving non-adjacency as well. When working with labelled graphs, a subgraph
 isomorphism must preserve labels, and on directed graphs, it must preserve orientation. A
@@ -187,18 +187,19 @@ work \cite{DBLP:conf/cp/McCreeshNPS16,DBLP:conf/aaai/HoffmannMR17,o:McCreeshPT17
 create five families of instances, as follows:
 
 \begin{description}
-    \item[Unlabelled] instances, by selecting the first ten members of each parameter class where the
-        graphs have up to 50 vertices each---this gives us a total of 4,110 instances.
+    \item[Unlabelled] undirected instances, by selecting the first ten members of each parameter
+        class where the graphs have up to 50 vertices each---this gives us a total of 4,110
+        instances.
 
-    \item[Vertex labelled] instances, by selecting the first ten members of each parameter class
-        (and so graphs have up to 100 vertices each), applying the 33\% labelling scheme for
-        vertices only, and treating edges as undirected. This gives 8,140 instances.
+    \item[Vertex labelled] undirected instances, by selecting the first ten members of each
+        parameter class (and so graphs have up to 100 vertices each), and applying the 33\%
+        labelling scheme for vertices only. This gives 8,140 instances.
 
     \item[Both labelled, directed] instances, by selecting the first ten members of each parameter
         class, and applying the 33\% labelling scheme to both vertices and edges. Again, this gives
         8,140 instances.
 
-    \item[Unlabelled, connected] instances, using the same instances as the \emph{unlabelled} case.
+    \item[Unlabelled, connected] instances, as per the \emph{unlabelled} case.
 
     \item[Both labelled, connected] instances, starting in the same way as the \emph{both labelled,
         directed} case. These are then converted to undirected graphs by treating edges as
@@ -346,43 +347,43 @@ now take a closer look at each of the three algorithms in turn.
     \centering
     \begin{tikzpicture}%{{{
         \node[anchor=west] (C1) {\includegraphics*{gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C2.east] (C3) {\includegraphics*{gen-graph-pp-plain-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, left = 0.2 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Unlabelled}};
+        \node[anchor=west, right = 0.1 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, right = 0.1 of C2.east] (C3) {\includegraphics*{gen-graph-pp2-plain-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, left = 0.1 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Unlabelled}};
     \end{tikzpicture}
 
     \centering
     \begin{tikzpicture}%{{{
         \node[anchor=west] (C1) {\includegraphics*{gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C2.east] (C3) {\includegraphics*{gen-graph-pp-33v-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, left = 0.2 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Vertex labelled}};
+        \node[anchor=west, right = 0.1 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, right = 0.1 of C2.east] (C3) {\includegraphics*{gen-graph-pp2-33v-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, left = 0.1 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Vertex labelled}};
     \end{tikzpicture}
 
     \centering
     \begin{tikzpicture}%{{{
         \node[anchor=west] (C1) {\includegraphics*{gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C2.east] (C3) {\includegraphics*{gen-graph-pp-33ved-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, left = 0.2 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Both labelled,}};
+        \node[anchor=west, right = 0.1 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, right = 0.1 of C2.east] (C3) {\includegraphics*{gen-graph-pp2-33ved-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, left = 0.1 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Both labelled,}};
         \node[anchor=west, right = -0.2 of C0.east] (C0) {\rotatebox{90}{\scriptsize directed}};
     \end{tikzpicture}
 
     \centering
     \begin{tikzpicture}%{{{
         \node[anchor=west] (C1) {\includegraphics*{gen-graph-scatter-plain-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-plain-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C2.east] (C3) {\includegraphics*{gen-graph-pp-plain-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, left = 0.2 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Unlabelled,}};
+        \node[anchor=west, right = 0.1 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-plain-connected-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, right = 0.1 of C2.east] (C3) {\includegraphics*{gen-graph-pp2-plain-connected-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, left = 0.1 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Unlabelled,}};
         \node[anchor=west, right = -0.2 of C0.east] (C0) {\rotatebox{90}{\scriptsize connected}};
     \end{tikzpicture}
 
     \centering
     \begin{tikzpicture}%{{{
         \node[anchor=west] (C1) {\includegraphics*{gen-graph-scatter-33ve-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, right = 0.3 of C2.east] (C3) {\includegraphics*{gen-graph-pp-33ve-connected-clique-vs-clique-par-t32.pdf}};
-        \node[anchor=west, left = 0.2 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Vertex labelled,}};
+        \node[anchor=west, right = 0.1 of C1.east] (C2) {\includegraphics*{gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, right = 0.1 of C2.east] (C3) {\includegraphics*{gen-graph-pp2-33ve-connected-clique-vs-clique-par-t32.pdf}};
+        \node[anchor=west, left = 0.1 of C1.east] (C0) at (0, 0) {\rotatebox{90}{\scriptsize Vertex labelled,}};
         \node[anchor=west, right = -0.2 of C0.east] (C0) {\rotatebox{90}{\scriptsize connected}};
     \end{tikzpicture}
 
@@ -436,20 +437,23 @@ arbitrary, and is acceptable only if we expect the parallel algorithms will only
 relatively hard instances.
 
 In the third column we show performance profiles \cite{DBLP:journals/mp/DolanM02}. A performance
-profile is a cumulative plot of the relative performance of the parallel algorithm to the sequential
-algorithm---instances occurring to the left of the vertical $x = 1$ line are speedups. Each plot
-shows three options as different lines. The `all' line include easy instances whose sequential
-runtime is below 500 milliseconds, whilst the other two lines include them. The `hard' line treats
-sequential timeouts as having been solved at the time limit, whilst the `PAR10' line treats timeouts
-as taking ten times longer than the timeout (this convention is common in portfolios
-\cite{DBLP:conf/aaai/XuHL10}).
+profile is a cumulative plot of how many times worse the performance of an algorithm is relative to
+the virtual best algorithm. Each plot shows three options as different lines. The `all' lines
+include easy instances whose sequential runtime is below 500 milliseconds, whilst the other two
+lines exclude them. The `hard' line treats sequential timeouts as having been solved at the time
+limit, whilst the `PAR10' line treats timeouts as taking ten times longer than the timeout (this
+convention is common in portfolios \cite{DBLP:conf/aaai/XuHL10}). The solid lines show the
+sequential algorithms, whilst the dotted lines show the parallel algorithms. (There are no dotted
+lines on the top four plots for the `hard' and `PAR10' cases, since the parallel algorithm always
+beats the sequential algorithm in these cases.) We have normalised the $y$-axis to the number of
+counted instances in a given class.
 
 Unfortunately, these three lines can paint very different pictures. For example, for unlabelled
-instances on the top row, if we include easy instances, it appears that parallelism is better on
-just over half of the instances, whilst if we exclude them, parallelism is always beneficial. If we
-do not use the PAR10 scheme, the performance profile also suggests that there are around 500
-instances where the speedup is below 10, whilst using PAR10 correctly shows that such instances are
-rare. However, PAR10 is only effective in this regard because the ``typical'' speedup is in the
+instances on the top row, if we include easy instances, it appears that the parallel algorithm can
+be up to ten times worse, whereas if we exclude them, it is never worse. If we do not use the PAR10
+scheme, the performance profile also suggests that there are around twenty-five percent of the
+hard instances where the speedup is below 10, whilst using PAR10 correctly shows that such instances
+are rare. However, PAR10 is only effective in this regard because the ``typical'' speedup is in the
 region of 10 (and this is a particular inconvenience because we seek a way of characterising
 speedups which does not rely upon us already knowing that 10 is a reasonable choice of penalty).
 
@@ -481,7 +485,7 @@ connected case, our aggregate speedup is barely larger than one. A closer inspec
 shows that the search tree is unusually narrow and deep for these instances, making work balance
 harder and contention higher.
 
-What about scalability and reproducibility? The first plot in \cref{figure:cliquescale} show the
+What about scalability and reproducibility? The first plot in \cref{figure:cliquescale} shows the
 effects of going from sequential to threaded with two cores, and the next four plots show the
 effects of doubling the number of threads each time. These plots show that most of the superlinear
 effects occur with fairly small numbers of threads, with nearly all of the benefits of increased

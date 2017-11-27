@@ -16,18 +16,23 @@ GRAPHS = \
 	gen-graph-scatter-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-pp-plain-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp2-plain-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-33v-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33v-clique-vs-clique-par-t32.pdf \
 	gen-graph-pp-33v-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp2-33v-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-33ved-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33ved-clique-vs-clique-par-t32.pdf \
 	gen-graph-pp-33ved-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp2-33ved-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-plain-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-plain-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-pp-plain-connected-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp2-plain-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-scatter-33ve-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-histogram-33ve-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-pp-33ve-connected-clique-vs-clique-par-t32.pdf \
+	gen-graph-pp2-33ve-connected-clique-vs-clique-par-t32.pdf \
 	gen-graph-as-clique.pdf \
 	gen-graph-scatter-33ved-clique-vs-clique-par-t2.pdf \
 	gen-graph-scatter-33ved-clique-par-t2-vs-clique-par-t4.pdf \
