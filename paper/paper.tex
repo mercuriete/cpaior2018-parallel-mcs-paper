@@ -48,12 +48,13 @@
 
 \begin{abstract}
     We discuss our experiences adapting three recent algorithms for maximum common (connected)
-    subgraph problems to exploit multi-core parallelism. These algorithms are heavily irregular and
-    very sensitive to search order changes, and so do not easily lend themselves to parallel search.
+    subgraph problems to exploit multi-core parallelism. These algorithms do not easily lend
+    themselves to parallel search, as the search trees are extremely irregular, making balanced work
+    distribution hard, and runtimes are very sensitive to value-ordering heuristic behaviour.
     Nonetheless, our results show that each algorithm can be parallelised successfully, with the
     threaded algorithms we create being clearly better than the sequential ones. We then look in
-    more detail at the results, and discuss how speedups should be measured for this kind of algorithm.
-    Because of the difficulty in quantifying an average speedup when so-called anomalous
+    more detail at the results, and discuss how speedups should be measured for this kind of
+    algorithm.  Because of the difficulty in quantifying an average speedup when so-called anomalous
     speedups (superlinear and sublinear) are common, we propose a new measure called \emph{aggregate
     speedup}.
 \end{abstract}
@@ -137,10 +138,10 @@ technique is a dedicated (non-toolkit) implementation of a forward-checking bran
 over this model \cite{DBLP:conf/cp/NdiayeS11,DBLP:conf/cp/McCreeshNPS16}.
 
 Two approaches exist for ensuring connectedness: either a conventional global constraint and
-propagator can be used \cite{DBLP:conf/cp/McCreeshNPS16}, or a special branching rule can be used
-to enforce connectedness during search \cite{DBLP:conf/mco/VismaraV08}. The two techniques are
+propagator can be used \cite{DBLP:conf/cp/McCreeshNPS16}, or a special branching rule can
+enforce connectedness during search \cite{DBLP:conf/mco/VismaraV08}. The two techniques are
 broadly comparable performance-wise \cite{DBLP:conf/cp/McCreeshNPS16}, but the branching rule is
-much simpler to implement.
+simpler to implement.
 
 \subsection{Domain Splitting (McSplit and McSplit$\downarrow$)}
 
@@ -192,12 +193,12 @@ create five families of instances, as follows:
         instances.
 
     \item[Vertex labelled] undirected instances, by selecting the first ten members of each
-        parameter class (and so graphs have up to 100 vertices each), and applying the 33\%
-        labelling scheme for vertices only. This gives 8,140 instances.
+        parameter class (and so graphs have up to 100 vertices each), using the 33\%
+        labelling scheme \cite{DBLP:journals/prl/SantoFSV03} for vertices only. This gives 8,140 instances.
 
     \item[Both labelled, directed] instances, by selecting the first ten members of each parameter
-        class, and applying the 33\% labelling scheme to both vertices and edges. Again, this gives
-        8,140 instances.
+        class, and applying the 33\% labelling scheme \cite{DBLP:journals/prl/SantoFSV03} to both
+        vertices and edges. Again, this gives 8,140 instances.
 
     \item[Unlabelled, connected] instances, as per the \emph{unlabelled} case.
 
@@ -228,7 +229,7 @@ are not performing a fixed amount of work, we should have no expectation of a li
 instead we could see a sublinear speedup (much less than $n$ from $n$ processors, if speculative
 work turns out to be wasted) or a superlinear speedup (much more than $n$ from $n$ processors, if a
 strong incumbent is found more quickly). An absolute slowdown (a speedup much less than 1) is also
-possible under some models.
+possible when using some parallelisation techniques.
 
 We stress that these anomalies are due to changes in the amount of work done, and are not due to
 work balance problems (although work balance is \emph{also} unusually difficult for this problem).
@@ -265,9 +266,9 @@ to early branching choices, where search ordering heuristics are most likely to 
 We will use this mechanism for our experiments.  The clique-based maximum common subgraph algorithm
 effectively differs only in the preprocessing stage, and the clique-inspired connected algorithm
 described by McCreesh et al.\ \cite{DBLP:conf/cp/McCreeshNPS16} is sufficiently similar that it may be parallelised in
-exactly the same way. Based upon preliminary experiments, we use a splitting depth limit of five
-rather than the original three, since maximum common subgraph instances appear to give even more
-irregular search trees than normal clique problem instances.
+exactly the same way. Based upon preliminary experiments, we set the mechanism's splitting depth
+limit parameter to be five rather than the original three, since maximum common subgraph instances
+appear to give even more irregular search trees than normal clique problem instances.
 
 \subsection{Parallel Constraint-Based Search}
 
@@ -541,9 +542,9 @@ reproducibility perspective.
 \subsection{$k{\downarrow}$ Results In Depth}
 
 In \cref{figure:kdownscatters} we show per-instance and aggregate speedups for the $k{\downarrow}$
-algorithm. On unlabelled instances, we see a range of speedups between slightly less than one and
-ten, with an aggregate speedup of seven. These results are not as good as with the clique algorithm.
-Profiling suggests memory allocation problems: although the amount of work done would suggest good
+algorithm. On unlabelled instances, we see a range of speedups between 0.9 and ten, with an
+aggregate speedup of seven. These results are not as good as with the clique algorithm.  Profiling
+suggests memory allocation problems: although the amount of work done would suggest good
 parallelism, the time taken to perform each domain copy operation increases as the number of threads
 increases. Unlike the clique algorithm, which has very small, cache-friendly data structures which
 are modified in-place, the state for the $k{\downarrow}$ algorithm is large and much of the runtime
