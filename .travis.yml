@@ -4,7 +4,7 @@ compiler:
 
 before_install:
     - sudo apt-add-repository ppa:wsmoses/tapir-toolchain -y
-    - sudo apt-get update
+    - sudo apt-get --allow-unauthenticated update
     - sudo apt-get install tapirclang-5.0 libcilkrts5 -y
     - sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-5.0 10 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-5.0
     - sudo update-alternatives --config clang
