@@ -1,13 +1,18 @@
-language: cpp
-compiler:
-  - clang
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_install:
-    - sudo apt-add-repository ppa:wsmoses/tapir-toolchain -y
-    - sudo apt-get --allow-insecure-repositories update
-    - sudo apt-get install tapirclang-5.0 libcilkrts5 -y
-    - sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-5.0 10 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-5.0
-    - sudo update-alternatives --config clang
+    - eval "${MATRIX_EVAL}"
+
 script:
     - cd cilk-clique-code && make
 
