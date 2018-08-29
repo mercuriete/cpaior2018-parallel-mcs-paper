@@ -1,16 +1,11 @@
-matrix:
-  include:
-    # works on Precise and Trusty
-    - os: linux
-      env:
-         - MATRIX_EVAL="CC=clang && CXX=clang++"
-
+language: cpp
+compiler:
+  - clang
 
 before_install:
-    - eval "${MATRIX_EVAL}"
-    - sudo apt-add-repository ppa:wsmoses/tapir-toolchain
+    - sudo apt-add-repository ppa:wsmoses/tapir-toolchain -y
     - sudo apt-get update
-    - sudo apt-get install tapirclang-5.0 libcilkrts5
+    - sudo apt-get install tapirclang-5.0 libcilkrts5 -y
     - sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-5.0 10 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-5.0
     - sudo update-alternatives --config clang
 script:
