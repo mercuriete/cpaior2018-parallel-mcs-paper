@@ -13,9 +13,6 @@
 #include <chrono>
 #include <map>
 
-#include <cilk/cilk.h>
-#include <cilk/reducer_opadd.h>
-
 using std::chrono::steady_clock;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -331,7 +328,8 @@ namespace
             }
 
             if (params.parallel_for) {
-                cilk_for (int n = p.popcount() - 1 ; n >= 0 ; --n) {
+	        #pragma omp for
+                for (int n = p.popcount() - 1 ; n >= 0 ; --n) {
                     // bound, timeout or early exit?
                     if (! (c.size() + p_bounds[n] <= incumbent.value || (params.decide > 0 && incumbent.value >= params.decide) || params.abort->load())) {
                         auto v = p_order[n];
