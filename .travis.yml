@@ -48,5 +48,13 @@ matrix:
          - CMAKE_C_COMPILER=gcc-7
          - CMAKE_CXX_COMPILER=g++-7
 
+before_script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+          -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+          .
+
 script:
-    - cmake . && make
+  - make -j`nproc`
+
