@@ -48,7 +48,5 @@ before_install:
     - eval "${MATRIX_EVAL}"
 
 script:
-    - echo $CC
-    - echo $CXX
-    - cd cilk-clique-code && make
+    - cmake . && make
 
